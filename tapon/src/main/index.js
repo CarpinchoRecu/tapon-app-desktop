@@ -2,8 +2,7 @@ import { app, shell, BrowserWindow, ipcMain } from 'electron'
 import { join } from 'path'
 import { electronApp, optimizer, is } from '@electron-toolkit/utils'
 import icon from '../../resources/icon.png?asset'
-import sqlite3 from "sqlite3";
-
+import sqlite3 from 'sqlite3'
 
 function createWindow() {
   // creando la primer ventana
@@ -19,12 +18,15 @@ function createWindow() {
     }
   })
 
-  const dbPath = join(app.getPath("userData"), "db_sqlite.db");
+  mainWindow.webContents.openDevTools()
+
+  // crear y conectar a SQLite
+  const dbPath = join(app.getPath('userData'), 'db_sqlite.db')
   const db = new sqlite3.Database(dbPath, (err) => {
     if (err) {
-      console.error("Hubo un problema con la base de datos SQLite, error:", err.message)
-    } else{
-      console.log("Conectado a la base de datos SQLite")
+      console.error('Hubo un problema con la base de datos SQLite, error:', err.message)
+    } else {
+      console.log('Conectado a la base de datos SQLite')
       db.run(`CREATE TABLE IF NOT EXISTS clientes (
         id INTEGER PRIMARY KEY,
         nombre TEXT,
@@ -39,7 +41,22 @@ function createWindow() {
     }
   })
 
-  ipcMain.on("")
+  // Manejar consultas a la base de datos
+  ipcMain.on('consulta-db', (event, consultaSQL) => {
+    if (!db) {
+      event.reply('resultado-db', { error: 'La base de datos no está disponible' });
+      return;
+    }
+
+    db.all(consultaSQL, [], (err, rows) => {
+      if (err) {
+        event.reply('resultado-db', { error: err.message });
+      } else {
+        event.reply('resultado-db', { rows });
+      }
+    });
+  });
+
 
   mainWindow.on('ready-to-show', () => {
     mainWindow.show()
