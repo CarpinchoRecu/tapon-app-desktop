@@ -1,27 +1,32 @@
-import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom'
 import { useEffect, useState } from 'react'
 import Home from './components/Home.jsx'
+import Footer from "./components/Footer.jsx"
+import Header from './components/Header.jsx'
 import style from './style/main.scss'
 
-function ScrollToTop() {
-  const { pathname } = useLocation()
+function App() {
+  const [datos, setDatos] = useState([]);
 
   useEffect(() => {
-    window.scrollTo(0, 0)
-  }, [pathname])
+    const obtenerDatos = async () => {
+      try {
+        const selectDB = await window.electronAPI.consultarSQLite(
+          'SELECT * FROM clientes'
+        );
+        setDatos(selectDB); // Almacena los datos en el estado 'datos'
+      } catch (error) {
+        console.error('Error al obtener los datos:', error);
+      }
+    };
+    obtenerDatos();
+  }, []);
 
-  return null
-}
 
-function App() {
   return (
-    <BrowserRouter>
-      <ScrollToTop />
-      <Routes>
-        <Route path="*" element={<Home />} />
-        <Route path="/home" element={<Home />} key="home" />
-      </Routes>
-    </BrowserRouter>
+    <>
+    <Home datos={datos}/>
+    <Footer/>
+    </>
   )
 }
 
