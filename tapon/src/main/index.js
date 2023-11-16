@@ -1,8 +1,9 @@
 import { app, shell, BrowserWindow, ipcMain } from 'electron'
-import { join } from 'path'
+import { join, resolve } from 'path'
 import { electronApp, optimizer, is } from '@electron-toolkit/utils'
 import icon from '../../resources/icon.png?asset'
 import sqlite3 from 'sqlite3'
+import { rejects } from 'assert'
 
 function createWindow() {
   // creando la primer ventana
@@ -24,38 +25,40 @@ function createWindow() {
   const dbPath = join(app.getPath('userData'), 'db_sqlite.db')
   const db = new sqlite3.Database(dbPath, (err) => {
     if (err) {
-      console.error('Hubo un problema con la base de datos SQLite, error:', err.message)
+      console.error('Error al abrir la base de datos:', err.message);
     } else {
-      console.log('Conectado a la base de datos SQLite')
-      db.run(`CREATE TABLE IF NOT EXISTS clientes (
-        id INTEGER PRIMARY KEY,
-        nombre TEXT,
-        localidad TEXT,
-        direccion TEXT,
-        nombre_producto TEXT,
-        precio_producto REAL,
-        cuotas_producto REAL,
-        cuotas_pagadas REAL,
-        fecha_ultimo_pago TEXT
-      )`)
+      console.log('Conexión exitosa a la base de datos');
     }
+  });
+
+  ipcMain.handle("consulta-db", async(event, query) => {
+    return new Promise((resolve, reject) =>{
+      db.all(query, (err, rows) => {
+        if (err) {
+          console.error(err)
+          reject(err)
+        } else {
+          resolve(rows)
+        }
+      })
+    })
   })
 
   // Manejar consultas a la base de datos
-  ipcMain.on('consulta-db', (event, consultaSQL) => {
-    if (!db) {
-      event.reply('resultado-db', { error: 'La base de datos no está disponible' });
-      return;
-    }
+  // ipcMain.on('consulta-db', (event, consultaSQL) => {
+  //   if (!db) {
+  //     event.reply('resultado-db', { error: 'La base de datos no está disponible' });
+  //     return;
+  //   }
 
-    db.all(consultaSQL, [], (err, rows) => {
-      if (err) {
-        event.reply('resultado-db', { error: err.message });
-      } else {
-        event.reply('resultado-db', { rows });
-      }
-    });
-  });
+  //   db.all(consultaSQL, [], (err, rows) => {
+  //     if (err) {
+  //       event.reply('resultado-db', { error: err.message });
+  //     } else {
+  //       event.reply('resultado-db', { rows });
+  //     }
+  //   });
+  // });
 
 
   mainWindow.on('ready-to-show', () => {

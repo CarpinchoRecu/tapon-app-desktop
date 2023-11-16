@@ -1,31 +1,14 @@
-import { contextBridge, ipcRenderer } from 'electron';
-import { electronAPI } from '@electron-toolkit/preload';
+// preload.js
+const { contextBridge, ipcRenderer } = require('electron');
 
-const api = {};
-
-if (process.contextIsolated) {
-  try {
-    const extendedElectronAPI = {
-      ...electronAPI,
-      ipcRenderer: {
-        send: (channel, data) => {
-          ipcRenderer.send(channel, data);
-        },
-        on: (channel, listener) => {
-          ipcRenderer.on(channel, (_, ...args) => listener(...args));
-        },
-        removeAllListeners: (channel) => {
-          ipcRenderer.removeAllListeners(channel);
-        },
-      },
-    };
-
-    contextBridge.exposeInMainWorld('electron', extendedElectronAPI);
-    contextBridge.exposeInMainWorld('api', api);
-  } catch (error) {
-    console.error(error);
+contextBridge.exposeInMainWorld('electronAPI', {
+  // Función para realizar consultas a la base de datos SQLite desde React
+  consultarSQLite: async (query) => {
+    try {
+      const resultado = await ipcRenderer.invoke('consulta-db', query);
+      return resultado;
+    } catch (error) {
+      throw new Error(error);
+    }
   }
-} else {
-  window.electron = electronAPI;
-  window.api = api;
-}
+});
