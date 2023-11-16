@@ -1,1 +1,20 @@
+*{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+$bkColor: #ECDADA;
+$contColor: #4B3F34;
+$itemsColor: #2473BB;
+$decoColor: #313030;
+
 @import "./style_components/Home.scss";
