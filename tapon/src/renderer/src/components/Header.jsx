@@ -3,29 +3,51 @@ import { useState, useEffect } from "react";
 const Header = ({ datosHome, setDatosFiltrados }) => {
   const [filtroChivilcoy, setFiltroChivilcoy] = useState(false);
   const [filtroSuipacha, setFiltroSuipacha] = useState(false);
+  const [filtroCantidadProductos, setFiltroCantidadProductos] = useState('');
+  const [filtroBusquedaNombre, setFiltroBusquedaNombre] = useState('');
+  const [busquedaActiva, setBusquedaActiva] = useState(false);
 
   useEffect(() => {
     const filtrarDatos = () => {
-      if (!filtroChivilcoy && !filtroSuipacha) {
-        // Si ambos filtros están desactivados, mostramos todos los datos
-        setDatosFiltrados(datosHome);
+      let datosFiltrados = datosHome;
+
+      if (busquedaActiva) {
+        // Si la búsqueda está activa, desactivamos los otros filtros
+        setFiltroChivilcoy(false);
+        setFiltroSuipacha(false);
+        setFiltroCantidadProductos('');
       } else {
-        // Aplicamos los filtros
-        const datosFiltrados = datosHome.filter((dato) => {
-          const localidad = dato.localidad.toLowerCase();
-          if (filtroChivilcoy && localidad === 'chivilcoy') {
-            return true;
-          } else if (filtroSuipacha && localidad === 'suipacha') {
-            return true;
-          }
-          return false;
-        });
-        setDatosFiltrados(datosFiltrados);
+        // Si la búsqueda no está activa, aplicamos los otros filtros
+        if (filtroChivilcoy || filtroSuipacha) {
+          datosFiltrados = datosFiltrados.filter((dato) => {
+            const localidad = dato.localidad.toLowerCase();
+            if (filtroChivilcoy && localidad === 'chivilcoy') {
+              return true;
+            } else if (filtroSuipacha && localidad === 'suipacha') {
+              return true;
+            }
+            return false;
+          });
+        }
+
+        if (filtroCantidadProductos !== '') {
+          datosFiltrados = datosFiltrados.filter(
+            (dato) => dato.cantidadProductos === parseInt(filtroCantidadProductos)
+          );
+        }
       }
+
+      if (filtroBusquedaNombre !== '') {
+        datosFiltrados = datosFiltrados.filter(
+          (dato) => dato.nombre.toLowerCase().includes(filtroBusquedaNombre.toLowerCase())
+        );
+      }
+
+      setDatosFiltrados(datosFiltrados);
     };
 
     filtrarDatos();
-  }, [filtroChivilcoy, filtroSuipacha, datosHome, setDatosFiltrados]);
+  }, [filtroChivilcoy, filtroSuipacha, filtroCantidadProductos, filtroBusquedaNombre, busquedaActiva, datosHome, setDatosFiltrados]);
 
   const handleCheckboxChange = (e) => {
     const { name, checked } = e.target;
@@ -34,6 +56,20 @@ const Header = ({ datosHome, setDatosFiltrados }) => {
     } else if (name === 'suipacha') {
       setFiltroSuipacha(checked);
     }
+    // Cuando se activa un filtro, desactivamos la búsqueda
+    setBusquedaActiva(false);
+  };
+
+  const handleCantidadProductosChange = (e) => {
+    setFiltroCantidadProductos(e.target.value);
+    // Cuando se activa un filtro, desactivamos la búsqueda
+    setBusquedaActiva(false);
+  };
+
+  const handleBusquedaNombreChange = (e) => {
+    setFiltroBusquedaNombre(e.target.value);
+    // Activamos o desactivamos la búsqueda según si hay un valor en el input de búsqueda
+    setBusquedaActiva(e.target.value !== '');
   };
 
   const filtros = [
@@ -52,11 +88,6 @@ const Header = ({ datosHome, setDatosFiltrados }) => {
       type: "number",
       state: null
     },
-    {
-      nombreFiltro: 'tiempo de pago',
-      type: "date",
-      state: null
-    }
   ]
 
   return (
@@ -64,22 +95,37 @@ const Header = ({ datosHome, setDatosFiltrados }) => {
       <section className="contenedor__buscador">
         <div className="buscador">
           <h2>Solo por nombre</h2>
-          <input type="search" name="" id="" />
+          <input
+          type="text"
+          value={filtroBusquedaNombre}
+          onChange={handleBusquedaNombreChange}
+        />
         </div>
       </section>
       <section className="contenedor__filtros">
         {filtros.map((filtro, index) => (
           <div key={index}>
             {filtro.type === 'checkbox' && (
-              <label>
+              <>
+              <label htmlFor={filtro.nombreFiltro}>{filtro.nombreFiltro}</label>
                 <input
-                  type="checkbox"
+                  type={filtro.type}
                   name={filtro.nombreFiltro}
                   checked={filtro.state}
                   onChange={handleCheckboxChange}
                 />
-                {filtro.nombreFiltro}
-              </label>
+              </>
+            )}
+            {filtro.type ==="number" && (
+              <>
+              <label htmlFor={filtro.nombreFiltro}>{filtro.nombreFiltro}</label>
+              <input
+                  type={filtro.type}
+                  name={filtro.nombreFiltro}
+                  checked={filtro.state}
+                  onChange={handleCantidadProductosChange}
+                />
+              </>
             )}
             
           </div>

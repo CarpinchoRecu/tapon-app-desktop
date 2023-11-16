@@ -44,22 +44,20 @@ function createWindow() {
     })
   })
 
-  // Manejar consultas a la base de datos
-  // ipcMain.on('consulta-db', (event, consultaSQL) => {
-  //   if (!db) {
-  //     event.reply('resultado-db', { error: 'La base de datos no está disponible' });
-  //     return;
-  //   }
-
-  //   db.all(consultaSQL, [], (err, rows) => {
-  //     if (err) {
-  //       event.reply('resultado-db', { error: err.message });
-  //     } else {
-  //       event.reply('resultado-db', { rows });
-  //     }
-  //   });
-  // });
-
+   // Listener para eliminar una fila específica por su ID
+   ipcMain.handle('eliminar-fila', async (event, id) => {
+    return new Promise((resolve, reject) => {
+      const deleteQuery = `DELETE FROM tuTabla WHERE id = ${id}` // Reemplaza 'tuTabla' con el nombre real de tu tabla
+      db.run(deleteQuery, (err) => {
+        if (err) {
+          console.error(err)
+          reject(err)
+        } else {
+          resolve('Fila eliminada exitosamente')
+        }
+      })
+    })
+  })
 
   mainWindow.on('ready-to-show', () => {
     mainWindow.show()

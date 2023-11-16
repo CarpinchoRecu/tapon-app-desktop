@@ -1,9 +1,11 @@
 import { useEffect, useState } from 'react'
 import Header from './Header.jsx'
+import Footer from './Footer.jsx'
+import Editar from './Editar.jsx'
 
 const Home = ({ datos }) => {
   const [datosHome, setDatosHome] = useState([])
-  const [datosFiltrados, setDatosFiltrados] = useState(datosHome);
+  const [datosFiltrados, setDatosFiltrados] = useState(datosHome)
 
   useEffect(() => {
     const datosEnHome = () => {
@@ -35,9 +37,14 @@ const Home = ({ datos }) => {
             acumulador[indiceExistente].cantidadProductos++
           } else {
             acumulador.push({
+              id: dato.id,
               nombre: nombreMinusculas,
               localidad: dato.localidad || sinCompletar,
               direccion: dato.direccion || sinCompletar,
+              nombreProducto: dato.nombre_producto || sinCompletar,
+              precioProducto: dato.precio_producto || sinCompletar,
+              cuotasProducto: dato.cuotas_producto || sinCompletar,
+              cuotasPagadas: dato.cuotas_pagadas || sinCompletar,
               fecha_proximo_pago: fechaProximoPago || sinCompletar,
               fecha_ultimo_pago: fecha || sinCompletar,
               cantidadProductos: 1
@@ -55,44 +62,70 @@ const Home = ({ datos }) => {
     datosEnHome()
   }, [datos])
 
+  const [tocarCliente, setTocarCliente] = useState(false)
+  const [datosClienteSeleccionado, setDatosClienteSeleccionado] = useState(null)
+
+  const handleAbrirOpciones = (id) => {
+    const clienteSeleccionado = datosHome.find((cliente) => cliente.id === id)
+    setDatosClienteSeleccionado(clienteSeleccionado)
+    setTocarCliente(true)
+  }
+
+  const handleCerrarOpciones = () => {
+    setTocarCliente(false)
+  }
+
+  useEffect(() => {
+    const app = document.querySelector('.app')
+
+    app.addEventListener('click', handleCerrarOpciones)
+    return () => {
+      app.removeEventListener('click', handleCerrarOpciones)
+    }
+  }, [setTocarCliente])
+
   return (
     <>
-    <Header datosHome={datosHome} setDatosFiltrados={setDatosFiltrados}/>
-      <section className="home">
-        <div className="circle"></div>
-        <main>
-          <section className="contenedor__titulo">
-            <h2>Morosos</h2>
-          </section>
-          <section className="contenedor__datos">
-            <table>
-              <thead>
-                <tr>
-                  <th>Nombre</th>
-                  <th>Cantidad de Productos</th>
-                  <th>Localidad</th>
-                  <th>Dirección</th>
-                  <th>fecha ultimo pago</th>
-                  <th>fecha proximo pago</th>
-                </tr>
-              </thead>
-              <tbody>
-                {datosFiltrados.map((datoHome, index) => (
-                  <tr key={index}>
-                    <td>{datoHome.nombre}</td>
-                    <td>{datoHome.cantidadProductos}</td>
-                    <td>{datoHome.localidad}</td>
-                    <td>{datoHome.direccion}</td>
-                    <td>{datoHome.fecha_ultimo_pago}</td>
-                    <td>{datoHome.fecha_proximo_pago}</td>
+      <section className="app">
+        <Header datosHome={datosHome} setDatosFiltrados={setDatosFiltrados} />
+        <section className="home">
+          <div className="circle"></div>
+          <main>
+            <section className="contenedor__titulo">
+              <h2>Morosos</h2>
+            </section>
+            <section className="contenedor__datos">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Nombre</th>
+                    <th>Cantidad de Productos</th>
+                    <th>Localidad</th>
+                    <th>Dirección</th>
+                    <th>fecha ultimo pago</th>
+                    <th>fecha proximo pago</th>
                   </tr>
-                ))}
-              </tbody>
-            </table>
-          </section>
-        </main>
-        <div className="circle"></div>
+                </thead>
+                <tbody>
+                  {datosFiltrados.map((datoHome, index) => (
+                    <tr onClick={() => handleAbrirOpciones(datoHome.id)} key={index}>
+                      <td>{datoHome.nombre}</td>
+                      <td>{datoHome.cantidadProductos}</td>
+                      <td>{datoHome.localidad}</td>
+                      <td>{datoHome.direccion}</td>
+                      <td>{datoHome.fecha_ultimo_pago}</td>
+                      <td>{datoHome.fecha_proximo_pago}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </section>
+          </main>
+          <div className="circle"></div>
+        </section>
+      {tocarCliente === true && <Editar datosClienteSeleccionado={datosClienteSeleccionado} />}
       </section>
+      <Footer datosHome={datosHome} tocarCliente={tocarCliente} />
     </>
   )
 }

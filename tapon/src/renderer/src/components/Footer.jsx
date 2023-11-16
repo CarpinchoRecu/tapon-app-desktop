@@ -1,15 +1,9 @@
-const Footer = () => {
+const Footer = ({tocarCliente}) => {
+
     return (
-        <footer>
-            <section>
-                <p>Elimanar</p>
-            </section>
-            <section>
-                <p>Crear</p>
-            </section>
+        <footer className={tocarCliente === true ? "clienteToco" : "footer"}>
             <section>
                 <p>Editar</p>
-
             </section>
         </footer>
     )

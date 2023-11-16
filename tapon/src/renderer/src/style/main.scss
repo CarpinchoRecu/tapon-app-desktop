@@ -16,6 +16,11 @@ body{
     height: 100%;
 }
 
+.app{
+    width: 100%;
+    height: 100%;
+}
+
 $bkColor: #ECDADA;
 $contColor: #4B3F34;
 $itemsColor: #2473BB;
@@ -27,3 +32,4 @@ $rdsChico: 10px;
 @import "./style_components/Home.scss";
 @import "./style_components/Footer.scss";
 @import "./style_components/Header.scss";
+@import "./style_components/Editar.scss";

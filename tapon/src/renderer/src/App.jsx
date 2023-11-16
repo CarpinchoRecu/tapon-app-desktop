@@ -1,7 +1,5 @@
 import { useEffect, useState } from 'react'
 import Home from './components/Home.jsx'
-import Footer from "./components/Footer.jsx"
-import Header from './components/Header.jsx'
 import style from './style/main.scss'
 
 function App() {
@@ -23,10 +21,7 @@ function App() {
 
 
   return (
-    <>
     <Home datos={datos}/>
-    <Footer/>
-    </>
   )
 }
 
