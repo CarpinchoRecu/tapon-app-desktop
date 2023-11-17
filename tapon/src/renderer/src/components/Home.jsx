@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import Header from './Header.jsx'
 import Footer from './Footer.jsx'
+import Crear from './Crear.jsx'
 
 const Home = ({ datos }) => {
   //estado para menejar los datos originales de la base de datos
@@ -14,7 +15,6 @@ const Home = ({ datos }) => {
   useEffect(() => {
     setDatosOriginal(datos) // Almacena los datos originales
   }, [datos])
-
 
   //tranformando datos
   useEffect(() => {
@@ -103,6 +103,7 @@ const Home = ({ datos }) => {
         <section className="home">
           <div className="circle"></div>
           <main>
+        <Crear/>
             <section className="contenedor__titulo">
               <h2>Morosos</h2>
             </section>

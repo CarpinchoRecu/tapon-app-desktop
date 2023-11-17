@@ -1,4 +1,9 @@
 .editar {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
     width: 100vw;
     height: 100vh;
     position: absolute;
@@ -6,9 +11,71 @@
     top: 0;
     background-color: $contColor;
 
-    div {
-        p {
-            font-size: 40px;
+    .tabla__datos__cliente{
+        border-collapse: collapse;
+        width: 50%;
+        position: relative;
+
+        tbody {
+            background-color: $bkColor;
+        }
+
+        th,
+        td {
+            border: 4px solid $itemsColor;
+            padding: $pChico;
+            text-align: center;
+            font-size: $textSizeGeneral;
+        }
+
+        td {
+            width: 33%;
+            text-align: center;
+            font-size: $textSizeGeneral;
+        }
+
+        th {
+            background-color: $bkColor;
+        }
+
+        tr{
+            transition: 0.2s ease;
+        }
+    }
+
+    .tabla__datos__productos{
+        border-collapse: collapse;
+        width: 90%;
+        position: relative;
+
+        tbody {
+            background-color: $bkColor;
+        }
+
+        th,
+        td {
+            border: 4px solid $itemsColor;
+            padding: $pChico;
+            text-align: center;
+            font-size: $textSizeGeneral;
+        }
+
+        td {
+            width: 11%;
+            text-align: center;
+            font-size: $textSizeGeneral;
+        }
+
+        th {
+            background-color: $bkColor;
+        }
+
+        tr{
+            transition: 0.2s ease;
+        }
+
+        tr:hover {
+            background-color: $itemsColor;
         }
     }
 }

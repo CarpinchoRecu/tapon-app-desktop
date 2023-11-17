@@ -14,6 +14,100 @@
         flex-direction: column;
         border-radius: $rdsChico;
         box-shadow: $sombraGeneral;
+        position: relative;
+
+        .btn__creador__abrir {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: $itemsColor;
+            gap: 5px;
+            padding: $pChico;
+            border-radius: $rdsChico;
+            box-shadow: $sombraGeneral;
+            position: absolute;
+            z-index: 1;
+            right: 5%;
+            top: 5%;
+            transition: 0.2s ease;
+            cursor: pointer;
+
+            &:hover {
+                scale: 1.1;
+            }
+
+            p {
+                color: #fff;
+                font-size: $textSizeGeneral;
+            }
+
+            svg {
+                border-radius: 50%;
+                height: 40px;
+                width: 40px;
+            }
+        }
+
+        .creador {
+            position: absolute;
+            width: 50%;
+            z-index: 1;
+            height: 100%;
+            background-color: $bkColor;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+
+            .btn__creador__cerrar {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                background-color: $itemsColor;
+                gap: 5px;
+                padding: $pChico;
+                border-radius: $rdsChico;
+                box-shadow: $sombraGeneral;
+                position: absolute;
+                z-index: 1;
+                right: 5%;
+                top: 5%;
+                transition: 0.2s ease;
+                cursor: pointer;
+
+                &:hover {
+                    scale: 1.1;
+                }
+
+                p {
+                    color: #fff;
+                    font-size: $textSizeGeneral;
+                }
+
+                svg {
+                    border-radius: 50%;
+                    height: 40px;
+                    width: 40px;
+                }
+            }
+
+            .campos {
+                display: flex;
+                flex-wrap: wrap;
+                gap: 30px;
+                align-items: center;
+                justify-content: center;
+
+                .campo {
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    justify-content: center;
+
+                }
+            }
+
+        }
 
 
         .contenedor__titulo {
@@ -22,7 +116,7 @@
             background-color: $itemsColor;
             padding: $pGeneral;
             border-radius: $rdsGeneral;
-        box-shadow: $sombraGeneral;
+            box-shadow: $sombraGeneral;
 
 
             h2 {
@@ -31,22 +125,22 @@
             }
         }
 
-        
+
         ::-webkit-scrollbar {
             width: 10px;
         }
-        
+
         ::-webkit-scrollbar-track {
             background: $bkColor;
         }
-        
+
         ::-webkit-scrollbar-thumb {
             border-radius: $rdsGeneral;
             background: $itemsColor;
         }
 
         .contenedor__datos {
-        box-shadow: $sombraGeneral;
+            box-shadow: $sombraGeneral;
 
             height: 300px;
             overflow: auto;
@@ -80,7 +174,7 @@
                     background-color: $bkColor;
                 }
 
-                tr{
+                tr {
                     transition: 0.2s ease;
                 }
 
