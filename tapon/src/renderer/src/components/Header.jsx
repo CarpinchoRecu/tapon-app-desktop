@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { FaSearch } from "react-icons/fa";
+import { FaSearch } from 'react-icons/fa'
 
 const Header = ({ datosHome, setDatosFiltrados }) => {
   const [filtroChivilcoy, setFiltroChivilcoy] = useState(false)
@@ -121,15 +121,16 @@ const Header = ({ datosHome, setDatosFiltrados }) => {
     <header>
       <section className="contenedor__buscador">
         <div className="buscador">
-          {buscando === true ? <></> :
+          {buscando === true ? (
+            <></>
+          ) : (
             <>
               <p>Buscar...</p>
               <div className="img__buscador">
                 <FaSearch />
               </div>
-
             </>
-          }
+          )}
           <input
             onClick={handleBuscando}
             type="text"
@@ -140,32 +141,40 @@ const Header = ({ datosHome, setDatosFiltrados }) => {
         </div>
       </section>
       <section className="contenedor__filtros">
-        {filtros.map((filtro, index) => (
-          <div key={index}>
-            {filtro.type === 'checkbox' && (
-              <>
-                <label htmlFor={filtro.nombreFiltro}>{filtro.nombreFiltro}</label>
-                <input
-                  type={filtro.type}
-                  name={filtro.nombreFiltro}
-                  checked={filtro.state}
-                  onChange={handleCheckboxChange}
-                />
-              </>
-            )}
-            {filtro.type === 'number' && (
-              <>
-                <label htmlFor={filtro.nombreFiltro}>{filtro.nombreFiltro}</label>
-                <input
-                  type={filtro.type}
-                  name={filtro.nombreFiltro}
-                  checked={filtro.state}
-                  onChange={handleCantidadProductosChange}
-                />
-              </>
-            )}
-          </div>
-        ))}
+        <h2>Filtros</h2>
+
+        <div className="checkboxContainer">
+          {filtros.map(
+            (filtro, index) =>
+              filtro.type === 'checkbox' && (
+                <div className="checkBox" key={index}>
+                  <label htmlFor={filtro.nombreFiltro}>{filtro.nombreFiltro}</label>
+                  <input
+                    type={filtro.type}
+                    name={filtro.nombreFiltro}
+                    checked={filtro.state}
+                    onChange={handleCheckboxChange}
+                  />
+                </div>
+              )
+          )}
+        </div>
+        <div className="numberContainer">
+          {filtros.map(
+            (filtro, index) =>
+              filtro.type === 'number' && (
+                <div className="number" key={index}>
+                  <label htmlFor={filtro.nombreFiltro}>{filtro.nombreFiltro}</label>
+                  <input
+                    type={filtro.type}
+                    name={filtro.nombreFiltro}
+                    value={filtro.state}
+                    onChange={handleCantidadProductosChange}
+                  />
+                </div>
+              )
+          )}
+        </div>
       </section>
     </header>
   )
