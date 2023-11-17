@@ -90,11 +90,14 @@ const Header = ({ datosHome, setDatosFiltrados }) => {
     },
   ]
 
+  const [buscando, setBuscando] = useState(false)
+
   return (
     <header>
       <section className="contenedor__buscador">
         <div className="buscador">
           <h2>Solo por nombre</h2>
+          <p>Buscar...</p>
           <input
           type="text"
           value={filtroBusquedaNombre}
