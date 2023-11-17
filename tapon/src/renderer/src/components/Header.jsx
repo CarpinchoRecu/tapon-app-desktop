@@ -99,24 +99,6 @@ const Header = ({ datosHome, setDatosFiltrados }) => {
     }
   ]
 
-  const [buscando, setBuscando] = useState(false)
-
-  const handleBuscando = () => {
-    setBuscando(true)
-  }
-
-  const handleSalirDeBusqueda = () => {
-    setBuscando(false)
-  }
-  useEffect(() => {
-    const app = document.querySelector('.app')
-
-    app.addEventListener('click', handleSalirDeBusqueda)
-    return () => {
-      app.removeEventListener('click', handleSalirDeBusqueda)
-    }
-  }, [setBuscando])
-
   return (
     <header>
       <section className="contenedor__buscador">
@@ -131,6 +113,8 @@ const Header = ({ datosHome, setDatosFiltrados }) => {
               </div>
             </>
           )}
+          <h2>Solo por nombre</h2>
+          <p>Buscar...</p>
           <input
             onClick={handleBuscando}
             type="text"
