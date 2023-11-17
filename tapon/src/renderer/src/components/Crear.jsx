@@ -1,11 +1,14 @@
 import { useEffect, useState } from 'react'
 import { LuPlusCircle } from 'react-icons/lu'
 import { MdCancel } from 'react-icons/md'
+import { FaRegArrowAltCircleLeft } from 'react-icons/fa'
 
 const Crear = () => {
     const [abrirCreador, setAbrirCreador] = useState(false)
     const [cantidadDeProductos, setCantidadDeProductos] = useState(0)
+    const [mostrarBtnProductos, setMostrarBtnProductos] = useState(false)
     const [mostrarProductos, setMostrarProductos] = useState(false)
+    const [mostrarCamposClientes, setMostrarCamposClientes] = useState(false)
 
     const handleAbrirCreador = () => {
         setAbrirCreador(true)
@@ -15,6 +18,16 @@ const Crear = () => {
     const handleCerrarCreador = () => {
         setAbrirCreador(false)
         setCantidadDeProductos(0)
+    }
+
+    const handleSiguiente = () => {
+        setMostrarProductos(true)
+        setMostrarCamposClientes(true)
+    }
+
+    const handleAtras = () => {
+        setMostrarProductos(false)
+        setMostrarCamposClientes(false)
     }
 
     const handleCantidadProductosChange = (event) => {
@@ -82,8 +95,8 @@ const Crear = () => {
         }
 
         const mostrar = habilitarProductos(cantidadDeProductos)
-        setMostrarProductos(mostrar)
-    }, [cantidadDeProductos, setMostrarProductos])
+        setMostrarBtnProductos(mostrar)
+    }, [cantidadDeProductos, setMostrarBtnProductos])
 
     return (
         <>
@@ -97,6 +110,9 @@ const Crear = () => {
                     <section onClick={handleCerrarCreador} className="btn__creador__cerrar">
                         <MdCancel />
                     </section>
+                    {mostrarCamposClientes === true ? (
+                        <></>
+                    ) : (
                         <article className="campos__cliente">
                             {camposCreador.map((campo) => (
                                 <div key={campo.label} className="campo__cliente">
@@ -105,23 +121,41 @@ const Crear = () => {
                                 </div>
                             ))}
                         </article>
-                        {mostrarProductos === true ? (
-                            <article className="campos__productos">
-                                {camposProducto.map((producto, index) => (
-                                    <div key={index}>
-                                        <h3>{producto.label}</h3>
-                                        {producto.campos.map((campo) => (
-                                            <div key={campo.label} className="campo__producto">
-                                                <label htmlFor={campo.label}>{campo.label}</label>
-                                                <input type={campo.type} />
+                    )}
+                    {mostrarBtnProductos === true ? (
+                        <>
+                            {mostrarProductos === true ? (
+                                <div onClick={handleAtras} className="btn__volver__productos">
+                                    <FaRegArrowAltCircleLeft />
+                                </div>
+                            ) : (
+                                <div onClick={handleSiguiente} className="btn__siguiente__productos">
+                                    <p>Crear productos del cliente</p>
+                                </div>
+                            )}
+                            {mostrarProductos === true ? (
+                                <article className="contenedor__campos__productos">
+                                    {camposProducto.map((producto, index) => (
+                                        <article className="campos__productos" key={index}>
+                                            <div>
+                                                <h3>{producto.label}</h3>
+                                                {producto.campos.map((campo) => (
+                                                    <div key={campo.label} className="campo__producto">
+                                                        <label htmlFor={campo.label}>{campo.label}</label>
+                                                        <input type={campo.type} />
+                                                    </div>
+                                                ))}
                                             </div>
-                                        ))}
-                                    </div>
-                                ))}
-                            </article>
-                        ) : (
-                            <></>
-                        )}
+                                        </article>
+                                    ))}
+                                </article>
+                            ) : (
+                                <></>
+                            )}
+                        </>
+                    ) : (
+                        <></>
+                    )}
                 </div>
             ) : (
                 <></>
