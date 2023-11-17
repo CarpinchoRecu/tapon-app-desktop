@@ -128,8 +128,6 @@ const Header = ({ datosHome, setDatosFiltrados }) => {
               </div>
             </>
           )}
-          <h2>Solo por nombre</h2>
-          <p>Buscar...</p>
           <input
             onClick={handleBuscando}
             type="text"
