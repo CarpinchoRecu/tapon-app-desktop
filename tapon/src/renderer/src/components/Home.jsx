@@ -1,12 +1,22 @@
 import { useEffect, useState } from 'react'
 import Header from './Header.jsx'
 import Footer from './Footer.jsx'
-import Editar from './Editar.jsx'
 
 const Home = ({ datos }) => {
+  //estado para menejar los datos originales de la base de datos
+  const [datosOriginal, setDatosOriginal] = useState([])
+  //estado para menejar los datos que se van a trasformar en el home
   const [datosHome, setDatosHome] = useState([])
+  //estado para menejar los datos que tengan filtro
   const [datosFiltrados, setDatosFiltrados] = useState(datosHome)
 
+  //estado para menejar los datos originales de la base de datos
+  useEffect(() => {
+    setDatosOriginal(datos) // Almacena los datos originales
+  }, [datos])
+
+
+  //tranformando datos
   useEffect(() => {
     const datosEnHome = () => {
       try {
@@ -64,8 +74,10 @@ const Home = ({ datos }) => {
 
   const [tocarCliente, setTocarCliente] = useState(false)
   const [datosClienteSeleccionado, setDatosClienteSeleccionado] = useState(null)
+  const [idSeleccionado, setIdSeleccionado] = useState(null)
 
   const handleAbrirOpciones = (id) => {
+    setIdSeleccionado(id)
     const clienteSeleccionado = datosHome.find((cliente) => cliente.id === id)
     setDatosClienteSeleccionado(clienteSeleccionado)
     setTocarCliente(true)
@@ -123,9 +135,14 @@ const Home = ({ datos }) => {
           </main>
           <div className="circle"></div>
         </section>
-      {tocarCliente === true && <Editar datosClienteSeleccionado={datosClienteSeleccionado} />}
       </section>
-      <Footer datosHome={datosHome} tocarCliente={tocarCliente} />
+      <Footer
+        idSeleccionado={idSeleccionado}
+        datosOriginal={datosOriginal}
+        datosHome={datosHome}
+        tocarCliente={tocarCliente}
+        setTocarCliente={setTocarCliente}
+      />
     </>
   )
 }

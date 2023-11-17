@@ -1,12 +1,13 @@
-.editar{
+.editar {
     width: 100vw;
     height: 100vh;
     position: absolute;
     z-index: 10;
-top: 0;
-background-color: $contColor;
-    div{
-        p{
+    top: 0;
+    background-color: $contColor;
+
+    div {
+        p {
             font-size: 40px;
         }
     }
