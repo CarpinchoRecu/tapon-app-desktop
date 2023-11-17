@@ -15,6 +15,7 @@ body {
     height: 100vh;
     display: flex;
     overflow: hidden;
+box-shadow: inset 0px 0px 100px 10px rgba(0, 0, 0, 0.25);
 }
 
 #root {
@@ -36,6 +37,19 @@ $rdsGeneral: 20px;
 $rdsChico: 10px;
 
 $sombraGeneral: 6px 6px 30px rgba(0, 0, 0, 0.25);
+
+
+$textSizeMuyGrande: 45px;
+$textSizeGrande: 30px;
+$textSizeGeneral: 20px;
+$textSizeChico: 15px;
+
+
+$pGeneral: 20px;
+$pChico: 5px;
+
+
+
 @import './style_components/Home.scss';
 @import './style_components/Footer.scss';
 @import './style_components/Header.scss';

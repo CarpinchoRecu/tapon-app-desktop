@@ -11,8 +11,8 @@ const Footer = ({ tocarCliente, datosOriginal, idSeleccionado, setTocarCliente }
             <footer className={tocarCliente === true ? 'clienteToco' : 'footer'}>
                 {tocarCliente === true ? (
                     <>
-                        <section onClick={handleAbrirEditor}>
-                            <p>Editar</p>
+                        <section >
+                            <p onClick={handleAbrirEditor}>Editar</p>
                         </section>
                     </>
                 ) : (

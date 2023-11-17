@@ -2,7 +2,7 @@ header {
     display: flex;
     align-items: center;
     justify-content: space-evenly;
-    padding: 20px;
+    padding: $pGeneral;
     height: 25%;
 
     .contenedor__buscador {
@@ -27,16 +27,16 @@ header {
             h2 {
                 position: absolute;
                 top: 0;
-                padding: 5px;
+                padding: $pChico;
                 text-align: center;
                 width: 60%;
                 background-color: $bkColor;
-                font-size: 28px;
+                font-size: $textSizeGeneral;
                 border-radius: 0 0 20px 20px;
             }
 
             p {
-                font-size: 26px;
+                font-size: $textSizeGeneral;
                 width: 85%;
                 position: absolute;
                 z-index: 1;
@@ -48,7 +48,7 @@ header {
                 position: absolute;
                 right: 7%;
                 background-color: $itemsColor;
-                padding: 5px;
+                padding: $pChico;
                 width: 33px;
                 height: 33px;
                 border-radius: 50%;
@@ -67,8 +67,8 @@ header {
                 border: 0;
                 border-radius: $rdsGeneral;
                 width: 90%;
-                font-size: 26px;
-                padding: 10px;
+                font-size: $textSizeGrande;
+                padding: $pChico;
                 transition: 0.2s ease;
 
                 &:hover {
@@ -92,12 +92,12 @@ header {
         align-items: center;
         justify-content: center;
         flex-direction: column;
-        gap: 30px;
+        gap: 15px;
 
         h2 {
             color: #fff;
             background: $itemsColor;
-            padding: 10px;
+            padding: $pChico;
             border-radius: $rdsGeneral;
             text-align: center;
             width: 100px;
@@ -106,21 +106,21 @@ header {
 
         .checkboxContainer {
             display: flex;
-            gap: 80px;
+            gap: 20px;
 
             .checkBox {
                 display: flex;
                 gap: 10px;
                 color: #fff;
                 background: $itemsColor;
-                padding: 10px;
+                padding: $pChico;
                 border-radius: $rdsGeneral;
                 text-align: center;
                 width: auto;
                 box-shadow: $sombraGeneral;
 
                 label {
-                    font-size: 20px;
+                    font-size: $textSizeGeneral;
                 }
             }
 
@@ -136,7 +136,7 @@ header {
                 gap: 20px;
                 color: #fff;
                 background: $itemsColor;
-                padding: 10px;
+                padding: $pChico;
                 border-radius: $rdsGeneral;
                 text-align: center;
                 box-shadow: $sombraGeneral;
@@ -144,8 +144,8 @@ header {
                 input {
                     border: 1px solid #fff;
                     border-radius: $rdsGeneral;
-                    padding: 10px;
-                    font-size: 20px;
+                    padding: $pChico;
+                    font-size: $textSizeGeneral;
                     width: 50px;
                     transition: 0.2s ease;
                     text-align: center;
@@ -161,7 +161,7 @@ header {
                 }
 
                 label {
-                    font-size: 20px;
+                    font-size: $textSizeGeneral;
                 }
 
                 /* Eliminar los controles de incremento/decremento en input tipo number */
