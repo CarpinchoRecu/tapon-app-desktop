@@ -48,9 +48,7 @@
             }
         }
 
-        .contenedor__creador{
-            
-        }
+        .contenedor__creador {}
 
         .creador {
             padding: $pGeneral;
@@ -65,6 +63,17 @@
             justify-content: center;
             box-shadow: $sombraGeneral;
             border-radius: $rdsChico;
+            border: 3px solid;
+
+            h2 {
+                position: absolute;
+                top: -15px;
+                padding: $pChico;
+                border-radius: $rdsChico;
+                background-color: $itemsColor;
+                font-size: $textSizeGrande;
+                border: 3px solid;
+            }
 
             .btn__creador__cerrar {
                 display: flex;
@@ -105,6 +114,7 @@
                 background-color: $contColor;
                 box-shadow: $sombraGeneral;
                 border-radius: $rdsGeneral;
+                border: 3px solid;
 
                 .campo {
                     display: flex;
@@ -127,7 +137,7 @@
                         &:hover {
                             background-color: $itemsColor;
                         }
-        
+
                         &:focus {
                             outline: none;
                         }
