@@ -47,15 +47,44 @@
                 width: 40px;
             }
         }
+        .btn__eliminar__abrir {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: $errorColor;
+            gap: 5px;
+            padding: $pChico;
+            border-radius: $rdsChico;
+            box-shadow: $sombraGeneral;
+            position: absolute;
+            right: 5%;
+            top: 20%;
+            transition: 0.2s ease;
+            cursor: pointer;
 
-        .contenedor__creador {}
+            &:hover {
+                scale: 1.1;
+            }
+
+            p {
+                color: #fff;
+                font-size: $textSizeGeneral;
+            }
+
+            svg {
+                border-radius: 50%;
+                height: 40px;
+                width: 40px;
+            }
+        }
 
         .creador {
             padding: $pGeneral;
             position: absolute;
             height: 130%;
-            width: 60%;
+            width: auto;
             z-index: 1;
+            gap: 200%;
             background-color: $bkColor;
             display: flex;
             flex-direction: column;
@@ -102,9 +131,9 @@
                 }
             }
 
-            .campos {
-                width: 80%;
-                height: 80%;
+            .campos__cliente {
+                width: 30rem;
+                height: 90%;
                 padding: $pMedio;
                 display: flex;
                 flex-wrap: wrap;
@@ -116,7 +145,7 @@
                 border-radius: $rdsGeneral;
                 border: 3px solid;
 
-                .campo {
+                .campo__cliente {
                     display: flex;
                     flex-direction: column;
                     align-items: center;
@@ -129,7 +158,7 @@
 
                     input {
                         padding: $pChico;
-                        font-size: $textSizeChico;
+                        font-size: $textSizeGeneral;
                         border-radius: $rdsChico;
                         border: 0;
                         transition: 0.2s ease;
@@ -145,40 +174,50 @@
                 }
             }
 
+            .campos__productos{
+                width: 50%;
+                height: 100%;
+                padding: $pMedio;
+                display: flex;
+                gap: 15px;
+                align-items: center;
+                justify-content: center;
+                background-color: $contColor;
+                box-shadow: $sombraGeneral;
+                border-radius: $rdsGeneral;
+                border: 3px solid;
+                .campo__producto {
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    justify-content: center;
+                    gap: 10px;
+
+                    label {
+                        font-size: $textSizeGeneral;
+                    }
+
+                    input {
+                        padding: $pChico;
+                        font-size: $textSizeGeneral;
+                        border-radius: $rdsChico;
+                        border: 0;
+                        transition: 0.2s ease;
+
+                        &:hover {
+                            background-color: $itemsColor;
+                        }
+
+                        &:focus {
+                            outline: none;
+                        }
+                    }
+                }
+            }
         }
 
 
-        .btn__eliminar__abrir {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background-color: $errorColor;
-            gap: 5px;
-            padding: $pChico;
-            border-radius: $rdsChico;
-            box-shadow: $sombraGeneral;
-            position: absolute;
-            z-index: 1;
-            right: 5%;
-            top: 20%;
-            transition: 0.2s ease;
-            cursor: pointer;
 
-            &:hover {
-                scale: 1.1;
-            }
-
-            p {
-                color: #fff;
-                font-size: $textSizeGeneral;
-            }
-
-            svg {
-                border-radius: 50%;
-                height: 40px;
-                width: 40px;
-            }
-        }
 
         .eliminar {
             position: absolute;

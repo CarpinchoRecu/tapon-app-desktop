@@ -1,10 +1,11 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { LuPlusCircle } from 'react-icons/lu'
 import { MdCancel } from 'react-icons/md'
 
 const Crear = () => {
     const [abrirCreador, setAbrirCreador] = useState(false)
     const [cantidadDeProductos, setCantidadDeProductos] = useState(0)
+    const [mostrarProductos, setMostrarProductos] = useState(false)
 
     const handleAbrirCreador = () => {
         setAbrirCreador(true)
@@ -72,6 +73,18 @@ const Crear = () => {
         ]
     }))
 
+    useEffect(() => {
+        function habilitarProductos(cantidad) {
+            if (cantidad >= 1) {
+                return true
+            }
+            return false
+        }
+
+        const mostrar = habilitarProductos(cantidadDeProductos)
+        setMostrarProductos(mostrar)
+    }, [cantidadDeProductos, setMostrarProductos])
+
     return (
         <>
             <div onClick={handleAbrirCreador} className="btn__creador__abrir">
@@ -84,27 +97,31 @@ const Crear = () => {
                     <section onClick={handleCerrarCreador} className="btn__creador__cerrar">
                         <MdCancel />
                     </section>
-                    <section className="campos__cliente">
-                        {camposCreador.map((campo) => (
-                            <div key={campo.label} className="campo">
-                                <label htmlFor={campo.label}>{campo.label}</label>
-                                <input type={campo.type} value={campo.value} onChange={campo.onChange} />
-                            </div>
-                        ))}
-                    </section>
-                    <section className="campos__productos">
-                        {camposProducto.map((producto, index) => (
-                            <div key={index}>
-                                <h3>{producto.label}</h3>
-                                {producto.campos.map((campo) => (
-                                    <div key={campo.label} className="campo">
-                                        <label htmlFor={campo.label}>{campo.label}</label>
-                                        <input type={campo.type} />
+                        <article className="campos__cliente">
+                            {camposCreador.map((campo) => (
+                                <div key={campo.label} className="campo__cliente">
+                                    <label htmlFor={campo.label}>{campo.label}</label>
+                                    <input type={campo.type} value={campo.value} onChange={campo.onChange} />
+                                </div>
+                            ))}
+                        </article>
+                        {mostrarProductos === true ? (
+                            <article className="campos__productos">
+                                {camposProducto.map((producto, index) => (
+                                    <div key={index}>
+                                        <h3>{producto.label}</h3>
+                                        {producto.campos.map((campo) => (
+                                            <div key={campo.label} className="campo__producto">
+                                                <label htmlFor={campo.label}>{campo.label}</label>
+                                                <input type={campo.type} />
+                                            </div>
+                                        ))}
                                     </div>
                                 ))}
-                            </div>
-                        ))}
-                    </section>
+                            </article>
+                        ) : (
+                            <></>
+                        )}
                 </div>
             ) : (
                 <></>
