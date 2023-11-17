@@ -62,7 +62,6 @@ const Crear = () => {
             {abrirCreador === true ? (
                 <div className="creador">
                     <div onClick={handleCerrarCraedor} className="btn__creador__cerrar">
-                        <p>Cerrar</p>
                         <MdCancel />
                     </div>
                     <div className="campos">

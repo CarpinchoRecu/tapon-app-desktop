@@ -48,7 +48,129 @@
             }
         }
 
+        .contenedor__creador{
+            
+        }
+
         .creador {
+            padding: $pGeneral;
+            position: absolute;
+            height: 130%;
+            width: 60%;
+            z-index: 1;
+            background-color: $bkColor;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            box-shadow: $sombraGeneral;
+            border-radius: $rdsChico;
+
+            .btn__creador__cerrar {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                background-color: $errorColor;
+                gap: 5px;
+                padding: $pChico;
+                border-radius: $rdsChico;
+                box-shadow: $sombraGeneral;
+                position: absolute;
+                z-index: 1;
+                right: 3%;
+                top: 3%;
+                transition: 0.2s ease;
+                cursor: pointer;
+
+                &:hover {
+                    scale: 1.1;
+                }
+
+                svg {
+                    border-radius: 50%;
+                    height: 40px;
+                    width: 40px;
+                }
+            }
+
+            .campos {
+                width: 80%;
+                height: 80%;
+                padding: $pMedio;
+                display: flex;
+                flex-wrap: wrap;
+                gap: 15px;
+                align-items: center;
+                justify-content: center;
+                background-color: $contColor;
+                box-shadow: $sombraGeneral;
+                border-radius: $rdsGeneral;
+
+                .campo {
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    justify-content: center;
+                    gap: 10px;
+
+                    label {
+                        font-size: $textSizeGeneral;
+                    }
+
+                    input {
+                        padding: $pChico;
+                        font-size: $textSizeChico;
+                        border-radius: $rdsChico;
+                        border: 0;
+                        transition: 0.2s ease;
+
+                        &:hover {
+                            background-color: $itemsColor;
+                        }
+        
+                        &:focus {
+                            outline: none;
+                        }
+                    }
+                }
+            }
+
+        }
+
+
+        .btn__eliminar__abrir {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: $errorColor;
+            gap: 5px;
+            padding: $pChico;
+            border-radius: $rdsChico;
+            box-shadow: $sombraGeneral;
+            position: absolute;
+            z-index: 1;
+            right: 5%;
+            top: 20%;
+            transition: 0.2s ease;
+            cursor: pointer;
+
+            &:hover {
+                scale: 1.1;
+            }
+
+            p {
+                color: #fff;
+                font-size: $textSizeGeneral;
+            }
+
+            svg {
+                border-radius: 50%;
+                height: 40px;
+                width: 40px;
+            }
+        }
+
+        .eliminar {
             position: absolute;
             width: 50%;
             z-index: 1;
@@ -59,11 +181,11 @@
             align-items: center;
             justify-content: center;
 
-            .btn__creador__cerrar {
+            .btn__eliminar__cerrar {
                 display: flex;
                 align-items: center;
                 justify-content: center;
-                background-color: $itemsColor;
+                background-color: $errorColor;
                 gap: 5px;
                 padding: $pChico;
                 border-radius: $rdsChico;
@@ -90,23 +212,6 @@
                     width: 40px;
                 }
             }
-
-            .campos {
-                display: flex;
-                flex-wrap: wrap;
-                gap: 30px;
-                align-items: center;
-                justify-content: center;
-
-                .campo {
-                    display: flex;
-                    flex-direction: column;
-                    align-items: center;
-                    justify-content: center;
-
-                }
-            }
-
         }
 
 
@@ -191,7 +296,7 @@
         width: 100%;
         height: 500px;
         z-index: -1;
-        box-shadow: $sombraGeneral;
+        box-shadow: $sombraDeco;
     }
 
     .circle:first-child {

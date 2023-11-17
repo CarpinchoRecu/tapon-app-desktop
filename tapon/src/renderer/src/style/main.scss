@@ -15,7 +15,7 @@ body {
     height: 100vh;
     display: flex;
     overflow: hidden;
-box-shadow: inset 0px 0px 100px 10px rgba(0, 0, 0, 0.25);
+    box-shadow: inset 0px 0px 100px 10px rgba(0, 0, 0, 0.25);
 }
 
 #root {
@@ -29,14 +29,16 @@ box-shadow: inset 0px 0px 100px 10px rgba(0, 0, 0, 0.25);
 }
 
 $bkColor: #ecdada;
-$contColor: #4b3f34;
+$contColor: #5B4141;
 $itemsColor: #2473bb;
-$decoColor: #313030;
+$decoColor: #000;
+$errorColor: rgb(187, 36, 36);
 
 $rdsGeneral: 20px;
 $rdsChico: 10px;
 
 $sombraGeneral: 6px 6px 30px rgba(0, 0, 0, 0.25);
+$sombraDeco: 0px 0px 30px 20px rgba(0, 0, 0, 0.25);
 
 
 $textSizeMuyGrande: 45px;
@@ -46,6 +48,7 @@ $textSizeChico: 15px;
 
 
 $pGeneral: 20px;
+$pMedio: 9px;
 $pChico: 5px;
 
 

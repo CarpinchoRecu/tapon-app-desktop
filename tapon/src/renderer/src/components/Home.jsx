@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import Header from './Header.jsx'
 import Footer from './Footer.jsx'
 import Crear from './Crear.jsx'
+import Eliminar from './Eliminar.jsx'
 
 const Home = ({ datos }) => {
   //estado para menejar los datos originales de la base de datos
@@ -104,6 +105,7 @@ const Home = ({ datos }) => {
           <div className="circle"></div>
           <main>
         <Crear/>
+        <Eliminar/>
             <section className="contenedor__titulo">
               <h2>Morosos</h2>
             </section>
