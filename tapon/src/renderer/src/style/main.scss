@@ -1,35 +1,42 @@
-*{
+@font-face {
+    font-family: 'League Spartan';
+    src: url('../font/LeagueSpartan-Regular.ttf') format('truetype');
+}
+
+* {
+    font-family: 'League Spartan', sans-serif;
     box-sizing: border-box;
     margin: 0;
     padding: 0;
 }
 
-body{
+body {
     width: 100vw;
     height: 100vh;
     display: flex;
     overflow: hidden;
 }
 
-#root{
+#root {
     width: 100%;
     height: 100%;
 }
 
-.app{
+.app {
     width: 100%;
     height: 100%;
 }
 
-$bkColor: #ECDADA;
-$contColor: #4B3F34;
-$itemsColor: #2473BB;
+$bkColor: #ecdada;
+$contColor: #4b3f34;
+$itemsColor: #2473bb;
 $decoColor: #313030;
 
 $rdsGeneral: 20px;
 $rdsChico: 10px;
 
-@import "./style_components/Home.scss";
-@import "./style_components/Footer.scss";
-@import "./style_components/Header.scss";
-@import "./style_components/Editar.scss";
+$sombraGeneral: 6px 6px 30px rgba(0, 0, 0, 0.25);
+@import './style_components/Home.scss';
+@import './style_components/Footer.scss';
+@import './style_components/Header.scss';
+@import './style_components/Editar.scss';

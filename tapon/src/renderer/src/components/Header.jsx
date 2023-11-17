@@ -1,105 +1,142 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect } from 'react'
+import { FaSearch } from "react-icons/fa";
 
 const Header = ({ datosHome, setDatosFiltrados }) => {
-  const [filtroChivilcoy, setFiltroChivilcoy] = useState(false);
-  const [filtroSuipacha, setFiltroSuipacha] = useState(false);
-  const [filtroCantidadProductos, setFiltroCantidadProductos] = useState('');
-  const [filtroBusquedaNombre, setFiltroBusquedaNombre] = useState('');
-  const [busquedaActiva, setBusquedaActiva] = useState(false);
+  const [filtroChivilcoy, setFiltroChivilcoy] = useState(false)
+  const [filtroSuipacha, setFiltroSuipacha] = useState(false)
+  const [filtroCantidadProductos, setFiltroCantidadProductos] = useState('')
+  const [filtroBusquedaNombre, setFiltroBusquedaNombre] = useState('')
+  const [busquedaActiva, setBusquedaActiva] = useState(false)
 
   useEffect(() => {
     const filtrarDatos = () => {
-      let datosFiltrados = datosHome;
+      let datosFiltrados = datosHome
 
       if (busquedaActiva) {
         // Si la búsqueda está activa, desactivamos los otros filtros
-        setFiltroChivilcoy(false);
-        setFiltroSuipacha(false);
-        setFiltroCantidadProductos('');
+        setFiltroChivilcoy(false)
+        setFiltroSuipacha(false)
+        setFiltroCantidadProductos('')
       } else {
         // Si la búsqueda no está activa, aplicamos los otros filtros
         if (filtroChivilcoy || filtroSuipacha) {
           datosFiltrados = datosFiltrados.filter((dato) => {
-            const localidad = dato.localidad.toLowerCase();
+            const localidad = dato.localidad.toLowerCase()
             if (filtroChivilcoy && localidad === 'chivilcoy') {
-              return true;
+              return true
             } else if (filtroSuipacha && localidad === 'suipacha') {
-              return true;
+              return true
             }
-            return false;
-          });
+            return false
+          })
         }
 
         if (filtroCantidadProductos !== '') {
           datosFiltrados = datosFiltrados.filter(
             (dato) => dato.cantidadProductos === parseInt(filtroCantidadProductos)
-          );
+          )
         }
       }
 
       if (filtroBusquedaNombre !== '') {
-        datosFiltrados = datosFiltrados.filter(
-          (dato) => dato.nombre.toLowerCase().includes(filtroBusquedaNombre.toLowerCase())
-        );
+        datosFiltrados = datosFiltrados.filter((dato) =>
+          dato.nombre.toLowerCase().includes(filtroBusquedaNombre.toLowerCase())
+        )
       }
 
-      setDatosFiltrados(datosFiltrados);
-    };
+      setDatosFiltrados(datosFiltrados)
+    }
 
-    filtrarDatos();
-  }, [filtroChivilcoy, filtroSuipacha, filtroCantidadProductos, filtroBusquedaNombre, busquedaActiva, datosHome, setDatosFiltrados]);
+    filtrarDatos()
+  }, [
+    filtroChivilcoy,
+    filtroSuipacha,
+    filtroCantidadProductos,
+    filtroBusquedaNombre,
+    busquedaActiva,
+    datosHome,
+    setDatosFiltrados
+  ])
 
   const handleCheckboxChange = (e) => {
-    const { name, checked } = e.target;
+    const { name, checked } = e.target
     if (name === 'chivilcoy') {
-      setFiltroChivilcoy(checked);
+      setFiltroChivilcoy(checked)
     } else if (name === 'suipacha') {
-      setFiltroSuipacha(checked);
+      setFiltroSuipacha(checked)
     }
     // Cuando se activa un filtro, desactivamos la búsqueda
-    setBusquedaActiva(false);
-  };
+    setBusquedaActiva(false)
+  }
 
   const handleCantidadProductosChange = (e) => {
-    setFiltroCantidadProductos(e.target.value);
+    setFiltroCantidadProductos(e.target.value)
     // Cuando se activa un filtro, desactivamos la búsqueda
-    setBusquedaActiva(false);
-  };
+    setBusquedaActiva(false)
+  }
 
   const handleBusquedaNombreChange = (e) => {
-    setFiltroBusquedaNombre(e.target.value);
+    setFiltroBusquedaNombre(e.target.value)
     // Activamos o desactivamos la búsqueda según si hay un valor en el input de búsqueda
-    setBusquedaActiva(e.target.value !== '');
-  };
+    setBusquedaActiva(e.target.value !== '')
+  }
 
   const filtros = [
     {
       nombreFiltro: 'chivilcoy',
-      type: "checkbox",
+      type: 'checkbox',
       state: filtroChivilcoy
     },
     {
       nombreFiltro: 'suipacha',
-      type: "checkbox",
+      type: 'checkbox',
       state: filtroSuipacha
     },
     {
       nombreFiltro: 'cantidad de pruductos',
-      type: "number",
+      type: 'number',
       state: null
-    },
+    }
   ]
+
+  const [buscando, setBuscando] = useState(false)
+
+  const handleBuscando = () => {
+    setBuscando(true)
+  }
+
+  const handleSalirDeBusqueda = () => {
+    setBuscando(false)
+  }
+  useEffect(() => {
+    const app = document.querySelector('.app')
+
+    app.addEventListener('click', handleSalirDeBusqueda)
+    return () => {
+      app.removeEventListener('click', handleSalirDeBusqueda)
+    }
+  }, [setBuscando])
 
   return (
     <header>
       <section className="contenedor__buscador">
         <div className="buscador">
-          <h2>Solo por nombre</h2>
+          {buscando === true ? <></> :
+            <>
+              <p>Buscar...</p>
+              <div className="img__buscador">
+                <FaSearch />
+              </div>
+
+            </>
+          }
           <input
-          type="text"
-          value={filtroBusquedaNombre}
-          onChange={handleBusquedaNombreChange}
-        />
+            onClick={handleBuscando}
+            type="text"
+            value={filtroBusquedaNombre}
+            onChange={handleBusquedaNombreChange}
+          />
+          {buscando === true ? <h2>Las Busquedas son solo por nombres</h2> : <></>}
         </div>
       </section>
       <section className="contenedor__filtros">
@@ -107,7 +144,7 @@ const Header = ({ datosHome, setDatosFiltrados }) => {
           <div key={index}>
             {filtro.type === 'checkbox' && (
               <>
-              <label htmlFor={filtro.nombreFiltro}>{filtro.nombreFiltro}</label>
+                <label htmlFor={filtro.nombreFiltro}>{filtro.nombreFiltro}</label>
                 <input
                   type={filtro.type}
                   name={filtro.nombreFiltro}
@@ -116,10 +153,10 @@ const Header = ({ datosHome, setDatosFiltrados }) => {
                 />
               </>
             )}
-            {filtro.type ==="number" && (
+            {filtro.type === 'number' && (
               <>
-              <label htmlFor={filtro.nombreFiltro}>{filtro.nombreFiltro}</label>
-              <input
+                <label htmlFor={filtro.nombreFiltro}>{filtro.nombreFiltro}</label>
+                <input
                   type={filtro.type}
                   name={filtro.nombreFiltro}
                   checked={filtro.state}
@@ -127,7 +164,6 @@ const Header = ({ datosHome, setDatosFiltrados }) => {
                 />
               </>
             )}
-            
           </div>
         ))}
       </section>

@@ -25,14 +25,14 @@ function createWindow() {
   const dbPath = join(app.getPath('userData'), 'db_sqlite.db')
   const db = new sqlite3.Database(dbPath, (err) => {
     if (err) {
-      console.error('Error al abrir la base de datos:', err.message);
+      console.error('Error al abrir la base de datos:', err.message)
     } else {
-      console.log('Conexión exitosa a la base de datos');
+      console.log('Conexión exitosa a la base de datos')
     }
-  });
+  })
 
-  ipcMain.handle("consulta-db", async(event, query) => {
-    return new Promise((resolve, reject) =>{
+  ipcMain.handle('consulta-db', async (event, query) => {
+    return new Promise((resolve, reject) => {
       db.all(query, (err, rows) => {
         if (err) {
           console.error(err)
@@ -44,8 +44,8 @@ function createWindow() {
     })
   })
 
-   // Listener para eliminar una fila específica por su ID
-   ipcMain.handle('eliminar-fila', async (event, id) => {
+  // Listener para eliminar una fila específica por su ID
+  ipcMain.handle('eliminar-fila', async (event, id) => {
     return new Promise((resolve, reject) => {
       const deleteQuery = `DELETE FROM tuTabla WHERE id = ${id}` // Reemplaza 'tuTabla' con el nombre real de tu tabla
       db.run(deleteQuery, (err) => {
