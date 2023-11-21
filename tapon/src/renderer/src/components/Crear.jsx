@@ -13,11 +13,15 @@ const Crear = () => {
     const handleAbrirCreador = () => {
         setAbrirCreador(true)
         setCantidadDeProductos(0)
+        setMostrarCamposClientes(false)
+        setMostrarProductos(false)
     }
 
     const handleCerrarCreador = () => {
         setAbrirCreador(false)
         setCantidadDeProductos(0)
+        setMostrarCamposClientes(false)
+        setMostrarProductos(false)
     }
 
     const handleSiguiente = () => {
