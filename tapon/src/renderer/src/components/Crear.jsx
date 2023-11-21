@@ -10,6 +10,31 @@ const Crear = () => {
     const [mostrarProductos, setMostrarProductos] = useState(false)
     const [mostrarCamposClientes, setMostrarCamposClientes] = useState(false)
 
+    const [formDataClientes, setFormDataClientes] = useState({
+        nombre: '',
+        localidad: '',
+        direccion: '',
+    });
+
+    const [formDataProductos, setFormDataProductos] = useState({
+        nombre: '',
+        localidad: '',
+        direccion: '',
+    });
+
+    const handleInputClientesChange = (event) => {
+        const { name, value } = event.target;
+        setFormDataClientes({
+            ...formDataClientes,
+            [name]: value,
+        });
+    };
+
+    const handleSubmit = (event) => {
+        event.preventDefault();
+        console.log('Datos del formulario:', formDataClientes);
+    };
+
     const handleAbrirCreador = () => {
         setAbrirCreador(true)
         setCantidadDeProductos(0)
@@ -45,18 +70,22 @@ const Crear = () => {
 
     const camposCreador = [
         {
+            name: "nombre",
             label: 'Nombre del Cliente',
             type: 'text'
         },
         {
+            name: "localidad",
             label: 'Localidad',
             type: 'text'
         },
         {
+            name: "direccion",
             label: 'Direccion',
             type: 'text'
         },
         {
+            name: "cantidadDeProductos",
             label: 'Cantidad de Productos',
             type: 'number',
             value: cantidadDeProductos,
@@ -120,8 +149,16 @@ const Crear = () => {
                         <article className="campos__cliente">
                             {camposCreador.map((campo) => (
                                 <div key={campo.label} className="campo__cliente">
-                                    <label htmlFor={campo.label}>{campo.label}</label>
-                                    <input type={campo.type} value={campo.value} onChange={campo.onChange} />
+                                    {campo.name === "cantidadDeProductos" ?
+                                        <>
+                                            <label htmlFor='Cantidad de Productos'>Cantidad de Productos</label>
+                                            <input name='cantidadDeProductos' type="number" value={cantidadDeProductos} onChange={campo.onChange} />
+
+                                        </> :
+                                        <>
+                                            <label htmlFor={campo.label}>{campo.label}</label>
+                                            <input name={campo.name} type={campo.type} value={formDataClientes[campo.name]} onChange={handleInputClientesChange} />
+                                        </>}
                                 </div>
                             ))}
                         </article>
@@ -133,7 +170,7 @@ const Crear = () => {
                                     <FaRegArrowAltCircleLeft />
                                 </div>
                             ) : (
-                                <div onClick={handleSiguiente} className="btn__siguiente__productos">
+                                <div onClick={handleSubmit} className="btn__siguiente__productos">
                                     <p>Crear productos del cliente</p>
                                 </div>
                             )}
@@ -141,10 +178,10 @@ const Crear = () => {
                                 <article className="contenedor__campos__productos">
                                     {camposProducto.map((producto, index) => (
                                         <article className="campos__productos" key={index}>
-                                                <h3>{producto.label}</h3>
-                                                {producto.campos.map((campo, index) => (
-                                                        <input key={index} className="campo__producto" placeholder={campo.label} type={campo.type} />
-                                                ))}
+                                            <h3>{producto.label}</h3>
+                                            {producto.campos.map((campo, index) => (
+                                                <input key={index} className="campo__producto" placeholder={campo.label} type={campo.type} />
+                                            ))}
                                         </article>
                                     ))}
                                 </article>
