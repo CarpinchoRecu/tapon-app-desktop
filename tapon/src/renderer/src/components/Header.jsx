@@ -95,7 +95,7 @@ const Header = ({ datosHome, setDatosFiltrados }) => {
     {
       nombreFiltro: 'cantidad de pruductos',
       type: 'number',
-      state: null
+      state: ""
     }
   ]
 
