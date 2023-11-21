@@ -30,11 +30,6 @@ const Crear = () => {
         });
     };
 
-    const handleSubmit = (event) => {
-        event.preventDefault();
-        console.log('Datos del formulario:', formDataClientes);
-    };
-
     const handleAbrirCreador = () => {
         setAbrirCreador(true)
         setCantidadDeProductos(0)
@@ -50,6 +45,7 @@ const Crear = () => {
     }
 
     const handleSiguiente = () => {
+        console.log('Datos del formulario:', formDataClientes);
         setMostrarProductos(true)
         setMostrarCamposClientes(true)
     }
@@ -170,7 +166,7 @@ const Crear = () => {
                                     <FaRegArrowAltCircleLeft />
                                 </div>
                             ) : (
-                                <div onClick={handleSubmit} className="btn__siguiente__productos">
+                                <div onClick={handleSiguiente} className="btn__siguiente__productos">
                                     <p>Crear productos del cliente</p>
                                 </div>
                             )}
