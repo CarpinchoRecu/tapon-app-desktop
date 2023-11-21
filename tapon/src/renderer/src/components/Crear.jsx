@@ -141,15 +141,10 @@ const Crear = () => {
                                 <article className="contenedor__campos__productos">
                                     {camposProducto.map((producto, index) => (
                                         <article className="campos__productos" key={index}>
-                                            <div>
                                                 <h3>{producto.label}</h3>
-                                                {producto.campos.map((campo) => (
-                                                    <div key={campo.label} className="campo__producto">
-                                                        <label htmlFor={campo.label}>{campo.label}</label>
-                                                        <input type={campo.type} />
-                                                    </div>
+                                                {producto.campos.map((campo, index) => (
+                                                        <input key={index} className="campo__producto" placeholder={campo.label} type={campo.type} />
                                                 ))}
-                                            </div>
                                         </article>
                                     ))}
                                 </article>
