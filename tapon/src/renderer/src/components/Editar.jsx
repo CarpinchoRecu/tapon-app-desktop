@@ -128,6 +128,7 @@ const Editar = ({ datosOriginal, idSeleccionado, setEditar, setTocarCliente }) =
 
             {mostrarMenuProductoSeleccionado && productoSeleccionado && (
                 <div className="editor">
+                    <h2>Editar Producto</h2>
                     <div onClick={handleCerrarProductoSeleccionado} className="cerrar__editor">
                         <MdCancel />
                     </div>

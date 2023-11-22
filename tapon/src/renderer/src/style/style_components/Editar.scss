@@ -121,6 +121,17 @@
         border-radius: $rdsChico;
         border: 3px solid;
 
+        h2 {
+            position: absolute;
+            top: -15px;
+            padding: $pChico;
+            border-radius: $rdsChico;
+            background-color: $itemsColor;
+            font-size: $textSizeGrande;
+            border: 3px solid;
+            box-shadow: $sombraGeneral;
+        }
+
         .cerrar__editor {
             display: flex;
             align-items: center;
@@ -150,6 +161,7 @@
 
         .contenedor__campo__editor {
             padding: $pGeneral;
+
             .campos__editor {
                 width: auto;
                 height: auto;
