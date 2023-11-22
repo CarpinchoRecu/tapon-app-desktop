@@ -11,7 +11,7 @@
     top: 0;
     background-color: $contColor;
 
-    .tabla__datos__cliente{
+    .tabla__datos__cliente {
         border-collapse: collapse;
         width: 50%;
         position: relative;
@@ -38,12 +38,12 @@
             background-color: $bkColor;
         }
 
-        tr{
+        tr {
             transition: 0.2s ease;
         }
     }
 
-    .tabla__datos__productos{
+    .tabla__datos__productos {
         border-collapse: collapse;
         width: 90%;
         position: relative;
@@ -70,7 +70,7 @@
             background-color: $bkColor;
         }
 
-        tr{
+        tr {
             transition: 0.2s ease;
             cursor: pointer;
         }
@@ -105,6 +105,82 @@
             height: 40px;
             width: 40px;
         }
+    }
 
+    .editor {
+        padding: $pGeneral;
+        position: absolute;
+        top: 25%;
+        height: 50%;
+        z-index: 1;
+        background-color: $bkColor;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: $sombraGeneral;
+        border-radius: $rdsChico;
+        border: 3px solid;
+
+        .cerrar__editor {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: $errorColor;
+            gap: 5px;
+            padding: $pChico;
+            border-radius: $rdsChico;
+            box-shadow: $sombraGeneral;
+            position: absolute;
+            z-index: 1;
+            left: 3%;
+            top: 3%;
+            transition: 0.2s ease;
+            cursor: pointer;
+
+            &:hover {
+                scale: 1.1;
+            }
+
+            svg {
+                border-radius: 50%;
+                height: 40px;
+                width: 40px;
+            }
+        }
+
+        .contenedor__campo__editor {
+            padding: $pGeneral;
+            .campos__editor {
+                width: auto;
+                height: auto;
+                padding: $pGeneral;
+                flex-direction: column;
+                display: flex;
+                flex-wrap: wrap;
+                gap: 15px;
+                align-items: center;
+                justify-content: center;
+                background-color: $contColor;
+                box-shadow: $sombraGeneral;
+                border-radius: $rdsGeneral;
+                border: 3px solid;
+
+                .campo__editor {
+                    padding: $pChico;
+                    font-size: $textSizeGeneral;
+                    border-radius: $rdsChico;
+                    border: 0;
+                    transition: 0.2s ease;
+
+                    &:hover {
+                        background-color: $itemsColor;
+                    }
+
+                    &:focus {
+                        outline: none;
+                    }
+                }
+            }
+        }
     }
 }
