@@ -6,6 +6,39 @@ const Editar = ({ datosOriginal, idSeleccionado, setEditar, setTocarCliente }) =
     const [mostrarMenuProductoSeleccionado, setMostrarMenuProductoSeleccionado] = useState(false)
     const [productoSeleccionado, setProductoSeleccionado] = useState(null)
 
+    const [formDataEdicion, setFormDataEdicion] = useState({
+        nombre_producto: '',
+        precio_producto: 0,
+        cuotas_producto: 0,
+        cuotas_pagadas: 0,
+        fecha_ultimo_pago: ''
+    });
+
+    const handleInputEdicionChange = (event, campo) => {
+        setFormDataEdicion({
+            ...formDataEdicion,
+            [campo]: event.target.value
+        });
+    };
+
+    const handleEditar = async () => {
+        // Supongamos que tienes los nuevos valores en un objeto formDataEdicion
+        const { nombre_producto, precio_producto, cuotas_producto, cuotas_pagadas, fecha_ultimo_pago } = formDataEdicion;
+
+        const query = `UPDATE clientes SET nombre_producto=?, precio_producto=?, cuotas_producto=?, cuotas_pagadas=?, fecha_ultimo_pago=? WHERE id=?`;
+        const values = [nombre_producto, precio_producto, cuotas_producto, cuotas_pagadas, fecha_ultimo_pago, productoSeleccionado.id];
+
+        try {
+            await window.electronAPI.actualizarSQLite(query, values);
+            console.log('Actualización exitosa:', resultado);
+            // Realizar alguna acción adicional si la actualización fue exitosa
+        } catch (error) {
+            console.error('Error al actualizar:', error);
+            // Manejar el error de alguna manera (mostrar mensaje, etc.)
+        }
+    };
+
+
     const handleMostrarProductoSeleccionado = (producto) => {
         setProductoSeleccionado(producto)
         setMostrarMenuProductoSeleccionado(true)
@@ -140,12 +173,20 @@ const Editar = ({ datosOriginal, idSeleccionado, setEditar, setTocarCliente }) =
                                     className="campo__editor"
                                     placeholder={productoSeleccionado[campoSeleccionado.name]}
                                     type={campoSeleccionado.type}
+                                    value={formDataEdicion[campoSeleccionado.name]}
+                                    onChange={(event) => handleInputEdicionChange(event, campoSeleccionado.name)}
                                 />
                             ))}
                         </div>
                     </div>
+                    <div onClick={handleEditar} className="btn__editar">
+                        <p>Editar</p>
+                    </div>
+                    {productoSeleccionado.id}
                 </div>
+
             )}
+
         </div>
     )
 }

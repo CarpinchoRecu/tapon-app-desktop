@@ -159,6 +159,32 @@
             }
         }
 
+        .btn__editar{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: $itemsColor;
+            gap: 5px;
+            padding: $pChico;
+            border-radius: $rdsChico;
+            box-shadow: $sombraGeneral;
+            position: absolute;
+            z-index: 1;
+            bottom: 3%;
+            transition: 0.2s ease;
+            cursor: pointer;
+            border: 2px solid;
+    
+            &:hover {
+                scale: 1.1;
+            }
+
+            p{
+                color: #fff;
+                font-size: $textSizeGrande;
+            }
+        }
+
         .contenedor__campo__editor {
             padding: $pGeneral;
 
@@ -195,4 +221,6 @@
             }
         }
     }
+
+
 }

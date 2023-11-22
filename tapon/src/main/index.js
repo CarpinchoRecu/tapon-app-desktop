@@ -56,6 +56,20 @@ function createWindow() {
       });
     });
   });
+
+  ipcMain.handle('update-db', async (event, query, values) => {
+    return new Promise((resolve, reject) => {
+      db.run(query, values, function (err) {
+        if (err) {
+          console.error(err);
+          reject(err);
+        } else {
+          resolve({ message: 'Actualización exitosa' });
+        }
+      });
+    });
+  });
+  
   
 
   mainWindow.on('ready-to-show', () => {
