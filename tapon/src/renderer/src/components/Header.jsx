@@ -95,7 +95,7 @@ const Header = ({ datosHome, setDatosFiltrados }) => {
     {
       nombreFiltro: 'cantidad de pruductos',
       type: 'number',
-      state: ""
+      state: undefined
     }
   ]
 
@@ -122,7 +122,6 @@ const Header = ({ datosHome, setDatosFiltrados }) => {
             <></>
           ) : (
             <>
-              <p>Buscar...</p>
               <div className="img__buscador">
                 <FaSearch />
               </div>
@@ -131,6 +130,7 @@ const Header = ({ datosHome, setDatosFiltrados }) => {
           <input
             onClick={handleBuscando}
             type="text"
+            placeholder='Buscar...'
             value={filtroBusquedaNombre}
             onChange={handleBusquedaNombreChange}
           />

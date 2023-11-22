@@ -2,6 +2,8 @@ import { useEffect, useState } from 'react'
 import { LuPlusCircle } from 'react-icons/lu'
 import { MdCancel } from 'react-icons/md'
 import { FaRegArrowAltCircleLeft } from 'react-icons/fa'
+import Swal from 'sweetalert2';
+
 
 const Crear = () => {
     const [abrirCreador, setAbrirCreador] = useState(false)
@@ -153,18 +155,34 @@ const Crear = () => {
         setMostrarBtnProductos(mostrar)
     }, [cantidadDeProductos, setMostrarBtnProductos])
 
-    const generarConsultasInsercion = () => {
-        let consultasInsercion = ''
-
+    const enviarConsultasInsercion = async () => {
+      try {
         for (let i = 0; i < cantidadDeProductos; i++) {
-            consultasInsercion += `INSERT INTO clientes (nombre, localidad, direccion, nombre_producto, precio_producto, cuotas_producto, cuotas_pagadas, fecha_ultimo_pago) VALUES ('${formDataClientes.nombre}', '${formDataClientes.localidad}', '${formDataClientes.direccion}', '${formDataProductos[i].nombre_producto}', ${formDataProductos[i].precio_producto}, ${formDataProductos[i].cuotas_producto}, ${formDataProductos[i].cuotas_pagadas}, '${formDataProductos[i].fecha_ultimo_pago}');\n`
+          const consulta = `INSERT INTO clientes (nombre, localidad, direccion, nombre_producto, precio_producto, cuotas_producto, cuotas_pagadas, fecha_ultimo_pago) VALUES ('${formDataClientes.nombre}', '${formDataClientes.localidad}', '${formDataClientes.direccion}', '${formDataProductos[i].nombre_producto}', ${formDataProductos[i].precio_producto}, ${formDataProductos[i].cuotas_producto}, ${formDataProductos[i].cuotas_pagadas}, '${formDataProductos[i].fecha_ultimo_pago}')`;
+    
+          await window.electronAPI.insertarSQLite(consulta);
         }
-
-        console.log(consultasInsercion)
-    }
+    
+        // Mostrar alerta de éxito
+        Swal.fire({
+          icon: 'success',
+          title: '¡Éxito!',
+          text: 'Todos los INSERT se han ejecutado correctamente',
+        });
+      } catch (error) {
+        console.error('Error al ejecutar los INSERT:', error);
+        // Mostrar alerta de error
+        Swal.fire({
+          icon: 'error',
+          title: 'Error',
+          text: 'Hubo un error al ejecutar los INSERT',
+        });
+      }
+    };
+    
 
     const handleCrear = () => {
-        generarConsultasInsercion()
+        enviarConsultasInsercion()
     }
 
     return (
