@@ -44,20 +44,19 @@ function createWindow() {
     })
   })
 
-  // Listener para eliminar una fila específica por su ID
-  ipcMain.handle('eliminar-fila', async (event, id) => {
+  ipcMain.handle('insertar-db', async (event, query) => {
     return new Promise((resolve, reject) => {
-      const deleteQuery = `DELETE FROM tuTabla WHERE id = ${id}` // Reemplaza 'tuTabla' con el nombre real de tu tabla
-      db.run(deleteQuery, (err) => {
+      db.run(query, function (err) {
         if (err) {
-          console.error(err)
-          reject(err)
+          console.error(err);
+          reject(err);
         } else {
-          resolve('Fila eliminada exitosamente')
+          resolve({ message: 'Inserción exitosa' });
         }
-      })
-    })
-  })
+      });
+    });
+  });
+  
 
   mainWindow.on('ready-to-show', () => {
     mainWindow.show()

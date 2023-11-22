@@ -10,13 +10,12 @@ contextBridge.exposeInMainWorld('electronAPI', {
     }
   },
 
-  // Nueva función para eliminar una fila específica por su ID
-  eliminarFilaSQLite: async (id) => {
+  insertarSQLite: async (query) => {
     try {
-      const resultado = await ipcRenderer.invoke('eliminar-fila', id);
+      const resultado = await ipcRenderer.invoke('insertar-db', query);
       return resultado;
     } catch (error) {
       throw new Error(error);
     }
-  }
+  },
 });
