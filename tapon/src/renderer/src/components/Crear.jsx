@@ -13,22 +13,32 @@ const Crear = () => {
     const [formDataClientes, setFormDataClientes] = useState({
         nombre: '',
         localidad: '',
-        direccion: '',
-    });
+        direccion: ''
+    })
 
     const [formDataProductos, setFormDataProductos] = useState({
-        nombre: '',
-        localidad: '',
-        direccion: '',
-    });
+        nombre_producto: '',
+        precio_producto: '',
+        cuotas_producto: '',
+        cuotas_pagadas: '',
+        fecha_ultimo_pago: ''
+    })
 
     const handleInputClientesChange = (event) => {
-        const { name, value } = event.target;
+        const { name, value } = event.target
         setFormDataClientes({
             ...formDataClientes,
-            [name]: value,
-        });
-    };
+            [name]: value
+        })
+    }
+
+    const handleInputProductosChange = (event) => {
+        const { name, value } = event.target
+        setFormDataProductos({
+            ...formDataProductos,
+            [name]: value
+        })
+    }
 
     const handleAbrirCreador = () => {
         setAbrirCreador(true)
@@ -45,9 +55,13 @@ const Crear = () => {
     }
 
     const handleSiguiente = () => {
-        console.log('Datos del formulario:', formDataClientes);
+        console.log('Datos del formulario:', formDataClientes)
         setMostrarProductos(true)
         setMostrarCamposClientes(true)
+    }
+
+    const handleCrear = () => {
+        console.log(formDataProductos)
     }
 
     const handleAtras = () => {
@@ -66,22 +80,22 @@ const Crear = () => {
 
     const camposCreador = [
         {
-            name: "nombre",
+            name: 'nombre',
             label: 'Nombre del Cliente',
             type: 'text'
         },
         {
-            name: "localidad",
+            name: 'localidad',
             label: 'Localidad',
             type: 'text'
         },
         {
-            name: "direccion",
+            name: 'direccion',
             label: 'Direccion',
             type: 'text'
         },
         {
-            name: "cantidadDeProductos",
+            name: 'cantidadDeProductos',
             label: 'Cantidad de Productos',
             type: 'number',
             value: cantidadDeProductos,
@@ -93,22 +107,27 @@ const Crear = () => {
         label: `Producto nº${index + 1}`,
         campos: [
             {
+                name: 'nombre_producto',
                 label: 'Nombre Producto',
                 type: 'text'
             },
             {
+                name: 'precio_producto',
                 label: 'Precio Producto',
                 type: 'number'
             },
             {
+                name: 'cuotas_producto',
                 label: 'Cuotas',
                 type: 'number'
             },
             {
+                name: 'cuotas_pagadas',
                 label: 'Cuotas Pagadas',
                 type: 'number'
             },
             {
+                name: 'fecha_ultimo_pago',
                 label: 'Fecha Ultimo Pago',
                 type: 'date'
             }
@@ -145,16 +164,27 @@ const Crear = () => {
                         <article className="campos__cliente">
                             {camposCreador.map((campo) => (
                                 <div key={campo.label} className="campo__cliente">
-                                    {campo.name === "cantidadDeProductos" ?
+                                    {campo.name === 'cantidadDeProductos' ? (
                                         <>
-                                            <label htmlFor='Cantidad de Productos'>Cantidad de Productos</label>
-                                            <input name='cantidadDeProductos' type="number" value={cantidadDeProductos} onChange={campo.onChange} />
-
-                                        </> :
+                                            <label htmlFor="Cantidad de Productos">Cantidad de Productos</label>
+                                            <input
+                                                name="cantidadDeProductos"
+                                                type="number"
+                                                value={cantidadDeProductos}
+                                                onChange={campo.onChange}
+                                            />
+                                        </>
+                                    ) : (
                                         <>
                                             <label htmlFor={campo.label}>{campo.label}</label>
-                                            <input name={campo.name} type={campo.type} value={formDataClientes[campo.name]} onChange={handleInputClientesChange} />
-                                        </>}
+                                            <input
+                                                name={campo.name}
+                                                type={campo.type}
+                                                value={formDataClientes[campo.name]}
+                                                onChange={handleInputClientesChange}
+                                            />
+                                        </>
+                                    )}
                                 </div>
                             ))}
                         </article>
@@ -176,10 +206,20 @@ const Crear = () => {
                                         <article className="campos__productos" key={index}>
                                             <h3>{producto.label}</h3>
                                             {producto.campos.map((campo, index) => (
-                                                <input key={index} className="campo__producto" placeholder={campo.label} type={campo.type} />
+                                                <input
+                                                    key={index}
+                                                    name={campo.name}
+                                                    className="campo__producto"
+                                                    placeholder={campo.label}
+                                                    value={formDataProductos[campo.name]}
+                                                    onChange={handleInputProductosChange}
+                                                    type={campo.type}
+                                                />
                                             ))}
                                         </article>
                                     ))}
+
+                                    <button onClick={handleCrear}>CREAR</button>
                                 </article>
                             ) : (
                                 <></>
