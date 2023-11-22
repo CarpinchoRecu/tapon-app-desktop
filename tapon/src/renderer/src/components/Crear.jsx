@@ -10,20 +10,7 @@ const Crear = () => {
     const [mostrarProductos, setMostrarProductos] = useState(false)
     const [mostrarCamposClientes, setMostrarCamposClientes] = useState(false)
 
-    const [formDataClientes, setFormDataClientes] = useState({
-        nombre: '',
-        localidad: '',
-        direccion: ''
-    })
-
-    const [formDataProductos, setFormDataProductos] = useState({
-        nombre_producto: '',
-        precio_producto: '',
-        cuotas_producto: '',
-        cuotas_pagadas: '',
-        fecha_ultimo_pago: ''
-    })
-
+    //manejar estado de campos de clientes
     const handleInputClientesChange = (event) => {
         const { name, value } = event.target
         setFormDataClientes({
@@ -32,11 +19,17 @@ const Crear = () => {
         })
     }
 
-    const handleInputProductosChange = (event) => {
-        const { name, value } = event.target
-        setFormDataProductos({
-            ...formDataProductos,
-            [name]: value
+    //manejar estado de campos de productos
+    const handleInputProductosChange = (event, productIndex, fieldName) => {
+        const { value } = event.target
+
+        setFormDataProductos((prevFormData) => {
+            const updatedFormData = [...prevFormData]
+            updatedFormData[productIndex] = {
+                ...updatedFormData[productIndex],
+                [fieldName]: value
+            }
+            return updatedFormData
         })
     }
 
@@ -78,6 +71,7 @@ const Crear = () => {
         setCantidadDeProductos(value)
     }
 
+    // campos y recoleccion de datos de clientes
     const camposCreador = [
         {
             name: 'nombre',
@@ -102,6 +96,23 @@ const Crear = () => {
             onChange: handleCantidadProductosChange // Manejar el cambio en la cantidad de productos
         }
     ]
+
+    const [formDataClientes, setFormDataClientes] = useState({
+        nombre: '',
+        localidad: '',
+        direccion: ''
+    })
+
+    // campos y recoleccion de datos de productos de los clientes
+    const [formDataProductos, setFormDataProductos] = useState(
+        Array.from({ length: cantidadDeProductos }, () => ({
+            nombre_producto: '',
+            precio_producto: '',
+            cuotas_producto: '',
+            cuotas_pagadas: '',
+            fecha_ultimo_pago: ''
+        }))
+    )
 
     const camposProducto = Array.from({ length: cantidadDeProductos }, (_, index) => ({
         label: `Producto nº${index + 1}`,
@@ -202,24 +213,25 @@ const Crear = () => {
                             )}
                             {mostrarProductos === true ? (
                                 <article className="contenedor__campos__productos">
-                                    {camposProducto.map((producto, index) => (
-                                        <article className="campos__productos" key={index}>
+                                    {camposProducto.map((producto, productIndex) => (
+                                        <article className="campos__productos" key={productIndex}>
                                             <h3>{producto.label}</h3>
-                                            {producto.campos.map((campo, index) => (
+                                            {producto.campos.map((campo, campoIndex) => (
                                                 <input
-                                                    key={index}
+                                                    key={campoIndex}
                                                     name={campo.name}
                                                     className="campo__producto"
                                                     placeholder={campo.label}
                                                     value={formDataProductos[campo.name]}
-                                                    onChange={handleInputProductosChange}
+                                                    onChange={(event) =>
+                                                        handleInputProductosChange(event, productIndex, campo.name)
+                                                    }
                                                     type={campo.type}
                                                 />
                                             ))}
                                         </article>
                                     ))}
-
-                                    <button onClick={handleCrear}>CREAR</button>
+                                <button onClick={handleCrear}>CREAR</button>
                                 </article>
                             ) : (
                                 <></>
