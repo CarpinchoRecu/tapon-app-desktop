@@ -53,10 +53,6 @@ const Crear = () => {
         setMostrarCamposClientes(true)
     }
 
-    const handleCrear = () => {
-        console.log(formDataProductos)
-    }
-
     const handleAtras = () => {
         setMostrarProductos(false)
         setMostrarCamposClientes(false)
@@ -157,6 +153,20 @@ const Crear = () => {
         setMostrarBtnProductos(mostrar)
     }, [cantidadDeProductos, setMostrarBtnProductos])
 
+    const generarConsultasInsercion = () => {
+        let consultasInsercion = ''
+
+        for (let i = 0; i < cantidadDeProductos; i++) {
+            consultasInsercion += `INSERT INTO clientes (nombre, localidad, direccion, nombre_producto, precio_producto, cuotas_producto, cuotas_pagadas, fecha_ultimo_pago) VALUES ('${formDataClientes.nombre}', '${formDataClientes.localidad}', '${formDataClientes.direccion}', '${formDataProductos[i].nombre_producto}', ${formDataProductos[i].precio_producto}, ${formDataProductos[i].cuotas_producto}, ${formDataProductos[i].cuotas_pagadas}, '${formDataProductos[i].fecha_ultimo_pago}');\n`
+        }
+
+        console.log(consultasInsercion)
+    }
+
+    const handleCrear = () => {
+        generarConsultasInsercion()
+    }
+
     return (
         <>
             <div onClick={handleAbrirCreador} className="btn__creador__abrir">
@@ -231,7 +241,7 @@ const Crear = () => {
                                             ))}
                                         </article>
                                     ))}
-                                <button onClick={handleCrear}>CREAR</button>
+                                    <button onClick={handleCrear}>CREAR</button>
                                 </article>
                             ) : (
                                 <></>
