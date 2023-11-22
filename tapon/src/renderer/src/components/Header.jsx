@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import { FaSearch } from 'react-icons/fa'
+import { MdCancel } from 'react-icons/md'
 
 const Header = ({ datosHome, setDatosFiltrados }) => {
   const [filtroChivilcoy, setFiltroChivilcoy] = useState(false)
@@ -106,20 +107,29 @@ const Header = ({ datosHome, setDatosFiltrados }) => {
   const handleSalirDeBusqueda = () => {
     setBuscando(false)
   }
+
+  const handleSacarNombre = () => {
+    setFiltroBusquedaNombre('')
+  }
+
   useEffect(() => {
-    const app = document.querySelector('.app')
-    app.addEventListener('click', handleSalirDeBusqueda)
-    return () => {
-      app.removeEventListener('click', handleSalirDeBusqueda)
+    if (filtroBusquedaNombre === '') {
+      setBuscando(false)
+    } else {
+      setBuscando(true)
     }
-  }, [setBuscando])
+  }, [filtroBusquedaNombre, setBuscando])
 
   return (
     <header>
       <section className="contenedor__buscador">
         <div className="buscador">
           {buscando === true ? (
-            <></>
+            <>
+              <div onClick={handleSacarNombre} className="img__sacar__buscador">
+                <MdCancel />
+              </div>
+            </>
           ) : (
             <>
               <div className="img__buscador">
@@ -130,7 +140,7 @@ const Header = ({ datosHome, setDatosFiltrados }) => {
           <input
             onClick={handleBuscando}
             type="text"
-            placeholder='Buscar...'
+            placeholder="Buscar..."
             value={filtroBusquedaNombre}
             onChange={handleBusquedaNombreChange}
           />

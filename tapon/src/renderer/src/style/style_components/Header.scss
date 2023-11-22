@@ -63,6 +63,26 @@ header {
                 }
             }
 
+            .img__sacar__buscador {
+                position: absolute;
+                right: 7%;
+                background-color: $errorColor;
+                padding: $pChico;
+                width: 33px;
+                height: 33px;
+                border-radius: 50%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                cursor: pointer;
+                
+                svg {
+                    height: 23px;
+                    width: 23px;
+                    scale: 1.4;
+                }
+            }
+
             input {
                 border: 0;
                 border-radius: $rdsGeneral;

@@ -1,3 +1,5 @@
+import { FaRegArrowAltCircleLeft } from 'react-icons/fa'
+
 const Editar = ({ datosOriginal, idSeleccionado, setEditar, setTocarCliente }) => {
     const handleCerrarEditor = () => {
         setEditar(false)
@@ -10,14 +12,19 @@ const Editar = ({ datosOriginal, idSeleccionado, setEditar, setTocarCliente }) =
         return <p>Cliente no encontrado</p>
     }
 
-    // Encontrar todos los productos con el mismo nombre del cliente seleccionado
-    const productosCliente = datosOriginal.filter(
-        (cliente) => cliente.nombre.toLowerCase() === clienteSeleccionado.nombre.toLowerCase()
-    )
+  // Encontrar todos los productos con el mismo nombre, localidad y dirección del cliente seleccionado
+  const productosCliente = datosOriginal.filter(
+    (cliente) =>
+      cliente.nombre.toLowerCase() === clienteSeleccionado.nombre.toLowerCase() &&
+      cliente.localidad === clienteSeleccionado.localidad &&
+      cliente.direccion === clienteSeleccionado.direccion
+  )
 
     return (
         <div className="editar">
-            <button onClick={handleCerrarEditor}>volver</button>
+            <div onClick={handleCerrarEditor} className="btn__volver">
+                <FaRegArrowAltCircleLeft/>
+            </div>
             <table className="tabla__datos__cliente">
                 <thead>
                     <tr>

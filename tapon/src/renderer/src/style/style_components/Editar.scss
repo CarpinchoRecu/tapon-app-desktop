@@ -2,11 +2,11 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
     gap: 20px;
     width: 100vw;
     height: 100vh;
     position: absolute;
+    padding: $pGeneral;
     z-index: 10;
     top: 0;
     background-color: $contColor;
@@ -72,10 +72,39 @@
 
         tr{
             transition: 0.2s ease;
+            cursor: pointer;
         }
 
         tr:hover {
             background-color: $itemsColor;
         }
+    }
+
+    .btn__volver {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: $itemsColor;
+        gap: 5px;
+        padding: $pChico;
+        border-radius: $rdsChico;
+        box-shadow: $sombraGeneral;
+        position: absolute;
+        z-index: 1;
+        left: 3%;
+        top: 3%;
+        transition: 0.2s ease;
+        cursor: pointer;
+
+        &:hover {
+            scale: 1.1;
+        }
+
+        svg {
+            border-radius: 50%;
+            height: 40px;
+            width: 40px;
+        }
+
     }
 }

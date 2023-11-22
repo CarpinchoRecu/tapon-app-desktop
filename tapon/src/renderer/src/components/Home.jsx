@@ -21,57 +21,59 @@ const Home = ({ datos }) => {
   useEffect(() => {
     const datosEnHome = () => {
       try {
-        const nombresContados = datos.reduce((acumulador, dato) => {
+        const datosAgrupados = datos.reduce((acumulador, dato) => {
           const sinCompletar = 'Sin Completar'
           const nombreMinusculas = dato.nombre.toLowerCase()
-
+          const localidad = dato.localidad || sinCompletar
+          const direccion = dato.direccion || sinCompletar
+          const clave = `${nombreMinusculas}-${localidad}-${direccion}`
+  
           // Lógica manejo de fechas
           const fecha = dato.fecha_ultimo_pago
           const partesFecha = fecha.split('-')
           const fechaEnDate = new Date(partesFecha[0], partesFecha[1] - 1, partesFecha[2])
-          // Crear una nueva fecha sumando un mes
           const fechaMasUnMes = new Date(
             fechaEnDate.getFullYear(),
             fechaEnDate.getMonth() + 1,
             fechaEnDate.getDate()
           )
-          // Obtener el año, mes y día de la nueva fecha
           const nuevoAño = fechaMasUnMes.getFullYear()
           const nuevoMes = String(fechaMasUnMes.getMonth() + 1).padStart(2, '0')
           const nuevoDia = String(fechaMasUnMes.getDate()).padStart(2, '0')
-
-          // Construir la nueva fecha
           const fechaProximoPago = `${nuevoAño}-${nuevoMes}-${nuevoDia}`
-          const indiceExistente = acumulador.findIndex((elem) => elem.nombre === nombreMinusculas)
-
+  
+          const indiceExistente = acumulador.findIndex((elem) => elem.clave === clave)
+  
           if (indiceExistente !== -1) {
             acumulador[indiceExistente].cantidadProductos++
           } else {
             acumulador.push({
               id: dato.id,
               nombre: nombreMinusculas,
-              localidad: dato.localidad || sinCompletar,
-              direccion: dato.direccion || sinCompletar,
+              localidad: localidad,
+              direccion: direccion,
               nombreProducto: dato.nombre_producto || sinCompletar,
               precioProducto: dato.precio_producto || sinCompletar,
               cuotasProducto: dato.cuotas_producto || sinCompletar,
               cuotasPagadas: dato.cuotas_pagadas || sinCompletar,
               fecha_proximo_pago: fechaProximoPago || sinCompletar,
               fecha_ultimo_pago: fecha || sinCompletar,
-              cantidadProductos: 1
+              cantidadProductos: 1,
+              clave: clave
             })
           }
           return acumulador
         }, [])
-
-        setDatosHome(nombresContados)
+  
+        setDatosHome(datosAgrupados)
       } catch (error) {
         console.error('Error al obtener los datos:', error)
       }
     }
-
+  
     datosEnHome()
   }, [datos])
+  
 
   const [tocarCliente, setTocarCliente] = useState(false)
   const [datosClienteSeleccionado, setDatosClienteSeleccionado] = useState(null)
