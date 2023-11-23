@@ -122,11 +122,13 @@ header {
 
         .checkboxContainer {
             display: flex;
-            gap: 20px;
+            flex-direction: column;
+            gap: 5px;
 
             .checkBox {
                 display: flex;
-                gap: 10px;
+                justify-content: space-between;
+                gap: 5px;
                 color: #fff;
                 background: $itemsColor;
                 padding: $pChico;

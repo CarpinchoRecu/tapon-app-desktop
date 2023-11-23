@@ -8,6 +8,7 @@ const Header = ({ datosHome, setDatosFiltrados }) => {
   const [filtroCantidadProductos, setFiltroCantidadProductos] = useState('')
   const [filtroBusquedaNombre, setFiltroBusquedaNombre] = useState('')
   const [busquedaActiva, setBusquedaActiva] = useState(false)
+  const [filtroProximoPago, setFiltroProximoPago] = useState(false);
 
   useEffect(() => {
     const filtrarDatos = () => {
@@ -45,6 +46,18 @@ const Header = ({ datosHome, setDatosFiltrados }) => {
         )
       }
 
+      if (filtroProximoPago) {
+        // Filtrar solo si se activa el checkbox
+        const fechaActual = new Date().getTime();
+
+        datosFiltrados = datosFiltrados.filter((cliente) => {
+          const fechaProximoPago = new Date(cliente.fecha_proximo_pago).getTime();
+          const diffTiempo = fechaProximoPago - fechaActual;
+          const diffDias = Math.ceil(diffTiempo / (1000 * 60 * 60 * 24));
+          return diffDias <= 7 && diffDias >= 0;
+        });
+      }
+
       setDatosFiltrados(datosFiltrados)
     }
 
@@ -54,6 +67,7 @@ const Header = ({ datosHome, setDatosFiltrados }) => {
     filtroSuipacha,
     filtroCantidadProductos,
     filtroBusquedaNombre,
+    filtroProximoPago,
     busquedaActiva,
     datosHome,
     setDatosFiltrados
@@ -65,7 +79,10 @@ const Header = ({ datosHome, setDatosFiltrados }) => {
       setFiltroChivilcoy(checked)
     } else if (name === 'suipacha') {
       setFiltroSuipacha(checked)
+    }else if (name === 'proximoCobrar') {
+      setFiltroProximoPago(checked)
     }
+    
     // Cuando se activa un filtro, desactivamos la búsqueda
     setBusquedaActiva(false)
   }
@@ -84,23 +101,35 @@ const Header = ({ datosHome, setDatosFiltrados }) => {
 
   const filtros = [
     {
-      nombreFiltro: 'Chivilcoy',
+      name: "Chivilcoy",
+      nombreFiltro: 'chivilcoy',
       type: 'checkbox',
       state: filtroChivilcoy
     },
     {
-      nombreFiltro: 'Suipacha',
+      name: "Suipacha",
+      nombreFiltro: 'suipacha',
       type: 'checkbox',
       state: filtroSuipacha
     },
     {
-      nombreFiltro: 'Cantidad de Pruductos',
+      name: "Proximo a Cobrar",
+      nombreFiltro: 'proximoCobrar',
+      type: 'checkbox',
+      state: filtroProximoPago
+    },
+    {
+      name: "Cantidad de Pruductos",
+      nombreFiltro: 'cantidad de pruductos',
       type: 'number',
-      state: undefined
+      state: ""
     }
   ]
 
   const [buscando, setBuscando] = useState(false)
+  const handleBuscando = () => {
+    setBuscando(true)
+  }
   const handleSalirDeBusqueda = () => {
     setBuscando(false)
   }
@@ -135,6 +164,7 @@ const Header = ({ datosHome, setDatosFiltrados }) => {
             </>
           )}
           <input
+            onClick={handleBuscando}
             type="text"
             placeholder="Buscar..."
             value={filtroBusquedaNombre}
@@ -145,28 +175,13 @@ const Header = ({ datosHome, setDatosFiltrados }) => {
       </section>
       <section className="contenedor__filtros">
         <h2>Filtros</h2>
-        <div className="numberContainer">
-          {filtros.map(
-            (filtro, index) =>
-              filtro.type === 'number' && (
-                <div className="number" key={index}>
-                  <label htmlFor={filtro.nombreFiltro}>{filtro.nombreFiltro}</label>
-                  <input
-                    type={filtro.type}
-                    name={filtro.nombreFiltro}
-                    value={filtro.state}
-                    onChange={handleCantidadProductosChange}
-                  />
-                </div>
-              )
-          )}
-        </div>
+
         <div className="checkboxContainer">
           {filtros.map(
             (filtro, index) =>
               filtro.type === 'checkbox' && (
                 <div className="checkBox" key={index}>
-                  <label htmlFor={filtro.nombreFiltro}>{filtro.nombreFiltro}</label>
+                  <label htmlFor={filtro.name}>{filtro.name}</label>
                   <input
                     type={filtro.type}
                     name={filtro.nombreFiltro}
@@ -177,7 +192,22 @@ const Header = ({ datosHome, setDatosFiltrados }) => {
               )
           )}
         </div>
-
+        <div className="numberContainer">
+          {filtros.map(
+            (filtro, index) =>
+              filtro.type === 'number' && (
+                <div className="number" key={index}>
+                  <label htmlFor={filtro.name}>{filtro.name}</label>
+                  <input
+                    type={filtro.type}
+                    name={filtro.nombreFiltro}
+                    value={filtro.state}
+                    onChange={handleCantidadProductosChange}
+                  />
+                </div>
+              )
+          )}
+        </div>
       </section>
     </header>
   )
