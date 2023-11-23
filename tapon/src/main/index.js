@@ -7,9 +7,10 @@ import { rejects } from 'assert'
 
 // creando la primer ventana
 function createWindow() {
+  const { width, height } = screen.getPrimaryDisplay().workAreaSize;
   const mainWindow = new BrowserWindow({
-    width: screen.getPrimaryDisplay().workAreaSize.width,
-    height: screen.getPrimaryDisplay().workAreaSize.height,
+    width,
+    height,
     show: true,
     fullscreen: false,
     fullscreenable: true,
@@ -20,6 +21,8 @@ function createWindow() {
       sandbox: false
     }
   })
+  
+  mainWindow.setMinimumSize(width, height);
 
   // Plantilla del menú
   const template = [
