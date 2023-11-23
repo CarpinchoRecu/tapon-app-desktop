@@ -5,14 +5,13 @@ import icon from '../../resources/icon.png'
 import sqlite3 from 'sqlite3'
 import { rejects } from 'assert'
 
+// creando la primer ventana
 function createWindow() {
-  const { width, height } = screen.getPrimaryDisplay().workAreaSize
-  // creando la primer ventana
   const mainWindow = new BrowserWindow({
-    width,
-    height,
+    width: screen.getPrimaryDisplay().workAreaSize.width,
+    height: screen.getPrimaryDisplay().workAreaSize.height,
     show: true,
-    fullscreen: true,
+    fullscreen: false,
     fullscreenable: true,
     autoHideMenuBar: false,
     ...(process.platform === 'linux' ? { icon } : {}),
@@ -32,6 +31,14 @@ function createWindow() {
           role: 'minimize'
         },
         {
+          label: 'Recargar',
+          accelerator: 'CmdOrCtrl+R',
+          click: () => {
+            mainWindow.reload()
+          }
+        },
+        { type: 'separator' },
+        {
           label: 'Salir',
           click: () => {
             app.quit()
@@ -39,6 +46,7 @@ function createWindow() {
         }
       ]
     },
+    { type: 'separator' },
     {
       label: 'Ver',
       submenu: [
@@ -127,20 +135,19 @@ function createWindow() {
 
   ipcMain.handle('eliminarCliente-db', async (event, nombre, localidad, direccion) => {
     return new Promise((resolve, reject) => {
-      const query = 'DELETE FROM clientes WHERE nombre = ? AND localidad = ? AND direccion = ?';
-      const values = [nombre, localidad, direccion];
-  
+      const query = 'DELETE FROM clientes WHERE nombre = ? AND localidad = ? AND direccion = ?'
+      const values = [nombre, localidad, direccion]
+
       db.run(query, values, function (err) {
         if (err) {
-          console.error(err);
-          reject(err);
+          console.error(err)
+          reject(err)
         } else {
-          resolve({ message: 'Eliminación exitosa' });
+          resolve({ message: 'Eliminación exitosa' })
         }
-      });
-    });
-  });
-  
+      })
+    })
+  })
 
   mainWindow.on('ready-to-show', () => {
     mainWindow.show()
