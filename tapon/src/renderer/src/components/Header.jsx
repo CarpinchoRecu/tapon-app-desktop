@@ -84,17 +84,17 @@ const Header = ({ datosHome, setDatosFiltrados }) => {
 
   const filtros = [
     {
-      nombreFiltro: 'chivilcoy',
+      nombreFiltro: 'Chivilcoy',
       type: 'checkbox',
       state: filtroChivilcoy
     },
     {
-      nombreFiltro: 'suipacha',
+      nombreFiltro: 'Suipacha',
       type: 'checkbox',
       state: filtroSuipacha
     },
     {
-      nombreFiltro: 'cantidad de pruductos',
+      nombreFiltro: 'Cantidad de Pruductos',
       type: 'number',
       state: undefined
     }
@@ -145,23 +145,6 @@ const Header = ({ datosHome, setDatosFiltrados }) => {
       </section>
       <section className="contenedor__filtros">
         <h2>Filtros</h2>
-
-        <div className="checkboxContainer">
-          {filtros.map(
-            (filtro, index) =>
-              filtro.type === 'checkbox' && (
-                <div className="checkBox" key={index}>
-                  <label htmlFor={filtro.nombreFiltro}>{filtro.nombreFiltro}</label>
-                  <input
-                    type={filtro.type}
-                    name={filtro.nombreFiltro}
-                    checked={filtro.state}
-                    onChange={handleCheckboxChange}
-                  />
-                </div>
-              )
-          )}
-        </div>
         <div className="numberContainer">
           {filtros.map(
             (filtro, index) =>
@@ -178,6 +161,23 @@ const Header = ({ datosHome, setDatosFiltrados }) => {
               )
           )}
         </div>
+        <div className="checkboxContainer">
+          {filtros.map(
+            (filtro, index) =>
+              filtro.type === 'checkbox' && (
+                <div className="checkBox" key={index}>
+                  <label htmlFor={filtro.nombreFiltro}>{filtro.nombreFiltro}</label>
+                  <input
+                    type={filtro.type}
+                    name={filtro.nombreFiltro}
+                    checked={filtro.state}
+                    onChange={handleCheckboxChange}
+                  />
+                </div>
+              )
+          )}
+        </div>
+
       </section>
     </header>
   )
