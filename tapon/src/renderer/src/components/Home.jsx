@@ -27,7 +27,7 @@ const Home = ({ datos }) => {
           const localidad = dato.localidad || sinCompletar
           const direccion = dato.direccion || sinCompletar
           const clave = `${nombreMinusculas}-${localidad}-${direccion}`
-  
+
           // Lógica manejo de fechas
           const fecha = dato.fecha_ultimo_pago
           const partesFecha = fecha.split('-')
@@ -41,9 +41,9 @@ const Home = ({ datos }) => {
           const nuevoMes = String(fechaMasUnMes.getMonth() + 1).padStart(2, '0')
           const nuevoDia = String(fechaMasUnMes.getDate()).padStart(2, '0')
           const fechaProximoPago = `${nuevoAño}-${nuevoMes}-${nuevoDia}`
-  
+
           const indiceExistente = acumulador.findIndex((elem) => elem.clave === clave)
-  
+
           if (indiceExistente !== -1) {
             acumulador[indiceExistente].cantidadProductos++
           } else {
@@ -64,16 +64,15 @@ const Home = ({ datos }) => {
           }
           return acumulador
         }, [])
-  
+
         setDatosHome(datosAgrupados)
       } catch (error) {
         console.error('Error al obtener los datos:', error)
       }
     }
-  
+
     datosEnHome()
   }, [datos])
-  
 
   const [tocarCliente, setTocarCliente] = useState(false)
   const [datosClienteSeleccionado, setDatosClienteSeleccionado] = useState(null)
@@ -106,8 +105,8 @@ const Home = ({ datos }) => {
         <section className="home">
           <div className="circle"></div>
           <main>
-        <Crear/>
-        <Eliminar datosOriginal={datosOriginal} idSeleccionado={idSeleccionado}/>
+            <Crear />
+            <Eliminar datosOriginal={datosOriginal} idSeleccionado={idSeleccionado} />
             <section className="contenedor__titulo">
               <h2>Morosos</h2>
             </section>

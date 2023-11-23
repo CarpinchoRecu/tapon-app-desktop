@@ -101,9 +101,6 @@ const Header = ({ datosHome, setDatosFiltrados }) => {
   ]
 
   const [buscando, setBuscando] = useState(false)
-  const handleBuscando = () => {
-    setBuscando(true)
-  }
   const handleSalirDeBusqueda = () => {
     setBuscando(false)
   }
@@ -138,7 +135,6 @@ const Header = ({ datosHome, setDatosFiltrados }) => {
             </>
           )}
           <input
-            onClick={handleBuscando}
             type="text"
             placeholder="Buscar..."
             value={filtroBusquedaNombre}

@@ -193,7 +193,6 @@ const Editar = ({ datosOriginal, idSeleccionado, setEditar, setTocarCliente }) =
                     })}
                 </tbody>
             </table>
-
             {mostrarMenuProductoSeleccionado && productoSeleccionado && (
                 <div className="editor">
                     <h2>Editar Producto</h2>

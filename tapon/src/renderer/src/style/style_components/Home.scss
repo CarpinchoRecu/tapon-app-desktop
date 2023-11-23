@@ -83,6 +83,11 @@
             opacity: 0.5!important;
             cursor: inherit;
             scale: 0.9;
+            
+            &:hover{
+                scale: 0.9;
+
+            }
         }
 
         .creador {

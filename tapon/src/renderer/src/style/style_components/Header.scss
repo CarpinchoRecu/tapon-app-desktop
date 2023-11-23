@@ -35,31 +35,24 @@ header {
                 border-radius: 0 0 20px 20px;
             }
 
-            p {
-                font-size: $textSizeGeneral;
-                width: 85%;
-                position: absolute;
-                z-index: 1;
-                pointer-events: none;
-                opacity: 0.5;
-            }
-
             .img__buscador {
                 position: absolute;
                 right: 7%;
                 background-color: $itemsColor;
                 padding: $pChico;
-                width: 33px;
-                height: 33px;
+                width: 24px;
+                height: 24px;
                 border-radius: 50%;
                 display: flex;
                 align-items: center;
                 justify-content: center;
+                transition: 0.5s ease;
 
                 svg {
+                    scale: 1.1;
                     pointer-events: none;
-                    height: 23px;
-                    width: 22px;
+                    height: 30px;
+                    width: 30px;
                 }
             }
 
@@ -68,18 +61,20 @@ header {
                 right: 7%;
                 background-color: $errorColor;
                 padding: $pChico;
-                width: 33px;
-                height: 33px;
+                width: 24px;
+                height: 24px;
                 border-radius: 50%;
                 display: flex;
                 align-items: center;
                 justify-content: center;
                 cursor: pointer;
-                
+                transition: 0.5s ease;
+
                 svg {
-                    height: 23px;
-                    width: 23px;
-                    scale: 1.4;
+                    scale: 2;
+                    pointer-events: none;
+                    height: 30px;
+                    width: 30px;
                 }
             }
 
@@ -87,7 +82,7 @@ header {
                 border: 0;
                 border-radius: $rdsGeneral;
                 width: 90%;
-                font-size: $textSizeGrande;
+                font-size: $textSizeGeneral;
                 padding: $pChico;
                 transition: 0.2s ease;
 
