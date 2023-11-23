@@ -260,6 +260,7 @@ const Crear = () => {
                                 </div>
                             )}
                             {mostrarProductos === true ? (
+                                <>
                                 <article className="contenedor__campos__productos">
                                     {camposProducto.map((producto, productIndex) => (
                                         <article className="campos__productos" key={productIndex}>
@@ -279,8 +280,11 @@ const Crear = () => {
                                             ))}
                                         </article>
                                     ))}
-                                    <button onClick={handleCrear}>CREAR</button>
                                 </article>
+                                <div onClick={handleCrear} className="btn__siguiente__productos">
+                                    <p>Crear</p>
+                                </div>
+                                </>
                             ) : (
                                 <></>
                             )}

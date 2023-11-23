@@ -43,42 +43,61 @@
         }
     }
 
-    .tabla__datos__productos {
-        border-collapse: collapse;
+    ::-webkit-scrollbar {
+        width: 10px;
+    }
+
+    ::-webkit-scrollbar-track {
+        background: $bkColor;
+    }
+
+    ::-webkit-scrollbar-thumb {
+        border-radius: $rdsGeneral;
+        background: $itemsColor;
+    }
+
+    .contenedor__datos__productos{
+        overflow: auto;
         width: 90%;
-        position: relative;
+        height: 80%;
 
-        tbody {
-            background-color: $bkColor;
-        }
-
-        th,
-        td {
-            border: 4px solid $itemsColor;
-            padding: $pChico;
-            text-align: center;
-            font-size: $textSizeGeneral;
-        }
-
-        td {
-            width: 11%;
-            text-align: center;
-            font-size: $textSizeGeneral;
-        }
-
-        th {
-            background-color: $bkColor;
-        }
-
-        tr {
-            transition: 0.2s ease;
-            cursor: pointer;
-        }
-
-        tr:hover {
-            background-color: $itemsColor;
+        .tabla__datos__productos {
+            border-collapse: collapse;
+            position: relative;
+            
+            tbody {
+                background-color: $bkColor;
+            }
+    
+            th,
+            td {
+                border: 4px solid $itemsColor;
+                padding: $pChico;
+                text-align: center;
+                font-size: $textSizeGeneral;
+            }
+    
+            td {
+                width: 11%;
+                text-align: center;
+                font-size: $textSizeGeneral;
+            }
+    
+            th {
+                background-color: $bkColor;
+            }
+    
+            tr {
+                transition: 0.2s ease;
+                cursor: pointer;
+            }
+    
+            tr:hover {
+                background-color: $itemsColor;
+            }
         }
     }
+
 
     .btn__volver {
         display: flex;

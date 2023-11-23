@@ -106,6 +106,7 @@ header {
         display: flex;
         align-items: center;
         justify-content: space-around;
+        gap: 15px;
 
         h2 {
             position: absolute;
@@ -121,7 +122,6 @@ header {
 
         .checkboxContainer {
             display: flex;
-            flex-direction: column;
             gap: 20px;
 
             .checkBox {
@@ -144,7 +144,6 @@ header {
         .numberContainer {
             .number {
                 display: flex;
-                flex-direction: column;
                 justify-content: center;
                 align-items: center;
                 gap: 5px;

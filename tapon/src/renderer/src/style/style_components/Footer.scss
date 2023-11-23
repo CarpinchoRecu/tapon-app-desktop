@@ -21,6 +21,8 @@
             font-size: $textSizeMuyGrande;
         }
     }
+
+
 }
 
 .clienteToco {
@@ -48,11 +50,22 @@
             transition: all 0.4s ease;
             cursor: pointer;
 
-            &:hover{
+            &:hover {
                 border: 0;
                 padding: $pGeneral;
-            transition: all 0.1s ease;
+                transition: all 0.1s ease;
                 background-color: $itemsColor;
+                border-radius: $rdsGeneral;
+            }
+        }
+    }
+
+    section:nth-child(2) {
+        p {
+            border-bottom: 5px solid $errorColor;
+
+            &:hover {
+                background-color: $errorColor;
                 border-radius: $rdsGeneral;
             }
         }
