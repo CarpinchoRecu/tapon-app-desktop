@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { FaRegArrowAltCircleLeft } from 'react-icons/fa'
 import { MdCancel } from 'react-icons/md'
+import Swal from 'sweetalert2'
 
 const Editar = ({ datosOriginal, idSeleccionado, setEditar, setTocarCliente }) => {
     const [mostrarMenuProductoSeleccionado, setMostrarMenuProductoSeleccionado] = useState(false)
@@ -12,32 +13,66 @@ const Editar = ({ datosOriginal, idSeleccionado, setEditar, setTocarCliente }) =
         cuotas_producto: 0,
         cuotas_pagadas: 0,
         fecha_ultimo_pago: ''
-    });
+    })
 
     const handleInputEdicionChange = (event, campo) => {
         setFormDataEdicion({
             ...formDataEdicion,
             [campo]: event.target.value
-        });
-    };
+        })
+    }
 
     const handleEditar = async () => {
-        // Supongamos que tienes los nuevos valores en un objeto formDataEdicion
-        const { nombre_producto, precio_producto, cuotas_producto, cuotas_pagadas, fecha_ultimo_pago } = formDataEdicion;
+        const { nombre_producto, precio_producto, cuotas_producto, cuotas_pagadas, fecha_ultimo_pago } =
+            formDataEdicion
 
-        const query = `UPDATE clientes SET nombre_producto=?, precio_producto=?, cuotas_producto=?, cuotas_pagadas=?, fecha_ultimo_pago=? WHERE id=?`;
-        const values = [nombre_producto, precio_producto, cuotas_producto, cuotas_pagadas, fecha_ultimo_pago, productoSeleccionado.id];
+        // Validación de campos vacíos
+        if (
+            !nombre_producto ||
+            !precio_producto ||
+            !cuotas_producto ||
+            !cuotas_pagadas ||
+            !fecha_ultimo_pago
+        ) {
+            // Mostrar alerta con SweetAlert para campos vacíos
+            Swal.fire({
+                icon: 'error',
+                title: 'Error',
+                text: 'Por favor, completa todos los campos'
+            })
+            return // Detener la ejecución si hay campos vacíos
+        }
+
+        const query = `UPDATE clientes SET nombre_producto=?, precio_producto=?, cuotas_producto=?, cuotas_pagadas=?, fecha_ultimo_pago=? WHERE id=?`
+        const values = [
+            nombre_producto,
+            precio_producto,
+            cuotas_producto,
+            cuotas_pagadas,
+            fecha_ultimo_pago,
+            productoSeleccionado.id
+        ]
 
         try {
-            await window.electronAPI.actualizarSQLite(query, values);
-            console.log('Actualización exitosa:', resultado);
-            // Realizar alguna acción adicional si la actualización fue exitosa
+            await window.electronAPI.actualizarSQLite(query, values)
+            // Mostrar alerta con SweetAlert para éxito
+            Swal.fire({
+                icon: 'success',
+                title: '¡Éxito!',
+                text: 'El producto se actualizó correctamente'
+            })
+            window.location.reload()
         } catch (error) {
-            console.error('Error al actualizar:', error);
+            console.error('Error al actualizar:', error)
+            // Mostrar alerta con SweetAlert para errores
+            Swal.fire({
+                icon: 'error',
+                title: 'Error',
+                text: 'Hubo un error al actualizar el producto'
+            })
             // Manejar el error de alguna manera (mostrar mensaje, etc.)
         }
-    };
-
+    }
 
     const handleMostrarProductoSeleccionado = (producto) => {
         setProductoSeleccionado(producto)
@@ -137,10 +172,10 @@ const Editar = ({ datosOriginal, idSeleccionado, setEditar, setTocarCliente }) =
                 </thead>
                 <tbody>
                     {productosCliente.map((producto, index) => {
-                        const precioPorCuota = producto.precio_producto / producto.cuotas_producto
-                        const totalPagado = producto.cuotas_pagadas * precioPorCuota
-                        const faltaPagar = producto.precio_producto - totalPagado
-                        const faltaCuotas = producto.cuotas_producto - producto.cuotas_pagadas
+                        const precioPorCuota = Math.floor(producto.precio_producto / producto.cuotas_producto)
+                        const totalPagado = Math.floor(producto.cuotas_pagadas * precioPorCuota)
+                        const faltaPagar = Math.floor(producto.precio_producto - totalPagado)
+                        const faltaCuotas = Math.floor(producto.cuotas_producto - producto.cuotas_pagadas)
 
                         return (
                             <tr key={index} onClick={() => handleMostrarProductoSeleccionado(producto)}>
@@ -182,11 +217,8 @@ const Editar = ({ datosOriginal, idSeleccionado, setEditar, setTocarCliente }) =
                     <div onClick={handleEditar} className="btn__editar">
                         <p>Editar</p>
                     </div>
-                    {productoSeleccionado.id}
                 </div>
-
             )}
-
         </div>
     )
 }

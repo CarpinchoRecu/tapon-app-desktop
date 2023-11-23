@@ -107,7 +107,7 @@ const Home = ({ datos }) => {
           <div className="circle"></div>
           <main>
         <Crear/>
-        <Eliminar/>
+        <Eliminar datosOriginal={datosOriginal} idSeleccionado={idSeleccionado}/>
             <section className="contenedor__titulo">
               <h2>Morosos</h2>
             </section>

@@ -28,4 +28,14 @@ contextBridge.exposeInMainWorld('electronAPI', {
       throw new Error(error);
     }
   },
+
+  EliminarClienteSQLite: async (nombre, localidad, direccion) => {
+    try {
+      const resultado = await ipcRenderer.invoke('eliminarCliente-db', nombre, localidad, direccion);
+      return resultado;
+    } catch (error) {
+      throw new Error(error);
+    }
+  },
+  
 });

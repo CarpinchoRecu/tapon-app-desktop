@@ -79,6 +79,12 @@
             }
         }
 
+        .disabled{
+            opacity: 0.5!important;
+            cursor: inherit;
+            scale: 0.9;
+        }
+
         .creador {
             padding: $pGeneral;
             position: absolute;

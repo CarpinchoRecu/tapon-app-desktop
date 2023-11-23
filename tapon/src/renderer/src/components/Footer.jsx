@@ -11,7 +11,7 @@ const Footer = ({ tocarCliente, datosOriginal, idSeleccionado, setTocarCliente }
             <footer className={tocarCliente === true ? 'clienteToco' : 'footer'}>
                 {tocarCliente === true ? (
                     <>
-                        <section >
+                        <section>
                             <p onClick={handleAbrirEditor}>Editar</p>
                         </section>
                     </>
@@ -23,7 +23,14 @@ const Footer = ({ tocarCliente, datosOriginal, idSeleccionado, setTocarCliente }
                     </>
                 )}
             </footer>
-            {editar === true && <Editar setTocarCliente={setTocarCliente} idSeleccionado={idSeleccionado} setEditar={setEditar} datosOriginal={datosOriginal} />}
+            {editar === true && (
+                <Editar
+                    setTocarCliente={setTocarCliente}
+                    idSeleccionado={idSeleccionado}
+                    setEditar={setEditar}
+                    datosOriginal={datosOriginal}
+                />
+            )}
         </>
     )
 }

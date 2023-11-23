@@ -2,8 +2,7 @@ import { useEffect, useState } from 'react'
 import { LuPlusCircle } from 'react-icons/lu'
 import { MdCancel } from 'react-icons/md'
 import { FaRegArrowAltCircleLeft } from 'react-icons/fa'
-import Swal from 'sweetalert2';
-
+import Swal from 'sweetalert2'
 
 const Crear = () => {
     const [abrirCreador, setAbrirCreador] = useState(false)
@@ -50,7 +49,6 @@ const Crear = () => {
     }
 
     const handleSiguiente = () => {
-        console.log('Datos del formulario:', formDataClientes)
         setMostrarProductos(true)
         setMostrarCamposClientes(true)
     }
@@ -155,34 +153,56 @@ const Crear = () => {
         setMostrarBtnProductos(mostrar)
     }, [cantidadDeProductos, setMostrarBtnProductos])
 
-    const enviarConsultasInsercion = async () => {
-      try {
-        for (let i = 0; i < cantidadDeProductos; i++) {
-          const consulta = `INSERT INTO clientes (nombre, localidad, direccion, nombre_producto, precio_producto, cuotas_producto, cuotas_pagadas, fecha_ultimo_pago) VALUES ('${formDataClientes.nombre}', '${formDataClientes.localidad}', '${formDataClientes.direccion}', '${formDataProductos[i].nombre_producto}', ${formDataProductos[i].precio_producto}, ${formDataProductos[i].cuotas_producto}, ${formDataProductos[i].cuotas_pagadas}, '${formDataProductos[i].fecha_ultimo_pago}')`;
-    
-          await window.electronAPI.insertarSQLite(consulta);
-        }
-    
-        // Mostrar alerta de éxito
-        Swal.fire({
-          icon: 'success',
-          title: '¡Éxito!',
-          text: 'Todos los INSERT se han ejecutado correctamente',
-        });
-      } catch (error) {
-        console.error('Error al ejecutar los INSERT:', error);
-        // Mostrar alerta de error
-        Swal.fire({
-          icon: 'error',
-          title: 'Error',
-          text: 'Hubo un error al ejecutar los INSERT',
-        });
-      }
-    };
-    
+    const handleCrear = async () => {
+        // Validar campos en formDataClientes
+        const camposClientes = ['nombre', 'localidad', 'direccion']
+        const camposProductos = [
+            'nombre_producto',
+            'precio_producto',
+            'cuotas_producto',
+            'cuotas_pagadas',
+            'fecha_ultimo_pago'
+        ]
 
-    const handleCrear = () => {
-        enviarConsultasInsercion()
+        const camposClientesIncompletos = camposClientes.filter((campo) => !formDataClientes[campo])
+        const camposProductosIncompletos = formDataProductos.filter((producto) => {
+            return camposProductos.some((campo) => !producto[campo])
+        })
+
+        if (camposClientesIncompletos.length > 0 || camposProductosIncompletos.length > 0) {
+            // Mostrar alerta de campos incompletos
+            Swal.fire({
+                icon: 'error',
+                title: 'Campos incompletos',
+                text: 'Por favor, completa todos los campos antes de continuar.'
+            })
+            return // Detener la ejecución si hay campos incompletos
+        }
+
+        // Continuar con las inserciones si todos los campos están completos
+        try {
+            for (let i = 0; i < cantidadDeProductos; i++) {
+                const consulta = `INSERT INTO clientes (nombre, localidad, direccion, nombre_producto, precio_producto, cuotas_producto, cuotas_pagadas, fecha_ultimo_pago) VALUES ('${formDataClientes.nombre}', '${formDataClientes.localidad}', '${formDataClientes.direccion}', '${formDataProductos[i].nombre_producto}', ${formDataProductos[i].precio_producto}, ${formDataProductos[i].cuotas_producto}, ${formDataProductos[i].cuotas_pagadas}, '${formDataProductos[i].fecha_ultimo_pago}')`
+
+                await window.electronAPI.insertarSQLite(consulta)
+            }
+
+            // Mostrar alerta de éxito
+            Swal.fire({
+                icon: 'success',
+                title: '¡Éxito!',
+                text: 'El cliente se creo correctamente'
+            })
+            window.location.reload()
+        } catch (error) {
+            console.error('Error al ejecutar los INSERT:', error)
+            // Mostrar alerta de error
+            Swal.fire({
+                icon: 'error',
+                title: 'Error',
+                text: 'Hubo un error al ejecutar los INSERT'
+            })
+        }
     }
 
     return (
