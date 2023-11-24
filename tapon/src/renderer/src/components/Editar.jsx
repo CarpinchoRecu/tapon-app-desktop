@@ -6,6 +6,18 @@ import Swal from 'sweetalert2'
 const Editar = ({ datosOriginal, idSeleccionado, setEditar, setTocarCliente }) => {
     const [mostrarMenuProductoSeleccionado, setMostrarMenuProductoSeleccionado] = useState(false)
     const [productoSeleccionado, setProductoSeleccionado] = useState(null)
+    const [opcionesProducto, setOpcionesProducto] = useState(null)
+    const [opcion, setOpcion] = useState(null);
+    const [opcionSeleccionada, setOpcionSeleccionada] = useState(null);
+
+    const handleAbrirOpcion = (index) => {
+        setOpcion(opcion === index ? null : index);
+        setOpcionSeleccionada(index);
+    };
+
+
+
+
 
     const [formDataEdicion, setFormDataEdicion] = useState({
         nombre_producto: '',
@@ -135,6 +147,21 @@ const Editar = ({ datosOriginal, idSeleccionado, setEditar, setTocarCliente }) =
         }
     ]
 
+    const opcionesProd = [
+        {
+            h2: "Editar Producto",
+            p: "Esta opción es para poder editar el producto seleccionado. Se utiliza en caso de algún error o modificación en la fecha del último pago."
+        },
+        {
+            h2: "Eliminar Producto",
+            p: "Esta opción es solo para eliminar este producto en específico."
+        },
+        {
+            h2: "Notificar Pago de Producto",
+            p: "Esta opción es para cuando el producto de este cliente ya fue cobrado y quieres notificarlo."
+        }
+    ];
+
     return (
         <div className="editar">
             <div onClick={handleCerrarEditor} className="btn__volver">
@@ -196,31 +223,53 @@ const Editar = ({ datosOriginal, idSeleccionado, setEditar, setTocarCliente }) =
                 </table>
             </div>
 
-            {mostrarMenuProductoSeleccionado && productoSeleccionado && (
-                <div className="editor">
-                    <h2>Editar Producto</h2>
-                    <div onClick={handleCerrarProductoSeleccionado} className="cerrar__editor">
-                        <MdCancel />
-                    </div>
-                    <div className="contenedor__campo__editor">
-                        <div className="campos__editor">
-                            {camposProductosSeleccionados.map((campoSeleccionado, indexCampoSeleccionado) => (
-                                <input
-                                    key={indexCampoSeleccionado}
-                                    className="campo__editor"
-                                    placeholder={productoSeleccionado[campoSeleccionado.name]}
-                                    type={campoSeleccionado.type}
-                                    value={formDataEdicion[campoSeleccionado.name]}
-                                    onChange={(event) => handleInputEdicionChange(event, campoSeleccionado.name)}
-                                />
-                            ))}
-                        </div>
-                    </div>
-                    <div onClick={handleEditar} className="btn__editar">
-                        <p>Editar</p>
-                    </div>
+            {productoSeleccionado && (
+                <div className="opciones__productos">
+                    <h2 className="titulo__opciones">Opciones para el Producto</h2>
+                    {opcionesProd.map((opciones, index) => (
+                        <>
+                            <section key={index} onClick={() => handleAbrirOpcion(index)} className="contenedor__opcion">
+                                <h2 className="titulo__opcion">{opciones.h2}</h2>
+                                <p className='descripcion__opcion'>{opciones.p}</p>
+                            </section>
+                            {opcion === index && opcion === opcionSeleccionada && (
+                                <>
+                                    {mostrarMenuProductoSeleccionado && productoSeleccionado && (
+                                        <div className="editor">
+                                            <h2>Editar Producto</h2>
+                                            <div onClick={handleCerrarProductoSeleccionado} className="cerrar__editor">
+                                                <MdCancel />
+                                            </div>
+                                            <div className="contenedor__campo__editor">
+                                                <div className="campos__editor">
+                                                    {camposProductosSeleccionados.map((campoSeleccionado, indexCampoSeleccionado) => (
+                                                        <input
+                                                            key={indexCampoSeleccionado}
+                                                            className="campo__editor"
+                                                            placeholder={productoSeleccionado[campoSeleccionado.name]}
+                                                            type={campoSeleccionado.type}
+                                                            value={formDataEdicion[campoSeleccionado.name]}
+                                                            onChange={(event) => handleInputEdicionChange(event, campoSeleccionado.name)}
+                                                        />
+                                                    ))}
+                                                </div>
+                                            </div>
+                                            <div onClick={handleEditar} className="btn__editar">
+                                                <p>Editar</p>
+                                            </div>
+                                        </div>
+                                    )}
+                                </>
+                            )}
+                        </>
+                    ))}
                 </div>
             )}
+
+
+
+
+
         </div>
     )
 }

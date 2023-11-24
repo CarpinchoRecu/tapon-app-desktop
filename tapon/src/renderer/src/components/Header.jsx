@@ -122,17 +122,11 @@ const Header = ({ datosHome, setDatosFiltrados }) => {
       name: "Cantidad de Pruductos",
       nombreFiltro: 'cantidad de pruductos',
       type: 'number',
-      state: ""
+      state: undefined
     }
   ]
 
   const [buscando, setBuscando] = useState(false)
-  const handleBuscando = () => {
-    setBuscando(true)
-  }
-  const handleSalirDeBusqueda = () => {
-    setBuscando(false)
-  }
 
   const handleSacarNombre = () => {
     setFiltroBusquedaNombre('')
@@ -164,13 +158,12 @@ const Header = ({ datosHome, setDatosFiltrados }) => {
             </>
           )}
           <input
-            onClick={handleBuscando}
             type="text"
             placeholder="Buscar..."
             value={filtroBusquedaNombre}
             onChange={handleBusquedaNombreChange}
           />
-          {buscando === true ? <h2>Las Busquedas son solo por nombres</h2> : <></>}
+          <h2>Las busquedas son solo por nombres</h2>
         </div>
       </section>
       <section className="contenedor__filtros">

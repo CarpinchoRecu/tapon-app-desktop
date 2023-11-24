@@ -19,7 +19,7 @@ const Footer = ({ tocarCliente, datosOriginal, idSeleccionado, setTocarCliente }
                 {tocarCliente === true ? (
                     <>
                         <section>
-                            <p onClick={handleAbrirEditor}>Editar</p>
+                            <p onClick={handleAbrirEditor}>Observar</p>
                         </section>
                         <section>
                             <p onClick={handleAbrirEliminar}>Eliminar</p>
@@ -28,7 +28,7 @@ const Footer = ({ tocarCliente, datosOriginal, idSeleccionado, setTocarCliente }
                 ) : (
                     <>
                         <section>
-                            <p>Editar</p>
+                            <p>Observar</p>
                         </section>
                         <section>
                             <p>Eliminar</p>
@@ -40,12 +40,17 @@ const Footer = ({ tocarCliente, datosOriginal, idSeleccionado, setTocarCliente }
                 <Editar
                     setTocarCliente={setTocarCliente}
                     idSeleccionado={idSeleccionado}
-                    setEditar={setEditar}
                     datosOriginal={datosOriginal}
+                    setEditar={setEditar}
                 />
             )}
             {eliminar === true && (
-                <Eliminar setTocarCliente={setTocarCliente} setEliminar={setEliminar} datosOriginal={datosOriginal} idSeleccionado={idSeleccionado} />
+                <Eliminar
+                    setTocarCliente={setTocarCliente}
+                    idSeleccionado={idSeleccionado}
+                    datosOriginal={datosOriginal}
+                    setEliminar={setEliminar}
+                />
             )}
         </>
     )

@@ -56,7 +56,7 @@
         background: $itemsColor;
     }
 
-    .contenedor__datos__productos{
+    .contenedor__datos__productos {
         overflow: auto;
         width: 90%;
         height: 80%;
@@ -64,11 +64,11 @@
         .tabla__datos__productos {
             border-collapse: collapse;
             position: relative;
-            
+
             tbody {
                 background-color: $bkColor;
             }
-    
+
             th,
             td {
                 border: 4px solid $itemsColor;
@@ -76,22 +76,22 @@
                 text-align: center;
                 font-size: $textSizeGeneral;
             }
-    
+
             td {
                 width: 11%;
                 text-align: center;
                 font-size: $textSizeGeneral;
             }
-    
+
             th {
                 background-color: $bkColor;
             }
-    
+
             tr {
                 transition: 0.2s ease;
                 cursor: pointer;
             }
-    
+
             tr:hover {
                 background-color: $itemsColor;
             }
@@ -123,6 +123,83 @@
             border-radius: 50%;
             height: 40px;
             width: 40px;
+        }
+    }
+
+    .opciones__productos {
+        padding: $pGeneral;
+        position: absolute;
+        top: 25%;
+        height: 55%;
+        z-index: 1;
+        background-color: $bkColor;
+        display: flex;
+        align-items: end;
+        gap: 10px;
+        justify-content: space-around;
+        box-shadow: $sombraGeneral;
+        border-radius: $rdsChico;
+        border: 3px solid;
+        text-align: center;
+
+        .titulo__opciones {
+            position: absolute;
+            top: -15px;
+            width: auto;
+            color: #fff;
+            padding: $pChico;
+            border-radius: $rdsChico;
+            background-color: $itemsColor;
+            font-size: $textSizeGrande;
+            border: #000 3px solid;
+            box-shadow: $sombraGeneral;
+        }
+
+        .contenedor__opcion {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            padding: $pGeneral;
+            box-shadow: $sombraGeneral;
+            border-radius: $rdsChico;
+            width: 300px;
+            height: 90%;
+            background-color: $contColor;
+            border: 3px solid;
+            transition: 0.2s ease;
+            cursor: pointer;
+
+            &:hover{
+                scale: 1.04;
+            }
+
+            .titulo__opcion {
+                position: absolute;
+                top: -15px;
+                width: 90%;
+                color: #fff;
+                padding: $pChico;
+                border-radius: $rdsChico;
+                background-color: $itemsColor;
+                font-size: $textSizeGrande;
+                border: #000 3px solid;
+                box-shadow: $sombraGeneral;
+            }
+
+            .descripcion__opcion {
+                display: grid;
+                place-items: center;
+                width: 100%;
+                height: 50%;
+                padding: $pChico;
+                border-radius: $rdsChico;
+                background-color: $bkColor;
+                font-size: $textSizeGeneral;
+                border: 3px solid;
+                box-shadow: $sombraGeneral;
+            }
         }
     }
 
@@ -178,7 +255,7 @@
             }
         }
 
-        .btn__editar{
+        .btn__editar {
             display: flex;
             align-items: center;
             justify-content: center;
@@ -193,12 +270,12 @@
             transition: 0.2s ease;
             cursor: pointer;
             border: 2px solid;
-    
+
             &:hover {
                 scale: 1.1;
             }
 
-            p{
+            p {
                 color: #fff;
                 font-size: $textSizeGrande;
             }

@@ -87,6 +87,7 @@ const Home = ({ datos }) => {
 
   const handleCerrarOpciones = () => {
     setTocarCliente(false)
+    setIdSeleccionado(null)
   }
 
   useEffect(() => {
@@ -123,7 +124,13 @@ const Home = ({ datos }) => {
                 </thead>
                 <tbody>
                   {datosFiltrados.map((datoHome, index) => (
-                    <tr onClick={() => handleAbrirOpciones(datoHome.id)} key={index}>
+                    <tr
+                      style={{
+                        backgroundColor: idSeleccionado === datoHome.id ? '#2473bb' : '',
+                      }}
+                      onClick={() => handleAbrirOpciones(datoHome.id)}
+                      key={index}
+                    >
                       <td>{datoHome.nombre}</td>
                       <td>{datoHome.cantidadProductos}</td>
                       <td>{datoHome.localidad}</td>
