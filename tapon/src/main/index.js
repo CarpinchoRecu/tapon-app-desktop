@@ -49,7 +49,7 @@ function createWindow() {
         }
       ]
     },
-    { type: 'separator' },
+    
     {
       label: 'Ver',
       submenu: [
@@ -59,6 +59,7 @@ function createWindow() {
             mainWindow.webContents.toggleDevTools()
           }
         },
+        { type: 'separator' },
         {
           label: 'Pantalla completa',
           type: 'checkbox',

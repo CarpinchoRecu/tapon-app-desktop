@@ -130,7 +130,7 @@
         padding: $pGeneral;
         position: absolute;
         top: 25%;
-        height: 55%;
+        height: 60%;
         z-index: 1;
         background-color: $bkColor;
         display: flex;
@@ -155,6 +155,35 @@
             box-shadow: $sombraGeneral;
         }
 
+        .cerrar__opciones {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: $errorColor;
+            gap: 5px;
+            padding: $pChico;
+            border-radius: $rdsChico;
+            box-shadow: $sombraGeneral;
+            position: absolute;
+            z-index: 1;
+            right: 1%;
+            top: 1%;
+            transition: 0.2s ease;
+            cursor: pointer;
+
+            &:hover {
+                scale: 1.1;
+            }
+
+            svg {
+                border-radius: 50%;
+                height: 40px;
+                width: 40px;
+            }
+        }
+
+
+
         .contenedor__opcion {
             display: flex;
             flex-direction: column;
@@ -165,13 +194,13 @@
             box-shadow: $sombraGeneral;
             border-radius: $rdsChico;
             width: 300px;
-            height: 90%;
+            height: 85%;
             background-color: $contColor;
             border: 3px solid;
             transition: 0.2s ease;
             cursor: pointer;
 
-            &:hover{
+            &:hover {
                 scale: 1.04;
             }
 
@@ -201,122 +230,115 @@
                 box-shadow: $sombraGeneral;
             }
         }
-    }
 
-    .editor {
-        padding: $pGeneral;
-        position: absolute;
-        top: 25%;
-        height: 50%;
-        z-index: 1;
-        background-color: $bkColor;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        box-shadow: $sombraGeneral;
-        border-radius: $rdsChico;
-        border: 3px solid;
-
-        h2 {
-            position: absolute;
-            top: -15px;
-            padding: $pChico;
-            border-radius: $rdsChico;
-            background-color: $itemsColor;
-            font-size: $textSizeGrande;
-            border: 3px solid;
-            box-shadow: $sombraGeneral;
+        .contenedor__opcion:nth-child(4){
+            .titulo__opcion {
+                background: $correctoColor;
+            }            
         }
 
-        .cerrar__editor {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background-color: $errorColor;
-            gap: 5px;
-            padding: $pChico;
-            border-radius: $rdsChico;
-            box-shadow: $sombraGeneral;
-            position: absolute;
-            z-index: 1;
-            left: 3%;
-            top: 3%;
-            transition: 0.2s ease;
-            cursor: pointer;
-
-            &:hover {
-                scale: 1.1;
-            }
-
-            svg {
-                border-radius: 50%;
-                height: 40px;
-                width: 40px;
-            }
+        .contenedor__opcion:nth-child(5){
+            .titulo__opcion {
+                background: $errorColor;
+            }            
         }
 
-        .btn__editar {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background-color: $itemsColor;
-            gap: 5px;
-            padding: $pChico;
-            border-radius: $rdsChico;
-            box-shadow: $sombraGeneral;
-            position: absolute;
-            z-index: 1;
-            bottom: 3%;
-            transition: 0.2s ease;
-            cursor: pointer;
-            border: 2px solid;
-
-            &:hover {
-                scale: 1.1;
-            }
-
-            p {
-                color: #fff;
-                font-size: $textSizeGrande;
-            }
-        }
-
-        .contenedor__campo__editor {
+        .editor {
             padding: $pGeneral;
+            position: absolute;
+            height: 110%;
+            z-index: 1;
+            background-color: $bkColor;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: $sombraGeneral;
+            border-radius: $rdsChico;
+            border: 3px solid;
 
-            .campos__editor {
-                width: auto;
-                height: auto;
-                padding: $pGeneral;
-                flex-direction: column;
+            h2 {
+                color: #fff;
+                position: absolute;
+                top: -15px;
+                padding: $pChico;
+                border-radius: $rdsChico;
+                background-color: $itemsColor;
+                font-size: $textSizeGrande;
+                border: #000 3px solid;
+                box-shadow: $sombraGeneral;
+            }
+
+            .btn__editar {
                 display: flex;
-                flex-wrap: wrap;
-                gap: 15px;
                 align-items: center;
                 justify-content: center;
-                background-color: $contColor;
+                background-color: $itemsColor;
+                gap: 5px;
+                padding: $pChico;
+                border-radius: $rdsChico;
                 box-shadow: $sombraGeneral;
-                border-radius: $rdsGeneral;
-                border: 3px solid;
+                position: absolute;
+                z-index: 1;
+                bottom: 3%;
+                transition: 0.2s ease;
+                cursor: pointer;
+                border: 2px solid;
 
-                .campo__editor {
+                &:hover {
+                    scale: 1.1;
+                }
+
+                p {
+                    color: #fff;
+                    font-size: $textSizeGrande;
+                }
+            }
+
+            .contenedor__campo__editor {
+                padding: $pGeneral;
+
+                .campos__editor {
+                    width: auto;
+                    height: auto;
                     padding: $pChico;
-                    font-size: $textSizeGeneral;
-                    border-radius: $rdsChico;
-                    border: 0;
-                    transition: 0.2s ease;
+                    flex-direction: column;
+                    display: flex;
+                    flex-wrap: wrap;
+                    gap: 10px;
+                    align-items: center;
+                    justify-content: center;
+                    background-color: $contColor;
+                    box-shadow: $sombraGeneral;
+                    border-radius: $rdsGeneral;
+                    border: 3px solid;
 
-                    &:hover {
-                        background-color: $itemsColor;
+                    label {
+                        color: #fff;
+                        font-size: $textSizeGeneral;
                     }
 
-                    &:focus {
-                        outline: none;
+                    .campo__editor {
+                        padding: $pChico;
+                        font-size: $textSizeGeneral;
+                        border-radius: $rdsChico;
+                        border: 0;
+                        transition: 0.2s ease;
+
+                        &:hover {
+                            background-color: $itemsColor;
+                        }
+
+                        &:focus {
+                            outline: none;
+                        }
                     }
                 }
             }
         }
     }
+
+
+
 
 
 }
