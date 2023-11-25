@@ -1,13 +1,12 @@
 import { app, shell, BrowserWindow, ipcMain, screen, Menu } from 'electron'
-import { join, resolve } from 'path'
+import { join } from 'path'
 import { electronApp, optimizer, is } from '@electron-toolkit/utils'
 import icon from '../../resources/icon.png'
 import sqlite3 from 'sqlite3'
-import { rejects } from 'assert'
 
 // creando la primer ventana
 function createWindow() {
-  const { width, height } = screen.getPrimaryDisplay().workAreaSize;
+  const { width, height } = screen.getPrimaryDisplay().workAreaSize
   const mainWindow = new BrowserWindow({
     width,
     height,
@@ -21,8 +20,8 @@ function createWindow() {
       sandbox: false
     }
   })
-  
-  mainWindow.setMinimumSize(width, height);
+
+  mainWindow.setMinimumSize(width, height)
 
   // Plantilla del menú
   const template = [
@@ -49,7 +48,7 @@ function createWindow() {
         }
       ]
     },
-    
+
     {
       label: 'Ver',
       submenu: [

@@ -2,7 +2,6 @@ import { useEffect, useState } from 'react'
 import Header from './Header.jsx'
 import Footer from './Footer.jsx'
 import Crear from './Crear.jsx'
-import Eliminar from './Eliminar.jsx'
 
 const Home = ({ datos }) => {
   //estado para menejar los datos originales de la base de datos
@@ -126,7 +125,7 @@ const Home = ({ datos }) => {
                   {datosFiltrados.map((datoHome, index) => (
                     <tr
                       style={{
-                        backgroundColor: idSeleccionado === datoHome.id ? '#2473bb' : '',
+                        backgroundColor: idSeleccionado === datoHome.id ? '#2473bb' : ''
                       }}
                       onClick={() => handleAbrirOpciones(datoHome.id)}
                       key={index}

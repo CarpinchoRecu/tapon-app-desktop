@@ -8,7 +8,7 @@ const Header = ({ datosHome, setDatosFiltrados }) => {
   const [filtroCantidadProductos, setFiltroCantidadProductos] = useState('')
   const [filtroBusquedaNombre, setFiltroBusquedaNombre] = useState('')
   const [busquedaActiva, setBusquedaActiva] = useState(false)
-  const [filtroProximoPago, setFiltroProximoPago] = useState(false);
+  const [filtroProximoPago, setFiltroProximoPago] = useState(false)
 
   useEffect(() => {
     const filtrarDatos = () => {
@@ -48,14 +48,14 @@ const Header = ({ datosHome, setDatosFiltrados }) => {
 
       if (filtroProximoPago) {
         // Filtrar solo si se activa el checkbox
-        const fechaActual = new Date().getTime();
+        const fechaActual = new Date().getTime()
 
         datosFiltrados = datosFiltrados.filter((cliente) => {
-          const fechaProximoPago = new Date(cliente.fecha_proximo_pago).getTime();
-          const diffTiempo = fechaProximoPago - fechaActual;
-          const diffDias = Math.ceil(diffTiempo / (1000 * 60 * 60 * 24));
-          return diffDias <= 7 && diffDias >= 0;
-        });
+          const fechaProximoPago = new Date(cliente.fecha_proximo_pago).getTime()
+          const diffTiempo = fechaProximoPago - fechaActual
+          const diffDias = Math.ceil(diffTiempo / (1000 * 60 * 60 * 24))
+          return diffDias <= 7 && diffDias >= 0
+        })
       }
 
       setDatosFiltrados(datosFiltrados)
@@ -79,10 +79,10 @@ const Header = ({ datosHome, setDatosFiltrados }) => {
       setFiltroChivilcoy(checked)
     } else if (name === 'suipacha') {
       setFiltroSuipacha(checked)
-    }else if (name === 'proximoCobrar') {
+    } else if (name === 'proximoCobrar') {
       setFiltroProximoPago(checked)
     }
-    
+
     // Cuando se activa un filtro, desactivamos la búsqueda
     setBusquedaActiva(false)
   }
@@ -101,25 +101,25 @@ const Header = ({ datosHome, setDatosFiltrados }) => {
 
   const filtros = [
     {
-      name: "Chivilcoy",
+      name: 'Chivilcoy',
       nombreFiltro: 'chivilcoy',
       type: 'checkbox',
       state: filtroChivilcoy
     },
     {
-      name: "Suipacha",
+      name: 'Suipacha',
       nombreFiltro: 'suipacha',
       type: 'checkbox',
       state: filtroSuipacha
     },
     {
-      name: "Proximo a Cobrar",
+      name: 'Proximo a Cobrar',
       nombreFiltro: 'proximoCobrar',
       type: 'checkbox',
       state: filtroProximoPago
     },
     {
-      name: "Cantidad de Pruductos",
+      name: 'Cantidad de Pruductos',
       nombreFiltro: 'cantidad de pruductos',
       type: 'number',
       state: undefined
