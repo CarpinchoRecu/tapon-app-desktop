@@ -11,6 +11,9 @@ function App() {
   return(
     <DatosProvider>
       <Home />
+      <Footer/>
+      <Eliminar/>
+      <Editar/>
     </DatosProvider>
   ) 
 }

@@ -3,6 +3,7 @@ import Header from './Header.jsx'
 import Footer from './Footer.jsx'
 import Crear from './Crear.jsx'
 import { useDatosContext } from '../context/DatosContextFile.jsx'
+import { idContext } from '../context/idContext.jsx'
 
 const Home = () => {
   //estado para menejar los datos originales de la base de datos
@@ -11,11 +12,6 @@ const Home = () => {
   const [datosHome, setDatosHome] = useState([])
   //estado para menejar los datos que tengan filtro
   const [datosFiltrados, setDatosFiltrados] = useState(datosHome)
-
-  //estado para menejar los datos originales de la base de datos
-  // useEffect(() => {
-  //   setDatosOriginal(datos) // Almacena los datos originales
-  // }, [datos])
 
   //tranformando datos
   useEffect(() => {
@@ -100,7 +96,7 @@ const Home = () => {
   }, [setTocarCliente])
 
   return (
-    <>
+    <idContext.Provider value={idSeleccionado}>
       <section className="app">
         <Header datosHome={datosHome} setDatosFiltrados={setDatosFiltrados} />
         <section className="home">
@@ -153,7 +149,7 @@ const Home = () => {
         tocarCliente={tocarCliente}
         setTocarCliente={setTocarCliente}
       />
-    </>
+    </idContext.Provider>
   )
 }
 
