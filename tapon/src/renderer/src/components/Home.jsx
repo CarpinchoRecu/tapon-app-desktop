@@ -2,25 +2,26 @@ import { useEffect, useState } from 'react'
 import Header from './Header.jsx'
 import Footer from './Footer.jsx'
 import Crear from './Crear.jsx'
+import { useDatosContext } from '../context/DatosContextFile.jsx'
 
-const Home = ({ datos }) => {
+const Home = () => {
   //estado para menejar los datos originales de la base de datos
-  const [datosOriginal, setDatosOriginal] = useState([])
+  const datosOriginal = useDatosContext()
   //estado para menejar los datos que se van a trasformar en el home
   const [datosHome, setDatosHome] = useState([])
   //estado para menejar los datos que tengan filtro
   const [datosFiltrados, setDatosFiltrados] = useState(datosHome)
 
   //estado para menejar los datos originales de la base de datos
-  useEffect(() => {
-    setDatosOriginal(datos) // Almacena los datos originales
-  }, [datos])
+  // useEffect(() => {
+  //   setDatosOriginal(datos) // Almacena los datos originales
+  // }, [datos])
 
   //tranformando datos
   useEffect(() => {
     const datosEnHome = () => {
       try {
-        const datosAgrupados = datos.reduce((acumulador, dato) => {
+        const datosAgrupados = datosOriginal.reduce((acumulador, dato) => {
           const sinCompletar = 'Sin Completar'
           const nombreMinusculas = dato.nombre.toLowerCase()
           const localidad = dato.localidad || sinCompletar
@@ -71,7 +72,7 @@ const Home = ({ datos }) => {
     }
 
     datosEnHome()
-  }, [datos])
+  }, [datosOriginal])
 
   const [tocarCliente, setTocarCliente] = useState(false)
   const [datosClienteSeleccionado, setDatosClienteSeleccionado] = useState(null)

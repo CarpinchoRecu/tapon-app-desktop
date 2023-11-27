@@ -1,23 +1,18 @@
-import { useEffect, useState } from 'react'
+import Editar from './components/Editar.jsx'
+import Eliminar from './components/Eliminar.jsx'
+import Footer from './components/Footer.jsx'
 import Home from './components/Home.jsx'
+import { DatosProvider } from './context/DatosContextFile.jsx'
 import style from './style/main.scss'
 
+
 function App() {
-  const [datos, setDatos] = useState([])
 
-  useEffect(() => {
-    const obtenerDatos = async () => {
-      try {
-        const selectDB = await window.electronAPI.consultarSQLite('SELECT * FROM clientes')
-        setDatos(selectDB) // Almacena los datos en el estado 'datos'
-      } catch (error) {
-        console.error('Error al obtener los datos:', error)
-      }
-    }
-    obtenerDatos()
-  }, [])
-
-  return <Home datos={datos} />
+  return(
+    <DatosProvider>
+      <Home />
+    </DatosProvider>
+  ) 
 }
 
 export default App
