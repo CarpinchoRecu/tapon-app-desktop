@@ -3,12 +3,14 @@ import { FaSearch } from 'react-icons/fa'
 import { MdCancel } from 'react-icons/md'
 
 const Header = ({ datosHome, setDatosFiltrados }) => {
+  // --------------------------------------------------------- //
   const [filtroChivilcoy, setFiltroChivilcoy] = useState(false)
   const [filtroSuipacha, setFiltroSuipacha] = useState(false)
   const [filtroCantidadProductos, setFiltroCantidadProductos] = useState('')
   const [filtroBusquedaNombre, setFiltroBusquedaNombre] = useState('')
   const [busquedaActiva, setBusquedaActiva] = useState(false)
   const [filtroProximoPago, setFiltroProximoPago] = useState(false)
+  // --------------------------------------------------------- //
 
   useEffect(() => {
     const filtrarDatos = () => {

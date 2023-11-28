@@ -35,6 +35,7 @@ $decoColor: #000;
 $errorColor: rgb(187, 36, 36);
 $correctoColor: rgb(4, 127, 37);
 
+$bordes: #000 3px solid;
 $rdsGeneral: 20px;
 $rdsChico: 10px;
 
@@ -57,5 +58,8 @@ $pChico: 5px;
 @import './style_components/Home.scss';
 @import './style_components/Footer.scss';
 @import './style_components/Header.scss';
-@import './style_components/Editar.scss';
-@import './style_components//Eliminar.scss';
+@import './style_components/Observar.scss';
+@import './style_components/Eliminar.scss';
+@import './style_components/stylesObservar/Editor.scss';
+@import './style_components/botones/BtnAtras.scss';
+@import "./style_components/Crear.scss";

@@ -6,12 +6,14 @@ import { useDatosContext } from '../context/DatosContextFile.jsx'
 import { idContext } from '../context/idContext.jsx'
 
 const Home = () => {
+// --------------------------------------------------------- //
   //estado para menejar los datos originales de la base de datos
   const datosOriginal = useDatosContext()
   //estado para menejar los datos que se van a trasformar en el home
   const [datosHome, setDatosHome] = useState([])
   //estado para menejar los datos que tengan filtro
   const [datosFiltrados, setDatosFiltrados] = useState(datosHome)
+// --------------------------------------------------------- //
 
   //tranformando datos
   useEffect(() => {
@@ -54,6 +56,7 @@ const Home = () => {
               cuotasPagadas: dato.cuotas_pagadas || sinCompletar,
               fecha_proximo_pago: fechaProximoPago || sinCompletar,
               fecha_ultimo_pago: fecha || sinCompletar,
+              cada_cuanto_paga: dato.cada_cuanto_paga || sinCompletar,
               cantidadProductos: 1,
               clave: clave
             })
@@ -71,13 +74,10 @@ const Home = () => {
   }, [datosOriginal])
 
   const [tocarCliente, setTocarCliente] = useState(false)
-  const [datosClienteSeleccionado, setDatosClienteSeleccionado] = useState(null)
   const [idSeleccionado, setIdSeleccionado] = useState(null)
 
   const handleAbrirOpciones = (id) => {
     setIdSeleccionado(id)
-    const clienteSeleccionado = datosHome.find((cliente) => cliente.id === id)
-    setDatosClienteSeleccionado(clienteSeleccionado)
     setTocarCliente(true)
   }
 
@@ -116,6 +116,7 @@ const Home = () => {
                     <th>Dirección</th>
                     <th>fecha ultimo pago</th>
                     <th>fecha proximo pago</th>
+                    <th>fecha proximo pago</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -133,6 +134,7 @@ const Home = () => {
                       <td>{datoHome.direccion}</td>
                       <td>{datoHome.fecha_ultimo_pago}</td>
                       <td>{datoHome.fecha_proximo_pago}</td>
+                      <td>{datoHome.cada_cuanto_paga}</td>
                     </tr>
                   ))}
                 </tbody>
@@ -142,13 +144,7 @@ const Home = () => {
           <div className="circle"></div>
         </section>
       </section>
-      <Footer
-        idSeleccionado={idSeleccionado}
-        datosOriginal={datosOriginal}
-        datosHome={datosHome}
-        tocarCliente={tocarCliente}
-        setTocarCliente={setTocarCliente}
-      />
+      <Footer tocarCliente={tocarCliente} setTocarCliente={setTocarCliente} />
     </idContext.Provider>
   )
 }

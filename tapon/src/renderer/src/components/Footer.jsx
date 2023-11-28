@@ -1,10 +1,12 @@
 import { useState } from 'react'
-import Editar from './Editar'
+import Observar from './Observar'
 import Eliminar from './Eliminar'
 
-const Footer = ({ tocarCliente, datosOriginal, idSeleccionado, setTocarCliente }) => {
+const Footer = ({ tocarCliente, setTocarCliente }) => {
+  // --------------------------------------------------------- //
   const [editar, setEditar] = useState(false)
   const [eliminar, setEliminar] = useState(false)
+  // --------------------------------------------------------- //
   const handleAbrirEditor = () => {
     setEditar(true)
     setEliminar(false)
@@ -36,21 +38,9 @@ const Footer = ({ tocarCliente, datosOriginal, idSeleccionado, setTocarCliente }
           </>
         )}
       </footer>
-      {editar === true && (
-        <Editar
-          setTocarCliente={setTocarCliente}
-          idSeleccionado={idSeleccionado}
-          datosOriginal={datosOriginal}
-          setEditar={setEditar}
-        />
-      )}
+      {editar === true && <Observar setTocarCliente={setTocarCliente} setEditar={setEditar} />}
       {eliminar === true && (
-        <Eliminar
-          setTocarCliente={setTocarCliente}
-          idSeleccionado={idSeleccionado}
-          datosOriginal={datosOriginal}
-          setEliminar={setEliminar}
-        />
+        <Eliminar setTocarCliente={setTocarCliente} setEliminar={setEliminar} />
       )}
     </>
   )

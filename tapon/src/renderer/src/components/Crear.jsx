@@ -3,6 +3,7 @@ import { LuPlusCircle } from 'react-icons/lu'
 import { MdCancel } from 'react-icons/md'
 import { FaRegArrowAltCircleLeft } from 'react-icons/fa'
 import Swal from 'sweetalert2'
+import BtnAtras from './botones/BtnAtras'
 
 const Crear = () => {
   const [abrirCreador, setAbrirCreador] = useState(false)
@@ -61,7 +62,7 @@ const Crear = () => {
   const handleCantidadProductosChange = (event) => {
     let value = parseInt(event.target.value, 10)
     // Limitar la cantidad máxima de productos a 4
-    value = Math.min(value, 4)
+    value = Math.min(value, 15)
     // Limitar la cantidad mínima de productos a 0
     value = Math.max(value, 0)
     setCantidadDeProductos(value)
@@ -106,6 +107,7 @@ const Crear = () => {
       precio_producto: '',
       cuotas_producto: '',
       cuotas_pagadas: '',
+      cada_cuanto_paga: '',
       fecha_ultimo_pago: ''
     }))
   )
@@ -131,6 +133,11 @@ const Crear = () => {
       {
         name: 'cuotas_pagadas',
         label: 'Cuotas Pagadas',
+        type: 'number'
+      },
+      {
+        name: 'cada_cuanto_paga',
+        label: 'Cada cuanto paga',
         type: 'number'
       },
       {
@@ -161,6 +168,7 @@ const Crear = () => {
       'precio_producto',
       'cuotas_producto',
       'cuotas_pagadas',
+      'cada_cuanto_paga',
       'fecha_ultimo_pago'
     ]
 
@@ -182,7 +190,7 @@ const Crear = () => {
     // Continuar con las inserciones si todos los campos están completos
     try {
       for (let i = 0; i < cantidadDeProductos; i++) {
-        const consulta = `INSERT INTO clientes (nombre, localidad, direccion, nombre_producto, precio_producto, cuotas_producto, cuotas_pagadas, fecha_ultimo_pago) VALUES ('${formDataClientes.nombre}', '${formDataClientes.localidad}', '${formDataClientes.direccion}', '${formDataProductos[i].nombre_producto}', ${formDataProductos[i].precio_producto}, ${formDataProductos[i].cuotas_producto}, ${formDataProductos[i].cuotas_pagadas}, '${formDataProductos[i].fecha_ultimo_pago}')`
+        const consulta = `INSERT INTO clientes (nombre, localidad, direccion, nombre_producto, precio_producto, cuotas_producto, cuotas_pagadas, cada_cuanto_paga, fecha_ultimo_pago) VALUES ('${formDataClientes.nombre}', '${formDataClientes.localidad}', '${formDataClientes.direccion}', '${formDataProductos[i].nombre_producto}', ${formDataProductos[i].precio_producto}, ${formDataProductos[i].cuotas_producto}, ${formDataProductos[i].cuotas_pagadas}, ${formDataProductos[i].cada_cuanto_paga}, '${formDataProductos[i].fecha_ultimo_pago}')`
 
         await window.electronAPI.insertarSQLite(consulta)
       }
@@ -214,9 +222,7 @@ const Crear = () => {
       {abrirCreador === true ? (
         <div className="creador">
           <h2>Crear Clientes</h2>
-          <section onClick={handleCerrarCreador} className="btn__creador__cerrar">
-            <MdCancel />
-          </section>
+          <BtnAtras set1={setAbrirCreador} set2={setCantidadDeProductos} set3={setMostrarCamposClientes} set4={setMostrarProductos} cancelType={true}/>
           {mostrarCamposClientes === true ? (
             <></>
           ) : (

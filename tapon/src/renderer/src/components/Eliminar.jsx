@@ -1,7 +1,15 @@
 import { MdCancel } from 'react-icons/md'
 import Swal from 'sweetalert2'
+import { idContext } from '../context/idContext'
+import { useDatosContext } from '../context/DatosContextFile.jsx'
+import { useContext } from 'react'
+import BtnAtras from './botones/BtnAtras.jsx'
 
-const Eliminar = ({ datosOriginal, idSeleccionado, setEliminar, setTocarCliente }) => {
+const Eliminar = ({ setEliminar, setTocarCliente }) => {
+  // --------------------------------------------------------- //
+  const datosOriginal = useDatosContext()
+  const idSeleccionado = useContext(idContext)
+// --------------------------------------------------------- //
   const handleCerrarEliminar = () => {
     setEliminar(false)
     setTocarCliente(false)
@@ -9,15 +17,6 @@ const Eliminar = ({ datosOriginal, idSeleccionado, setEliminar, setTocarCliente 
 
   // Encontrar el cliente correspondiente al idSeleccionado
   const clienteSeleccionado = datosOriginal.find((cliente) => cliente.id === idSeleccionado)
-
-  if (!clienteSeleccionado) {
-    return (
-      <div className="btn__eliminar__abrir disabled">
-        <p>Eliminar</p>
-        <MdCancel />
-      </div>
-    )
-  }
 
   const handleEliminarCliente = async () => {
     try {
@@ -66,10 +65,7 @@ const Eliminar = ({ datosOriginal, idSeleccionado, setEliminar, setTocarCliente 
   return (
     <div className="eliminar">
       <h2>Eliminar Cliente</h2>
-      <div onClick={handleCerrarEliminar} className="btn__eliminar__cerrar">
-        <p>Cancelar</p>
-        <MdCancel />
-      </div>
+      <BtnAtras set1={setEliminar} set2={setTocarCliente} cancelType={true}/>
       <p className="aviso__eliminar">
         Con esta acción vas a borrar todos los datos del cliente {clienteSeleccionado.nombre}. Si
         estás seguro de proceder con la acción, toca &quot;Eliminar&quot;. Ten en cuenta que se van

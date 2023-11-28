@@ -1,6 +1,6 @@
 {
   "name": "tapon",
-  "version": "1.0.10",
+  "version": "1.0.12",
   "description": "Aplicacion electron con react para tapon",
   "main": "./out/main/index.js",
   "author": "example.com",
