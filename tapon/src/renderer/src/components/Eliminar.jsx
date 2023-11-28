@@ -1,19 +1,16 @@
-import { MdCancel } from 'react-icons/md'
 import Swal from 'sweetalert2'
-import { idContext } from '../context/idContext'
+import { IdContext } from '../context/IdContext.jsx'
 import { useDatosContext } from '../context/DatosContextFile.jsx'
 import { useContext } from 'react'
 import BtnAtras from './botones/BtnAtras.jsx'
 
+import PropTypes from 'prop-types'
+
 const Eliminar = ({ setEliminar, setTocarCliente }) => {
   // --------------------------------------------------------- //
   const datosOriginal = useDatosContext()
-  const idSeleccionado = useContext(idContext)
-// --------------------------------------------------------- //
-  const handleCerrarEliminar = () => {
-    setEliminar(false)
-    setTocarCliente(false)
-  }
+  const idSeleccionado = useContext(IdContext)
+  // --------------------------------------------------------- //
 
   // Encontrar el cliente correspondiente al idSeleccionado
   const clienteSeleccionado = datosOriginal.find((cliente) => cliente.id === idSeleccionado)
@@ -65,7 +62,7 @@ const Eliminar = ({ setEliminar, setTocarCliente }) => {
   return (
     <div className="eliminar">
       <h2>Eliminar Cliente</h2>
-      <BtnAtras set1={setEliminar} set2={setTocarCliente} cancelType={true}/>
+      <BtnAtras set1={setEliminar} set2={setTocarCliente} cancelType={true} />
       <p className="aviso__eliminar">
         Con esta acción vas a borrar todos los datos del cliente {clienteSeleccionado.nombre}. Si
         estás seguro de proceder con la acción, toca &quot;Eliminar&quot;. Ten en cuenta que se van
@@ -89,6 +86,11 @@ const Eliminar = ({ setEliminar, setTocarCliente }) => {
       </div>
     </div>
   )
+}
+
+Eliminar.propTypes = {
+  setEliminar: PropTypes.func.isRequired, // Para validar una función de setState
+  setTocarCliente: PropTypes.func.isRequired
 }
 
 export default Eliminar

@@ -1,13 +1,13 @@
-import { useContext, useState } from 'react'
-import { MdCancel } from 'react-icons/md'
-import { idContext } from '../context/idContext.jsx'
+import React, { useContext, useState } from 'react'
+import { IdContext } from '../context/IdContext.jsx'
 import { useDatosContext } from '../context/DatosContextFile.jsx'
 import Editor from './componentesObservar/Editor.jsx'
 import BtnAtras from './botones/BtnAtras.jsx'
+import PropTypes from 'prop-types'
 
 const Observar = ({ setEditar, setTocarCliente }) => {
   const datosOriginal = useDatosContext()
-  const idSeleccionado = useContext(idContext)
+  const idSeleccionado = useContext(IdContext)
   const [productoSeleccionado, setProductoSeleccionado] = useState(null)
   const [opcion, setOpcion] = useState(null)
   const [opcionSeleccionada, setOpcionSeleccionada] = useState(null)
@@ -19,15 +19,6 @@ const Observar = ({ setEditar, setTocarCliente }) => {
 
   const handleMostrarProductoSeleccionado = (producto) => {
     setProductoSeleccionado(producto)
-  }
-
-  const handleCerrarProductoSeleccionado = () => {
-    setProductoSeleccionado(null)
-  }
-
-  const handleCerrarEditor = () => {
-    setEditar(false)
-    setTocarCliente(false) // Cambia el estado de editar a false en Footer
   }
 
   // Encontrar el cliente correspondiente al idSeleccionado
@@ -65,7 +56,7 @@ const Observar = ({ setEditar, setTocarCliente }) => {
 
   return (
     <div className="editar">
-      <BtnAtras set1={setEditar} set2={setTocarCliente}/>
+      <BtnAtras set1={setEditar} set2={setTocarCliente} />
       <table className="tabla__datos__cliente">
         <thead>
           <tr>
@@ -125,11 +116,10 @@ const Observar = ({ setEditar, setTocarCliente }) => {
       {productoSeleccionado && (
         <div className="opciones__productos">
           <h2 className="titulo__opciones">Opciones para el Producto</h2>
-          <BtnAtras set1={setProductoSeleccionado} cancelType={true}/>
+          <BtnAtras set1={setProductoSeleccionado} cancelType={true} />
           {opcionesProd.map((opciones, index) => (
-            <>
+            <React.Fragment key={index}>
               <section
-                key={index}
                 onClick={() => handleAbrirOpcion(index)}
                 className="contenedor__opcion"
               >
@@ -149,12 +139,17 @@ const Observar = ({ setEditar, setTocarCliente }) => {
                   {opcionesProd[opcion].name === 'pagar' && <>menu pagar</>}
                 </>
               )}
-            </>
+            </React.Fragment>
           ))}
         </div>
       )}
     </div>
   )
+}
+
+Observar.propTypes = {
+  setEditar: PropTypes.func.isRequired,
+  setTocarCliente: PropTypes.func.isRequired
 }
 
 export default Observar

@@ -5,14 +5,22 @@ const BtnAtras = ({ set1, set2, set3, set4, cancelType }) => {
   const cancel = cancelType
 
   const handleAtras = () => {
-    set1(false)
-    set2(false)
-    set3(false)
-    set4(false)
+    if (set1) {
+      set1(false)
+    }
+    if (set2) {
+      set2(false)
+    }
+    if (set3) {
+      set3(false)
+    }
+    if (set4) {
+      set4(false)
+    }
   }
 
   return (
-    <div onClick={handleAtras} className={cancel === true ? "btn__cerrar" :"btn__volver"}>
+    <div onClick={handleAtras} className={cancel === true ? 'btn__cerrar' : 'btn__volver'}>
       {cancel === true ? <MdCancel /> : <FaRegArrowAltCircleLeft />}
     </div>
   )

@@ -25,7 +25,6 @@ export const DatosProvider = ({ children }) => {
   return <DatosContext.Provider value={datos}>{children}</DatosContext.Provider>
 }
 
-// Agrega PropTypes para validar 'children'
 DatosProvider.propTypes = {
   children: PropTypes.node.isRequired
 }

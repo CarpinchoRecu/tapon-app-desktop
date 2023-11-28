@@ -1,7 +1,5 @@
 import { useEffect, useState } from 'react'
 import { LuPlusCircle } from 'react-icons/lu'
-import { MdCancel } from 'react-icons/md'
-import { FaRegArrowAltCircleLeft } from 'react-icons/fa'
 import Swal from 'sweetalert2'
 import BtnAtras from './botones/BtnAtras'
 
@@ -42,21 +40,9 @@ const Crear = () => {
     setMostrarProductos(false)
   }
 
-  const handleCerrarCreador = () => {
-    setAbrirCreador(false)
-    setCantidadDeProductos(0)
-    setMostrarCamposClientes(false)
-    setMostrarProductos(false)
-  }
-
   const handleSiguiente = () => {
     setMostrarProductos(true)
     setMostrarCamposClientes(true)
-  }
-
-  const handleAtras = () => {
-    setMostrarProductos(false)
-    setMostrarCamposClientes(false)
   }
 
   const handleCantidadProductosChange = (event) => {
@@ -222,7 +208,13 @@ const Crear = () => {
       {abrirCreador === true ? (
         <div className="creador">
           <h2>Crear Clientes</h2>
-          <BtnAtras set1={setAbrirCreador} set2={setCantidadDeProductos} set3={setMostrarCamposClientes} set4={setMostrarProductos} cancelType={true}/>
+          <BtnAtras
+            set1={setAbrirCreador}
+            set2={setCantidadDeProductos}
+            set3={setMostrarCamposClientes}
+            set4={setMostrarProductos}
+            cancelType={true}
+          />
           {mostrarCamposClientes === true ? (
             <></>
           ) : (
@@ -257,7 +249,7 @@ const Crear = () => {
           {mostrarBtnProductos === true ? (
             <>
               {mostrarProductos === true ? (
-                <BtnAtras set1={setMostrarProductos} set2={setMostrarCamposClientes}/>
+                <BtnAtras set1={setMostrarProductos} set2={setMostrarCamposClientes} />
               ) : (
                 <div onClick={handleSiguiente} className="btn__siguiente__productos">
                   <p>Crear productos del cliente</p>

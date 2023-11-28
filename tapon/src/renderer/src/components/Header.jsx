@@ -2,6 +2,8 @@ import { useState, useEffect } from 'react'
 import { FaSearch } from 'react-icons/fa'
 import { MdCancel } from 'react-icons/md'
 
+import PropTypes from 'prop-types'
+
 const Header = ({ datosHome, setDatosFiltrados }) => {
   // --------------------------------------------------------- //
   const [filtroChivilcoy, setFiltroChivilcoy] = useState(false)
@@ -206,6 +208,11 @@ const Header = ({ datosHome, setDatosFiltrados }) => {
       </section>
     </header>
   )
+}
+
+Header.propTypes = {
+  datosHome: PropTypes.array.isRequired,
+  setDatosFiltrados: PropTypes.func.isRequired
 }
 
 export default Header

@@ -2,6 +2,8 @@ import { useState } from 'react'
 import Observar from './Observar'
 import Eliminar from './Eliminar'
 
+import PropTypes from 'prop-types'
+
 const Footer = ({ tocarCliente, setTocarCliente }) => {
   // --------------------------------------------------------- //
   const [editar, setEditar] = useState(false)
@@ -44,6 +46,11 @@ const Footer = ({ tocarCliente, setTocarCliente }) => {
       )}
     </>
   )
+}
+
+Footer.propTypes = {
+  tocarCliente: PropTypes.any.isRequired, 
+  setTocarCliente: PropTypes.func.isRequired
 }
 
 export default Footer
