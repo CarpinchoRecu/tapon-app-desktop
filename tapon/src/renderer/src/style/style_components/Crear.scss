@@ -32,11 +32,12 @@
         background-color: $correctoColor;
         border: 3px solid;
         transition: 0.2s ease;
+        width: 70%;
         box-shadow: $sombraGeneral;
         cursor: pointer;
 
         p {
-            padding: $pGeneral;
+            padding: $pMedio;
             color: #fff;
             text-align: center;
             font-size: $textSizeGeneral;
@@ -45,34 +46,6 @@
         &:hover {
             scale: 1.1;
         }
-    }
-
-    .btn__volver__productos {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        background-color: $itemsColor;
-        gap: 5px;
-        padding: $pChico;
-        border-radius: $rdsChico;
-        box-shadow: $sombraGeneral;
-        position: absolute;
-        z-index: 1;
-        left: 3%;
-        top: 3%;
-        transition: 0.2s ease;
-        cursor: pointer;
-
-        &:hover {
-            scale: 1.1;
-        }
-
-        svg {
-            border-radius: 50%;
-            height: 40px;
-            width: 40px;
-        }
-
     }
 
     .campos__cliente {

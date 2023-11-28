@@ -257,9 +257,7 @@ const Crear = () => {
           {mostrarBtnProductos === true ? (
             <>
               {mostrarProductos === true ? (
-                <div onClick={handleAtras} className="btn__volver__productos">
-                  <FaRegArrowAltCircleLeft />
-                </div>
+                <BtnAtras set1={setMostrarProductos} set2={setMostrarCamposClientes}/>
               ) : (
                 <div onClick={handleSiguiente} className="btn__siguiente__productos">
                   <p>Crear productos del cliente</p>
