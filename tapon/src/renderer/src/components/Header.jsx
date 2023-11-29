@@ -123,8 +123,8 @@ const Header = ({ datosHome, setDatosFiltrados }) => {
       state: filtroProximoPago
     },
     {
-      name: 'Cantidad de Pruductos',
-      nombreFiltro: 'cantidad de pruductos',
+      name: 'Cantidad de Productos',
+      nombreFiltro: 'cantidad de productos',
       type: 'number',
       state: undefined
     }

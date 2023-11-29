@@ -202,12 +202,12 @@ const Crear = () => {
   return (
     <>
       <div onClick={handleAbrirCreador} className="btn__creador__abrir">
-        <p>Crear</p>
+        <p>Crear Cliente</p>
         <LuPlusCircle />
       </div>
       {abrirCreador === true ? (
         <div className="creador">
-          <h2>Crear Clientes</h2>
+          <h2>Crear Cliente</h2>
           <BtnAtras
             set1={setAbrirCreador}
             set2={setCantidadDeProductos}

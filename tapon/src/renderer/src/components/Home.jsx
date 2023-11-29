@@ -4,6 +4,7 @@ import Footer from './Footer.jsx'
 import Crear from './Crear.jsx'
 import { useDatosContext } from '../context/DatosContextFile.jsx'
 import { IdContext } from '../context/IdContext.jsx'
+import CrearProducto from './CrearProducto.jsx'
 
 const Home = () => {
   // --------------------------------------------------------- //
@@ -141,6 +142,7 @@ const Home = () => {
           <div className="circle"></div>
         </section>
       </section>
+      <CrearProducto/>
       <Footer tocarCliente={tocarCliente} setTocarCliente={setTocarCliente} />
     </IdContext.Provider>
   )
