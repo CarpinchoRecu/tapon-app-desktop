@@ -22,7 +22,6 @@ const Crear = () => {
   //manejar estado de campos de productos
   const handleInputProductosChange = (event, productIndex, fieldName) => {
     const { value } = event.target
-
     setFormDataProductos((prevFormData) => {
       const updatedFormData = [...prevFormData]
       updatedFormData[productIndex] = {
@@ -43,7 +42,21 @@ const Crear = () => {
   const handleSiguiente = () => {
     setMostrarProductos(true)
     setMostrarCamposClientes(true)
+
+    console.log(formDataClientes)
   }
+
+  // Función para aplicar trim a los valores del formDataClientes
+const trimFormDataValues = () => {
+  const trimmedData = {};
+  for (const key in formDataClientes) {
+    if (Object.hasOwnProperty.call(formDataClientes, key)) {
+      trimmedData[key] = formDataClientes[key].trim();
+    }
+  }
+  return trimmedData;
+};
+
 
   const handleCantidadProductosChange = (event) => {
     let value = parseInt(event.target.value, 10)
@@ -80,7 +93,7 @@ const Crear = () => {
     }
   ]
 
-  const [formDataClientes, setFormDataClientes] = useState({
+  let [formDataClientes, setFormDataClientes] = useState({
     nombre: '',
     localidad: '',
     direccion: ''
@@ -149,6 +162,8 @@ const Crear = () => {
   const handleCrear = async () => {
     // Validar campos en formDataClientes
     const camposClientes = ['nombre', 'localidad', 'direccion']
+  console.log(formDataClientes)
+
     const camposProductos = [
       'nombre_producto',
       'precio_producto',
@@ -206,7 +221,7 @@ const Crear = () => {
         <LuPlusCircle />
       </div>
       {abrirCreador === true ? (
-        <div className="creador">
+        <section className="creador">
           <h2>Crear Cliente</h2>
           <BtnAtras
             set1={setAbrirCreador}
@@ -288,7 +303,7 @@ const Crear = () => {
           ) : (
             <></>
           )}
-        </div>
+        </section>
       ) : (
         <></>
       )}

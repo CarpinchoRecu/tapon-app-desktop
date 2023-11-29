@@ -1,8 +1,8 @@
 import { useState } from 'react'
 import Observar from './Observar'
 import Eliminar from './Eliminar'
-
 import PropTypes from 'prop-types'
+import CrearProducto from './CrearProducto'
 
 const Footer = ({ tocarCliente, setTocarCliente }) => {
   // --------------------------------------------------------- //
@@ -26,6 +26,9 @@ const Footer = ({ tocarCliente, setTocarCliente }) => {
               <p onClick={handleAbrirEditor}>Observar</p>
             </section>
             <section>
+              <p onClick={handleAbrirEditor}>Crear Producto</p>
+            </section>
+            <section>
               <p onClick={handleAbrirEliminar}>Eliminar</p>
             </section>
           </>
@@ -33,6 +36,9 @@ const Footer = ({ tocarCliente, setTocarCliente }) => {
           <>
             <section>
               <p>Observar</p>
+            </section>
+            <section>
+              <p>Crear Producto</p>
             </section>
             <section>
               <p>Eliminar</p>
@@ -49,7 +55,7 @@ const Footer = ({ tocarCliente, setTocarCliente }) => {
 }
 
 Footer.propTypes = {
-  tocarCliente: PropTypes.any.isRequired, 
+  tocarCliente: PropTypes.any.isRequired,
   setTocarCliente: PropTypes.func.isRequired
 }
 
