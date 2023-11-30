@@ -47,16 +47,15 @@ const Crear = () => {
   }
 
   // Función para aplicar trim a los valores del formDataClientes
-const trimFormDataValues = () => {
-  const trimmedData = {};
-  for (const key in formDataClientes) {
-    if (Object.hasOwnProperty.call(formDataClientes, key)) {
-      trimmedData[key] = formDataClientes[key].trim();
+  const trimFormDataValues = () => {
+    const trimmedData = {}
+    for (const key in formDataClientes) {
+      if (Object.hasOwnProperty.call(formDataClientes, key)) {
+        trimmedData[key] = formDataClientes[key].trim()
+      }
     }
+    return trimmedData
   }
-  return trimmedData;
-};
-
 
   const handleCantidadProductosChange = (event) => {
     let value = parseInt(event.target.value, 10)
@@ -162,7 +161,7 @@ const trimFormDataValues = () => {
   const handleCrear = async () => {
     // Validar campos en formDataClientes
     const camposClientes = ['nombre', 'localidad', 'direccion']
-  console.log(formDataClientes)
+    console.log(formDataClientes)
 
     const camposProductos = [
       'nombre_producto',

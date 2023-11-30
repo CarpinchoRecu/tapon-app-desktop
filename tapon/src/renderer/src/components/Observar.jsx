@@ -119,10 +119,7 @@ const Observar = ({ setEditar, setTocarCliente }) => {
           <BtnAtras set1={setProductoSeleccionado} cancelType={true} />
           {opcionesProd.map((opciones, index) => (
             <React.Fragment key={index}>
-              <section
-                onClick={() => handleAbrirOpcion(index)}
-                className="contenedor__opcion"
-              >
+              <section onClick={() => handleAbrirOpcion(index)} className="contenedor__opcion">
                 <h2 className="titulo__opcion">{opciones.h2}</h2>
                 <p className="descripcion__opcion">{opciones.p}</p>
               </section>

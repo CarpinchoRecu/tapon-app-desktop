@@ -142,7 +142,7 @@ const Home = () => {
           <div className="circle"></div>
         </section>
       </section>
-      <CrearProducto/>
+      <CrearProducto />
       <Footer tocarCliente={tocarCliente} setTocarCliente={setTocarCliente} />
     </IdContext.Provider>
   )
