@@ -4,6 +4,8 @@ import { useDatosContext } from '../context/DatosContextFile.jsx'
 import { useContext } from 'react'
 import BtnAtras from './botones/BtnAtras.jsx'
 
+import Historial from './Historial.jsx'
+
 import PropTypes from 'prop-types'
 
 const Eliminar = ({ setEliminar, setTocarCliente }) => {
@@ -61,6 +63,7 @@ const Eliminar = ({ setEliminar, setTocarCliente }) => {
 
   return (
     <div className="eliminar">
+      <Historial/>
       <h2>Eliminar Cliente</h2>
       <BtnAtras set1={setEliminar} set2={setTocarCliente} cancelType={true} />
       <p className="aviso__eliminar">

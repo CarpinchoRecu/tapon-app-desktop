@@ -3,8 +3,37 @@ import { join } from 'path'
 import { electronApp, optimizer, is } from '@electron-toolkit/utils'
 import icon from '../../resources/icon.png'
 import sqlite3 from 'sqlite3'
-const path = require('path');
+import fs from 'fs'
 
+// Función para crear una copia de seguridad en una carpeta específica
+function backupDatabase() {
+  // Obtener la fecha actual
+  const currentDate = new Date()
+  const year = currentDate.getFullYear()
+  const month = String(currentDate.getMonth() + 1).padStart(2, '0') // Sumar 1 ya que los meses van de 0 a 11
+  const day = String(currentDate.getDate()).padStart(2, '0')
+
+  // Construir la cadena de fecha con el formato deseado (DD-MM-YYYY)
+  const formattedDate = `${day}-${month}-${year}`
+
+  const dbPath = join(app.getPath('userData'), 'db_sqlite.db')
+
+  // Ruta de la carpeta de copias de seguridad
+  const backupFolderPath = join(__dirname, 'backup_folder')
+
+  // Verificar si la carpeta de copias de seguridad existe, si no, crearla
+  if (!fs.existsSync(backupFolderPath)) {
+    fs.mkdirSync(backupFolderPath)
+  }
+
+  // Ruta para la copia de seguridad
+  const backupPath = join(backupFolderPath, `backup-${formattedDate}-${Math.floor(Math.random() * 1000000)}.db`)
+
+  // Copiar la base de datos a la ruta de la copia de seguridad
+  fs.copyFileSync(dbPath, backupPath)
+
+  console.log('Copia de seguridad creada en:', backupPath)
+}
 
 // creando la primer ventana
 function createWindow() {
@@ -90,12 +119,12 @@ function createWindow() {
   Menu.setApplicationMenu(menu)
 
   // crear y conectar a SQLite
-  const dbPath = path.join(__dirname, 'db_sqlite.db');
+  const dbPath = join(app.getPath('userData'), 'db_sqlite.db')
   const db = new sqlite3.Database(dbPath, (err) => {
     if (err) {
       console.error('Error al abrir la base de datos:', err.message)
     } else {
-      console.log('Conexión exitosa a la base de datos')
+      console.warn('Conexion exitosa a la base de datos')
     }
   })
 
@@ -140,6 +169,7 @@ function createWindow() {
 
   ipcMain.handle('eliminarCliente-db', async (event, nombre, localidad, direccion) => {
     return new Promise((resolve, reject) => {
+      backupDatabase()
       const query = 'DELETE FROM clientes WHERE nombre = ? AND localidad = ? AND direccion = ?'
       const values = [nombre, localidad, direccion]
 
