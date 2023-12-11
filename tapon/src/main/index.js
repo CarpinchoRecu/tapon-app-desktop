@@ -3,6 +3,8 @@ import { join } from 'path'
 import { electronApp, optimizer, is } from '@electron-toolkit/utils'
 import icon from '../../resources/icon.png'
 import sqlite3 from 'sqlite3'
+const path = require('path');
+
 
 // creando la primer ventana
 function createWindow() {
@@ -88,7 +90,7 @@ function createWindow() {
   Menu.setApplicationMenu(menu)
 
   // crear y conectar a SQLite
-  const dbPath = join(app.getPath('userData'), 'db_sqlite.db')
+  const dbPath = path.join(__dirname, 'db_sqlite.db');
   const db = new sqlite3.Database(dbPath, (err) => {
     if (err) {
       console.error('Error al abrir la base de datos:', err.message)
