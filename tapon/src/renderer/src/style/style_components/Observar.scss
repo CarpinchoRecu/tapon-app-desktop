@@ -78,9 +78,9 @@
             }
 
             td {
-                width: 11%;
+                width: 9.1%;
                 text-align: center;
-                font-size: $textSizeGeneral;
+                font-size: $textSizeChico;
             }
 
             th {
@@ -174,23 +174,16 @@
             }
         }
 
-        .contenedor__opcion:nth-child(4){
+        .contenedor__opcion[name="pagar"]{
             .titulo__opcion {
                 background: $correctoColor;
             }            
         }
 
-        .contenedor__opcion:nth-child(5){
+        .contenedor__opcion[name="eliminar"]{
             .titulo__opcion {
                 background: $errorColor;
             }            
         }
-
-
     }
-
-
-
-
-
 }

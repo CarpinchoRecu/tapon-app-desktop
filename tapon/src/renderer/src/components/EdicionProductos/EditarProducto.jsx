@@ -1,9 +1,9 @@
 import React, { useState } from 'react'
 import Swal from 'sweetalert2'
-import BtnAtras from './Items/botones/BtnAtras'
+import BtnAtras from '../Items/botones/BtnAtras'
 import PropTypes from 'prop-types'
 
-const Editor = ({ setOpcionSeleccionada, setOpcion, productoSeleccionado }) => {
+const EditarProducto = ({ setOpcionSeleccionada, setOpcion, productoSeleccionado }) => {
   const [formDataEdicion, setFormDataEdicion] = useState({
     nombre_producto: '',
     precio_producto: 0,
@@ -130,10 +130,10 @@ const Editor = ({ setOpcionSeleccionada, setOpcion, productoSeleccionado }) => {
   )
 }
 
-Editor.propTypes = {
+EditarProducto.propTypes = {
   setOpcionSeleccionada: PropTypes.func.isRequired, // Para validar una función de setState
   setOpcion: PropTypes.func.isRequired,
   productoSeleccionado: PropTypes.object.isRequired // Para validar un objeto
 }
 
-export default Editor
+export default EditarProducto

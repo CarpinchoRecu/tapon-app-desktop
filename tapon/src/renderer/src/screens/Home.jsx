@@ -4,8 +4,9 @@ import Footer from '../components/Footer.jsx'
 import Crear from '../components/Crear.jsx'
 import { useDatosContext } from '../context/DatosContextFile.jsx'
 import { IdContext } from '../context/IdContext.jsx'
-import CrearProducto from '../components/EdicionProductos/CrearProducto.jsx'
-import { calcularUltimoPago } from '../utils/utilsDate.js'
+import CrearProducto from '../components/CrearProducto.jsx'
+import { ClienteAgrupado } from '../utils/utilsClienteAgrupado.jsx'
+import HistorialEliminados from '../components/HistorialEliminados.jsx'
 
 const Home = () => {
   // --------------------------------------------------------- //
@@ -13,6 +14,7 @@ const Home = () => {
   const datosOriginal = useDatosContext()
   //estado para menejar los datos que se van a trasformar en el home
   const [datosHome, setDatosHome] = useState([])
+  const [datosEliminados, setDatosEliminados] = useState([])
   //estado para menejar los datos que tengan filtro
   const [datosFiltrados, setDatosFiltrados] = useState(datosHome)
   // --------------------------------------------------------- //
@@ -20,41 +22,11 @@ const Home = () => {
   //tranformando datos
   useEffect(() => {
     const datosEnHome = () => {
-      try {
-        const datosAgrupados = datosOriginal.reduce((acumulador, dato) => {
-          const sinCompletar = 'Sin Completar'
-          const nombreMinusculas = dato.nombre.toLowerCase()
-          const localidad = dato.localidad || sinCompletar
-          const direccion = dato.direccion || sinCompletar
-          const clave = `${nombreMinusculas}-${localidad}-${direccion}`
-          // Lógica manejo de fechas
-          // const fecha = dato.fecha_ultimo_pago
-          // const CadaCuantoPaga = dato.cada_cuanto_paga
-          const indiceExistente = acumulador.findIndex((elem) => elem.clave === clave)
-
-          if (indiceExistente !== -1) {
-            acumulador[indiceExistente].cantidadProductos++
-          } else {
-            acumulador.push({
-              id: dato.id,
-              nombre: nombreMinusculas,
-              localidad: localidad,
-              direccion: direccion,
-              nombreProducto: dato.nombre_producto || sinCompletar,
-              precioProducto: dato.precio_producto || sinCompletar,
-              cuotasProducto: dato.cuotas_producto || sinCompletar,
-              cuotasPagadas: dato.cuotas_pagadas || sinCompletar,
-              cantidadProductos: 1,
-              clave: clave
-            })
-          }
-          return acumulador
-        }, [])
-
-        setDatosHome(datosAgrupados)
-      } catch (error) {
-        console.error('Error al obtener los datos:', error)
-      }
+      const datosAgrupados = ClienteAgrupado(datosOriginal)
+      const datosSinEliminar = datosAgrupados.filter((dato) => dato.eliminado === 0)
+      const datosEliminados = datosAgrupados.filter((dato) => dato.eliminado === 1)
+      setDatosHome(datosSinEliminar)
+      setDatosEliminados(datosEliminados)
     }
 
     datosEnHome()
@@ -83,6 +55,7 @@ const Home = () => {
   }, [setTocarCliente])
 
   return (
+    
     <IdContext.Provider value={idSeleccionado}>
       <section className="app">
         <Header datosHome={datosHome} setDatosFiltrados={setDatosFiltrados} />
@@ -126,6 +99,7 @@ const Home = () => {
         </section>
       </section>
       <CrearProducto />
+      <HistorialEliminados datosEliminados={datosEliminados}/>
       <Footer tocarCliente={tocarCliente} setTocarCliente={setTocarCliente} />
     </IdContext.Provider>
   )
