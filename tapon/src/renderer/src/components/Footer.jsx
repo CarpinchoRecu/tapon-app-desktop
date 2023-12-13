@@ -1,8 +1,8 @@
 import { useState } from 'react'
-import Observar from './Observar'
-import Eliminar from './Eliminar'
+import Observar from '../screens/Observar/Observar'
+import Eliminar from './Eliminar/Eliminar'
 import PropTypes from 'prop-types'
-import CrearProducto from './CrearProducto'
+import CrearProducto from './EdicionProductos/CrearProducto'
 
 const Footer = ({ tocarCliente, setTocarCliente }) => {
   // --------------------------------------------------------- //

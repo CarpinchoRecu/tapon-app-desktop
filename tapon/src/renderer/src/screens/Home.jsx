@@ -1,10 +1,11 @@
 import { useEffect, useState } from 'react'
-import Header from './Header.jsx'
-import Footer from './Footer.jsx'
-import Crear from './Crear.jsx'
+import Header from '../components/Header.jsx'
+import Footer from '../components/Footer.jsx'
+import Crear from '../components/Crear.jsx'
 import { useDatosContext } from '../context/DatosContextFile.jsx'
 import { IdContext } from '../context/IdContext.jsx'
-import CrearProducto from './CrearProducto.jsx'
+import CrearProducto from '../components/EdicionProductos/CrearProducto.jsx'
+import { calcularUltimoPago } from '../utils/utilsDate.js'
 
 const Home = () => {
   // --------------------------------------------------------- //
@@ -26,21 +27,9 @@ const Home = () => {
           const localidad = dato.localidad || sinCompletar
           const direccion = dato.direccion || sinCompletar
           const clave = `${nombreMinusculas}-${localidad}-${direccion}`
-
           // Lógica manejo de fechas
-          const fecha = dato.fecha_ultimo_pago
-          const partesFecha = fecha.split('-')
-          const fechaEnDate = new Date(partesFecha[0], partesFecha[1] - 1, partesFecha[2])
-          const fechaMasUnMes = new Date(
-            fechaEnDate.getFullYear(),
-            fechaEnDate.getMonth(),
-            fechaEnDate.getDate() + dato.cada_cuanto_paga
-          )
-          const nuevoAño = fechaMasUnMes.getFullYear()
-          const nuevoMes = String(fechaMasUnMes.getMonth() + 1).padStart(2, '0')
-          const nuevoDia = String(fechaMasUnMes.getDate()).padStart(2, '0')
-          const fechaProximoPago = `${nuevoAño}-${nuevoMes}-${nuevoDia}`
-
+          // const fecha = dato.fecha_ultimo_pago
+          // const CadaCuantoPaga = dato.cada_cuanto_paga
           const indiceExistente = acumulador.findIndex((elem) => elem.clave === clave)
 
           if (indiceExistente !== -1) {
@@ -55,8 +44,6 @@ const Home = () => {
               precioProducto: dato.precio_producto || sinCompletar,
               cuotasProducto: dato.cuotas_producto || sinCompletar,
               cuotasPagadas: dato.cuotas_pagadas || sinCompletar,
-              fecha_proximo_pago: fechaProximoPago || sinCompletar,
-              fecha_ultimo_pago: fecha || sinCompletar,
               cantidadProductos: 1,
               clave: clave
             })
@@ -114,8 +101,6 @@ const Home = () => {
                     <th>Cantidad de Productos</th>
                     <th>Localidad</th>
                     <th>Dirección</th>
-                    <th>fecha ultimo pago</th>
-                    <th>fecha proximo pago</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -131,8 +116,6 @@ const Home = () => {
                       <td>{datoHome.cantidadProductos}</td>
                       <td>{datoHome.localidad}</td>
                       <td>{datoHome.direccion}</td>
-                      <td>{datoHome.fecha_ultimo_pago}</td>
-                      <td>{datoHome.fecha_proximo_pago}</td>
                     </tr>
                   ))}
                 </tbody>

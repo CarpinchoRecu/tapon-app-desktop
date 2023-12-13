@@ -1,6 +1,6 @@
 import { useEffect, useContext, useState } from 'react'
-import { IdContext } from '../context/IdContext.jsx'
-import { useDatosContext } from '../context/DatosContextFile.jsx'
+import { IdContext } from '../../context/IdContext.jsx'
+import { useDatosContext } from '../../context/DatosContextFile.jsx'
 import { LuPlusCircle } from 'react-icons/lu'
 
 const CrearProducto = () => {

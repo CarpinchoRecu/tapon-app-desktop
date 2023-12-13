@@ -1,26 +1,19 @@
-import React, { useContext, useState } from 'react'
-import { IdContext } from '../context/IdContext.jsx'
-import { useDatosContext } from '../context/DatosContextFile.jsx'
-import Editor from './componentesObservar/Editor.jsx'
-import BtnAtras from './botones/BtnAtras.jsx'
+import { useContext, useState } from 'react'
+import { IdContext } from '../../context/IdContext.jsx'
+import { useDatosContext } from '../../context/DatosContextFile.jsx'
+import BtnAtras from '../../components/Items/botones/BtnAtras.jsx'
 import PropTypes from 'prop-types'
+import MenuProductos from './MenuProductos.jsx'
+
 
 const Observar = ({ setEditar, setTocarCliente }) => {
   const datosOriginal = useDatosContext()
   const idSeleccionado = useContext(IdContext)
   const [productoSeleccionado, setProductoSeleccionado] = useState(null)
-  const [opcion, setOpcion] = useState(null)
-  const [opcionSeleccionada, setOpcionSeleccionada] = useState(null)
 
-  const handleAbrirOpcion = (index) => {
-    setOpcion(opcion === index ? null : index)
-    setOpcionSeleccionada(index)
-  }
-
-  const handleMostrarProductoSeleccionado = (producto) => {
+  const handleMostrarMenuProductos = (producto) => {
     setProductoSeleccionado(producto)
   }
-
   // Encontrar el cliente correspondiente al idSeleccionado
   const clienteSeleccionado = datosOriginal.find((cliente) => cliente.id === idSeleccionado)
 
@@ -36,23 +29,7 @@ const Observar = ({ setEditar, setTocarCliente }) => {
       cliente.direccion === clienteSeleccionado.direccion
   )
 
-  const opcionesProd = [
-    {
-      name: 'editar',
-      h2: 'Editar Producto',
-      p: 'Esta opción es para poder editar el producto seleccionado. Se utiliza en caso de algún error o modificación en la fecha del último pago.'
-    },
-    {
-      name: 'pagar',
-      h2: 'Notificar Pago de Producto',
-      p: 'Esta opción es para cuando el producto de este cliente ya fue cobrado y quieres notificarlo.'
-    },
-    {
-      name: 'eliminar',
-      h2: 'Eliminar Producto',
-      p: 'Esta opción es solo para eliminar este producto en específico.'
-    }
-  ]
+
 
   return (
     <div className="editar">
@@ -96,7 +73,7 @@ const Observar = ({ setEditar, setTocarCliente }) => {
               const faltaCuotas = Math.floor(producto.cuotas_producto - producto.cuotas_pagadas)
 
               return (
-                <tr key={index} onClick={() => handleMostrarProductoSeleccionado(producto)}>
+                <tr key={index} onClick={() => handleMostrarMenuProductos(producto)}>
                   <td>{producto.nombre_producto}</td>
                   <td>{producto.precio_producto}</td>
                   <td>{producto.cuotas_producto}</td>
@@ -112,34 +89,7 @@ const Observar = ({ setEditar, setTocarCliente }) => {
           </tbody>
         </table>
       </div>
-
-      {productoSeleccionado && (
-        <div className="opciones__productos">
-          <h2 className="titulo__opciones">Opciones para el Producto</h2>
-          <BtnAtras set1={setProductoSeleccionado} cancelType={true} />
-          {opcionesProd.map((opciones, index) => (
-            <React.Fragment key={index}>
-              <section onClick={() => handleAbrirOpcion(index)} className="contenedor__opcion">
-                <h2 className="titulo__opcion">{opciones.h2}</h2>
-                <p className="descripcion__opcion">{opciones.p}</p>
-              </section>
-              {opcion === index && opcion === opcionSeleccionada && (
-                <>
-                  {opcionesProd[opcion].name === 'editar' && (
-                    <Editor
-                      productoSeleccionado={productoSeleccionado}
-                      setOpcion={setOpcion}
-                      setOpcionSeleccionada={setOpcionSeleccionada}
-                    />
-                  )}
-                  {opcionesProd[opcion].name === 'eliminar' && <>menu eliminar</>}
-                  {opcionesProd[opcion].name === 'pagar' && <>menu pagar</>}
-                </>
-              )}
-            </React.Fragment>
-          ))}
-        </div>
-      )}
+      <MenuProductos productoSeleccionado={productoSeleccionado} setProductoSeleccionado={setProductoSeleccionado}/>
     </div>
   )
 }

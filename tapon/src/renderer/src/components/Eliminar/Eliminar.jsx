@@ -1,8 +1,8 @@
-import Swal from 'sweetalert2'
-import { IdContext } from '../context/IdContext.jsx'
-import { useDatosContext } from '../context/DatosContextFile.jsx'
 import { useContext } from 'react'
-import BtnAtras from './botones/BtnAtras.jsx'
+import Swal from 'sweetalert2'
+import { IdContext } from '../../context/IdContext.jsx'
+import { useDatosContext } from '../../context/DatosContextFile.jsx'
+import BtnAtras from '../Items/botones/BtnAtras.jsx'
 
 import Historial from './Historial.jsx'
 

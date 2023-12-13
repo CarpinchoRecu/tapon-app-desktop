@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import Swal from 'sweetalert2'
-import BtnAtras from '../botones/BtnAtras'
+import BtnAtras from './Items/botones/BtnAtras'
 import PropTypes from 'prop-types'
 
 const Editor = ({ setOpcionSeleccionada, setOpcion, productoSeleccionado }) => {

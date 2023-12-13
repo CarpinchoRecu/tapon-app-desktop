@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { LuPlusCircle } from 'react-icons/lu'
 import Swal from 'sweetalert2'
-import BtnAtras from './botones/BtnAtras'
+import BtnAtras from './Items/botones/BtnAtras'
 
 const Crear = () => {
   const [abrirCreador, setAbrirCreador] = useState(false)

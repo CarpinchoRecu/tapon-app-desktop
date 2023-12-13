@@ -1,6 +1,6 @@
-import Home from './components/Home.jsx'
+import Home from './screens/Home.jsx'
 import { DatosProvider } from './context/DatosContextFile.jsx'
-import style from './style/main.scss'
+import './style/main.scss'
 
 function App() {
   return (
