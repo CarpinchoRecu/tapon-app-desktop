@@ -6,7 +6,7 @@ import { useDatosContext } from '../context/DatosContextFile.jsx'
 import { IdContext } from '../context/IdContext.jsx'
 import CrearProducto from '../components/CrearProducto.jsx'
 import { ClienteAgrupado } from '../utils/utilsClienteAgrupado.jsx'
-import HistorialEliminados from '../components/HistorialEliminados.jsx'
+import HistorialEliminados from './HistorialEliminados.jsx'
 
 const Home = () => {
   // --------------------------------------------------------- //
@@ -99,7 +99,7 @@ const Home = () => {
         </section>
       </section>
       <CrearProducto />
-      <HistorialEliminados datosEliminados={datosEliminados}/>
+      {/* <HistorialEliminados datosEliminados={datosEliminados}/> */}
       <Footer tocarCliente={tocarCliente} setTocarCliente={setTocarCliente} />
     </IdContext.Provider>
   )

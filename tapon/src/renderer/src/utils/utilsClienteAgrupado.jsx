@@ -9,6 +9,9 @@ export function ClienteAgrupado(datosOriginal) {
 
         if (indiceExistente !== -1) {
             acumulador[indiceExistente].cantidadProductos++
+            if (dato.eliminado === 1) {
+                acumulador[indiceExistente].eliminado = 1
+            }
         } else {
             acumulador.push({
                 id: dato.id,

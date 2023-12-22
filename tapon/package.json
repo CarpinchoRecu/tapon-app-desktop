@@ -1,6 +1,6 @@
 {
   "name": "tapon",
-  "version": "1.0.15",
+  "version": "1.0.18",
   "description": "Aplicacion electron con react para tapon",
   "main": "./out/main/index.js",
   "author": "example.com",
@@ -21,7 +21,7 @@
     "@electron-toolkit/utils": "^2.0.0",
     "react-icons": "^4.12.0",
     "sqlite3": "^5.1.6",
-    "sweetalert2": "^11.6.13"
+    "sweetalert2": "^11.10.1"
   },
   "devDependencies": {
     "@electron-toolkit/eslint-config": "^1.0.1",

@@ -84,6 +84,7 @@ const Observar = ({ setEditar, setTocarCliente }) => {
                   <td>{producto.cada_cuanto_paga}</td>
                   <td>{producto.fecha_ultimo_pago}</td>
                   <td>{proximoPago}</td>
+                  <td>{producto.eliminado}</td>
                 </tr>
               )
             })}
