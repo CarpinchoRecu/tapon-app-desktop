@@ -7,14 +7,14 @@ export function ClienteAgrupado(datosOriginal) {
         const clave = `${nombreMinusculas}-${localidad}-${direccion}`
         const indiceExistente = acumulador.findIndex((elem) => elem.clave === clave)
 
-        if (indiceExistente !== -1) {
+        if (indiceExistente !== -1 && dato.eliminado === 0) {
             acumulador[indiceExistente].cantidadProductos++
-            if (dato.eliminado === 1) {
-                acumulador[indiceExistente].eliminado = 1
-            }
         } else {
             acumulador.push({
                 id: dato.id,
+                eliminado: dato.eliminado,
+                clave: clave,
+                cantidadProductos: 1,
                 nombre: nombreMinusculas,
                 localidad: localidad,
                 direccion: direccion,
@@ -22,9 +22,6 @@ export function ClienteAgrupado(datosOriginal) {
                 precioProducto: dato.precio_producto || sinCompletar,
                 cuotasProducto: dato.cuotas_producto || sinCompletar,
                 cuotasPagadas: dato.cuotas_pagadas || sinCompletar,
-                cantidadProductos: 1,
-                clave: clave,
-                eliminado: dato.eliminado
             })
         }
         return acumulador

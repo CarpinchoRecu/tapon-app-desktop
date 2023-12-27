@@ -22,11 +22,12 @@ const Observar = ({ setEditar, setTocarCliente }) => {
   // Encontrar todos los productos con el mismo nombre, localidad y dirección del cliente seleccionado
   const productosCliente = datosOriginal.filter(
     (cliente) =>
-      cliente.nombre.toLowerCase() === clienteSeleccionado.nombre.toLowerCase() &&
-      cliente.localidad === clienteSeleccionado.localidad &&
-      cliente.direccion === clienteSeleccionado.direccion
-  )
-
+    cliente.eliminado === 0 &&
+    cliente.nombre.toLowerCase() === clienteSeleccionado.nombre.toLowerCase() &&
+    cliente.localidad === clienteSeleccionado.localidad &&
+    cliente.direccion === clienteSeleccionado.direccion
+    )
+    
   return (
     <div className="editar">
       <BtnAtras set1={setEditar} set2={setTocarCliente} />
@@ -84,7 +85,6 @@ const Observar = ({ setEditar, setTocarCliente }) => {
                   <td>{producto.cada_cuanto_paga}</td>
                   <td>{producto.fecha_ultimo_pago}</td>
                   <td>{proximoPago}</td>
-                  <td>{producto.eliminado}</td>
                 </tr>
               )
             })}

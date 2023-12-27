@@ -169,20 +169,22 @@ function createWindow() {
 
   ipcMain.handle('eliminarCliente-db', async (event, nombre, localidad, direccion) => {
     return new Promise((resolve, reject) => {
-      backupDatabase()
-      const query = 'DELETE FROM clientes WHERE nombre = ? AND localidad = ? AND direccion = ?'
-      const values = [nombre, localidad, direccion]
-
+      backupDatabase();
+  
+      const query = 'UPDATE clientes SET eliminado = 1 WHERE nombre = ? AND localidad = ? AND direccion = ?';
+      const values = [nombre, localidad, direccion];
+  
       db.run(query, values, function (err) {
         if (err) {
-          console.error(err)
-          reject(err)
+          console.error(err);
+          reject(err);
         } else {
-          resolve({ message: 'Eliminación exitosa' })
+          resolve({ message: 'Eliminación exitosa' });
         }
-      })
-    })
-  })
+      });
+    });
+  });
+  
 
   mainWindow.on('ready-to-show', () => {
     mainWindow.show()
