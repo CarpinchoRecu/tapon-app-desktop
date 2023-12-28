@@ -11,7 +11,6 @@ const Header = ({ datosHome, setDatosFiltrados }) => {
   const [filtroCantidadProductos, setFiltroCantidadProductos] = useState('')
   const [filtroBusquedaNombre, setFiltroBusquedaNombre] = useState('')
   const [busquedaActiva, setBusquedaActiva] = useState(false)
-  const [filtroProximoPago, setFiltroProximoPago] = useState(false)
   // --------------------------------------------------------- //
 
   useEffect(() => {
@@ -49,19 +48,6 @@ const Header = ({ datosHome, setDatosFiltrados }) => {
           dato.nombre.toLowerCase().includes(filtroBusquedaNombre.toLowerCase())
         )
       }
-
-      if (filtroProximoPago) {
-        // Filtrar solo si se activa el checkbox
-        const fechaActual = new Date().getTime()
-
-        datosFiltrados = datosFiltrados.filter((cliente) => {
-          const fechaProximoPago = new Date(cliente.fecha_proximo_pago).getTime()
-          const diffTiempo = fechaProximoPago - fechaActual
-          const diffDias = Math.ceil(diffTiempo / (1000 * 60 * 60 * 24))
-          return diffDias <= 7 && diffDias >= 0
-        })
-      }
-
       setDatosFiltrados(datosFiltrados)
     }
 
@@ -71,7 +57,6 @@ const Header = ({ datosHome, setDatosFiltrados }) => {
     filtroSuipacha,
     filtroCantidadProductos,
     filtroBusquedaNombre,
-    filtroProximoPago,
     busquedaActiva,
     datosHome,
     setDatosFiltrados
@@ -83,8 +68,6 @@ const Header = ({ datosHome, setDatosFiltrados }) => {
       setFiltroChivilcoy(checked)
     } else if (name === 'suipacha') {
       setFiltroSuipacha(checked)
-    } else if (name === 'proximoCobrar') {
-      setFiltroProximoPago(checked)
     }
 
     // Cuando se activa un filtro, desactivamos la búsqueda
@@ -115,12 +98,6 @@ const Header = ({ datosHome, setDatosFiltrados }) => {
       nombreFiltro: 'suipacha',
       type: 'checkbox',
       state: filtroSuipacha
-    },
-    {
-      name: 'Proximo a Cobrar',
-      nombreFiltro: 'proximoCobrar',
-      type: 'checkbox',
-      state: filtroProximoPago
     },
     {
       name: 'Cantidad de Productos',

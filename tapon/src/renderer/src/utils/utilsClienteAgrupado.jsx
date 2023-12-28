@@ -9,7 +9,7 @@ export function ClienteAgrupado(datosOriginal) {
 
         if (indiceExistente !== -1 && dato.eliminado === 0) {
             acumulador[indiceExistente].cantidadProductos++
-        } else {
+        } else if (indiceExistente === -1 && dato.eliminado === 0) {
             acumulador.push({
                 id: dato.id,
                 eliminado: dato.eliminado,
@@ -21,7 +21,7 @@ export function ClienteAgrupado(datosOriginal) {
                 nombreProducto: dato.nombre_producto || sinCompletar,
                 precioProducto: dato.precio_producto || sinCompletar,
                 cuotasProducto: dato.cuotas_producto || sinCompletar,
-                cuotasPagadas: dato.cuotas_pagadas || sinCompletar,
+                cuotasPagadas: dato.cuotas_pagadas || sinCompletar
             })
         }
         return acumulador
