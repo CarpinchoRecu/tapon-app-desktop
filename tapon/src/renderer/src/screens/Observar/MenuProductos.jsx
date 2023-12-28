@@ -1,13 +1,14 @@
-import React, { useState } from 'react'
-
+import React, { useContext, useState } from 'react'
 import BtnAtras from '../../components/Items/botones/BtnAtras'
 import EditarProducto from '../../components/EdicionProductos/EditarProducto'
 import EliminarProducto from '../../components/EdicionProductos/EliminarProducto'
 import PagoProducto from '../../components/EdicionProductos/PagoProducto'
+import { ProductosContext } from '../../context/GeneralContext'
 
-const MenuProductos = ({ productoSeleccionado, setProductoSeleccionado }) => {
+const MenuProductos = ({ setProductoSeleccionado }) => {
     const [opcionSeleccionada, setOpcionSeleccionada] = useState(null)
     const [opcion, setOpcion] = useState(null)
+    const productoSeleccionado = useContext(ProductosContext)
 
     const handleAbrirOpcion = (index) => {
         setOpcion(opcion === index ? null : index)
@@ -51,7 +52,6 @@ const MenuProductos = ({ productoSeleccionado, setProductoSeleccionado }) => {
                                 <>
                                     {opcionesProd[opcion].name === 'editar' && (
                                         <EditarProducto
-                                            productoSeleccionado={productoSeleccionado}
                                             setOpcion={setOpcion}
                                             setOpcionSeleccionada={setOpcionSeleccionada}
                                         />

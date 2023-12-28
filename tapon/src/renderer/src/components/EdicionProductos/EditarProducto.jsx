@@ -1,9 +1,12 @@
-import React, { useState } from 'react'
-import Swal from 'sweetalert2'
+import React, { useContext, useState } from 'react'
+import { ToastContainer, toast } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
 import BtnAtras from '../Items/botones/BtnAtras'
 import PropTypes from 'prop-types'
+import { ProductosContext } from '../../context/GeneralContext'
 
-const EditarProducto = ({ setOpcionSeleccionada, setOpcion, productoSeleccionado }) => {
+const EditarProducto = ({ setOpcionSeleccionada, setOpcion }) => {
+  const productoSeleccionado = useContext(ProductosContext)
   const [formDataEdicion, setFormDataEdicion] = useState({
     nombre_producto: '',
     precio_producto: 0,
@@ -32,10 +35,15 @@ const EditarProducto = ({ setOpcionSeleccionada, setOpcion, productoSeleccionado
       !fecha_ultimo_pago
     ) {
       // Mostrar alerta con SweetAlert para campos vacíos
-      Swal.fire({
-        icon: 'error',
-        title: 'Error',
-        text: 'Por favor, completa todos los campos'
+      toast.error('Por favor completa todos los campos', {
+        position: 'top-right',
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: 'dark'
       })
       return // Detener la ejecución si hay campos vacíos
     }
@@ -52,22 +60,31 @@ const EditarProducto = ({ setOpcionSeleccionada, setOpcion, productoSeleccionado
 
     try {
       await window.electronAPI.actualizarSQLite(query, values)
-      // Mostrar alerta con SweetAlert para éxito
-      Swal.fire({
-        icon: 'success',
-        title: '¡Éxito!',
-        text: 'El producto se actualizó correctamente'
+      // Mostrar alerta de éxito
+      toast.success('Los datos se han guardado correctamente', {
+        position: 'top-right',
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: 'dark'
       })
       window.location.reload()
     } catch (error) {
       console.error('Error al actualizar:', error)
       // Mostrar alerta con SweetAlert para errores
-      Swal.fire({
-        icon: 'error',
-        title: 'Error',
-        text: 'Hubo un error al actualizar el producto'
+      toast.error('Hubo un error al guardar los datos', {
+        position: 'top-right',
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: 'dark'
       })
-      // Manejar el error de alguna manera (mostrar mensaje, etc.)
     }
   }
 
@@ -104,29 +121,43 @@ const EditarProducto = ({ setOpcionSeleccionada, setOpcion, productoSeleccionado
   ]
 
   return (
-    <div className="editor">
-      <h2 className="title_editor">Editar Producto</h2>
-      <BtnAtras set1={setOpcion} set2={setOpcionSeleccionada} />
-      <div className="contenedor__campo__editor">
-        <div className="campos__editor">
-          {camposProductosSeleccionados.map((campoSeleccionado, indexCampoSeleccionado) => (
-            <React.Fragment key={indexCampoSeleccionado}>
-              <label htmlFor={campoSeleccionado.label}>{campoSeleccionado.label}</label>
-              <input
-                className="campo__editor"
-                placeholder={productoSeleccionado[campoSeleccionado.name]}
-                type={campoSeleccionado.type}
-                value={formDataEdicion[campoSeleccionado.name]}
-                onChange={(event) => handleInputEdicionChange(event, campoSeleccionado.name)}
-              />
-            </React.Fragment>
-          ))}
+    <>
+      <div className="editor">
+        <h2 className="title_editor">Editar Producto</h2>
+        <BtnAtras set1={setOpcion} set2={setOpcionSeleccionada} />
+        <div className="contenedor__campo__editor">
+          <div className="campos__editor">
+            {camposProductosSeleccionados.map((campoSeleccionado, indexCampoSeleccionado) => (
+              <React.Fragment key={indexCampoSeleccionado}>
+                <label htmlFor={campoSeleccionado.label}>{campoSeleccionado.label}</label>
+                <input
+                  className="campo__editor"
+                  placeholder={productoSeleccionado[campoSeleccionado.name]}
+                  type={campoSeleccionado.type}
+                  value={formDataEdicion[campoSeleccionado.name]}
+                  onChange={(event) => handleInputEdicionChange(event, campoSeleccionado.name)}
+                />
+              </React.Fragment>
+            ))}
+          </div>
+        </div>
+        <div onClick={handleEditar} className="btn__editar">
+          <p>Editar</p>
         </div>
       </div>
-      <div onClick={handleEditar} className="btn__editar">
-        <p>Editar</p>
-      </div>
-    </div>
+      <ToastContainer
+        position="top-right"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="dark"
+      />
+    </>
   )
 }
 

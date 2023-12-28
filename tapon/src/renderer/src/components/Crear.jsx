@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react'
 import { LuPlusCircle } from 'react-icons/lu'
-import Swal from 'sweetalert2'
 import BtnAtras from './Items/botones/BtnAtras'
+import { ToastContainer, toast } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
 
 const Crear = () => {
   const [abrirCreador, setAbrirCreador] = useState(false)
@@ -159,10 +160,7 @@ const Crear = () => {
   }, [cantidadDeProductos, setMostrarBtnProductos])
 
   const handleCrear = async () => {
-    // Validar campos en formDataClientes
     const camposClientes = ['nombre', 'localidad', 'direccion']
-    console.log(formDataClientes)
-
     const camposProductos = [
       'nombre_producto',
       'precio_producto',
@@ -171,47 +169,62 @@ const Crear = () => {
       'cada_cuanto_paga',
       'fecha_ultimo_pago'
     ]
-
+  
     const camposClientesIncompletos = camposClientes.filter((campo) => !formDataClientes[campo])
     const camposProductosIncompletos = formDataProductos.filter((producto) => {
       return camposProductos.some((campo) => !producto[campo])
     })
-
+  
     if (camposClientesIncompletos.length > 0 || camposProductosIncompletos.length > 0) {
       // Mostrar alerta de campos incompletos
-      Swal.fire({
-        icon: 'error',
-        title: 'Campos incompletos',
-        text: 'Por favor, completa todos los campos antes de continuar.'
+      toast.error('Por favor completa todos los campos', {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark"
       })
       return // Detener la ejecución si hay campos incompletos
     }
-
-    // Continuar con las inserciones si todos los campos están completos
+  
     try {
       for (let i = 0; i < cantidadDeProductos; i++) {
         const consulta = `INSERT INTO clientes (nombre, localidad, direccion, nombre_producto, precio_producto, cuotas_producto, cuotas_pagadas, cada_cuanto_paga, fecha_ultimo_pago) VALUES ('${formDataClientes.nombre}', '${formDataClientes.localidad}', '${formDataClientes.direccion}', '${formDataProductos[i].nombre_producto}', ${formDataProductos[i].precio_producto}, ${formDataProductos[i].cuotas_producto}, ${formDataProductos[i].cuotas_pagadas}, ${formDataProductos[i].cada_cuanto_paga}, '${formDataProductos[i].fecha_ultimo_pago}')`
-
+  
         await window.electronAPI.insertarSQLite(consulta)
       }
-
+  
       // Mostrar alerta de éxito
-      Swal.fire({
-        icon: 'success',
-        title: '¡Éxito!',
-        text: 'El cliente se creo correctamente'
+      toast.success('Los datos se han guardado correctamente', {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark"
       })
       window.location.reload()
     } catch (error) {
       console.error('Error al ejecutar los INSERT:', error)
       // Mostrar alerta de error
-      Swal.fire({
-        icon: 'error',
-        title: 'Error',
-        text: 'Hubo un error al ejecutar los INSERT'
+      toast.error('Hubo un error al guardar los datos', {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark"
       })
     }
   }
+  
 
   return (
     <>
@@ -306,6 +319,18 @@ const Crear = () => {
       ) : (
         <></>
       )}
+      <ToastContainer
+        position="top-right"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="dark"
+      />
     </>
   )
 }

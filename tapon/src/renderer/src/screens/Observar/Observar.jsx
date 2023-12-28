@@ -1,5 +1,5 @@
 import { useContext, useState } from 'react'
-import { IdContext } from '../../context/IdContext.jsx'
+import { IdContext, ProductosContext } from '../../context/GeneralContext.jsx'
 import { useDatosContext } from '../../context/DatosContextFile.jsx'
 import BtnAtras from '../../components/Items/botones/BtnAtras.jsx'
 import PropTypes from 'prop-types'
@@ -29,6 +29,8 @@ const Observar = ({ setEditar, setTocarCliente }) => {
     )
     
   return (
+    <ProductosContext.Provider value={productoSeleccionado}>
+
     <div className="editar">
       <BtnAtras set1={setEditar} set2={setTocarCliente} />
       <table className="tabla__datos__cliente">
@@ -92,10 +94,10 @@ const Observar = ({ setEditar, setTocarCliente }) => {
         </table>
       </div>
       <MenuProductos
-        productoSeleccionado={productoSeleccionado}
         setProductoSeleccionado={setProductoSeleccionado}
       />
     </div>
+    </ProductosContext.Provider>
   )
 }
 
