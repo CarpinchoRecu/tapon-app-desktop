@@ -27,7 +27,10 @@ function backupDatabase() {
   }
 
   // Ruta para la copia de seguridad
-  const backupPath = join(backupFolderPath, `backup-${formattedDate}-${Math.floor(Math.random() * 1000000)}.db`)
+  const backupPath = join(
+    backupFolderPath,
+    `backup-${formattedDate}-${Math.floor(Math.random() * 1000000)}.db`
+  )
 
   // Copiar la base de datos a la ruta de la copia de seguridad
   fs.copyFileSync(dbPath, backupPath)
@@ -169,21 +172,41 @@ function createWindow() {
 
   ipcMain.handle('eliminarCliente-db', async (event, nombre, localidad, direccion) => {
     return new Promise((resolve, reject) => {
-      backupDatabase();
-  
-      const query = 'UPDATE clientes SET eliminado = 1 WHERE nombre = ? AND localidad = ? AND direccion = ?';
-      const values = [nombre, localidad, direccion];
-  
+      backupDatabase()
+
+      const query =
+        'UPDATE clientes SET eliminado = 1 WHERE nombre = ? AND localidad = ? AND direccion = ?'
+      const values = [nombre, localidad, direccion]
+
       db.run(query, values, function (err) {
         if (err) {
-          console.error(err);
-          reject(err);
+          console.error(err)
+          reject(err)
         } else {
-          resolve({ message: 'Eliminación exitosa' });
+          resolve({ message: 'Eliminación exitosa' })
         }
-      });
-    });
-  });
+      })
+    })
+  })
+
+  ipcMain.handle('eliminarProducto-db', async (event, idNumber, nombre, localidad, direccion) => {
+    return new Promise((resolve, reject) => {
+      backupDatabase()
+
+      const query =
+        'UPDATE clientes SET eliminado = 1 WHERE id = ? AND nombre = ? AND localidad = ? AND direccion = ?'
+      const values = [ idNumber, nombre, localidad, direccion]
+
+      db.run(query, values, function (err) {
+        if (err) {
+          console.error(err)
+          reject(err)
+        } else {
+          resolve({ message: 'Eliminación exitosa' })
+        }
+      })
+    })
+  })
   
 
   mainWindow.on('ready-to-show', () => {
