@@ -63,7 +63,7 @@ const Observar = ({ setEditar, setTocarCliente }) => {
               <th>Cuotas Restantes</th>
               <th>Cada Cuanto Paga (Dias)</th>
               <th>Fecha Ultimo Pago</th>
-              <th>Fecha Ultimo Proximo</th>
+              <th>Fecha Proximo Pago</th>
             </tr>
           </thead>
           <tbody>

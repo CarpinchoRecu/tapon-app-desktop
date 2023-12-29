@@ -19,7 +19,7 @@ function backupDatabase() {
   const dbPath = join(app.getPath('userData'), 'db_sqlite.db')
 
   // Ruta de la carpeta de copias de seguridad
-  const backupFolderPath = join(__dirname, 'backup_folder')
+  const backupFolderPath = join(app.getPath('userData'), 'backup_folder');
 
   // Verificar si la carpeta de copias de seguridad existe, si no, crearla
   if (!fs.existsSync(backupFolderPath)) {
