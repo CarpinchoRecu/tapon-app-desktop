@@ -13,11 +13,12 @@ const EditarProducto = ({ setOpcionSeleccionada, setOpcion }) => {
     precio_producto: 0,
     cuotas_producto: 0,
     cuotas_pagadas: 0,
+    cada_cuanto_paga: 0,
     fecha_ultimo_pago: ''
   })
   const [camposSeleccionados, setCamposSeleccionados] = useState([])
 
-  const handleCampoSeleccionado = ([campo, tipo]) => {
+  const handleCampoSeleccionado = ([campo, tipo, label]) => {
     const existeCampo = camposSeleccionados.some(([c, t]) => c === campo && t === tipo)
 
     if (existeCampo) {
@@ -39,7 +40,7 @@ const EditarProducto = ({ setOpcionSeleccionada, setOpcion }) => {
   }
 
   const handleEditar = async () => {
-    const fieldsToValidate = camposSeleccionados.map((campo) => campo.name)
+    const fieldsToValidate = camposSeleccionados.map((campo) => campo[0])
 
     const camposVacios = fieldsToValidate.filter(
       (campo) => !formDataEdicion[campo] || formDataEdicion[campo].trim() === ''
@@ -59,24 +60,24 @@ const EditarProducto = ({ setOpcionSeleccionada, setOpcion }) => {
       return
     }
 
-  // Obtener los nombres de los campos seleccionados
-  const camposAActualizar = camposSeleccionados.map(campo => campo[0]);
+    // Obtener los nombres de los campos seleccionados
+    const camposAActualizar = camposSeleccionados.map((campo) => campo[0])
 
-  // Construir la parte de la query para SET
-  const setQueryPart = camposAActualizar.map(campo => `${campo}=?`).join(', ');
+    // Construir la parte de la query para SET
+    const setQueryPart = camposAActualizar.map((campo) => `${campo}=?`).join(', ')
 
-  // Construir la query completa
-  const query = `UPDATE clientes SET ${setQueryPart} WHERE id=?`;
+    // Construir la query completa
+    const query = `UPDATE clientes SET ${setQueryPart} WHERE id=?`
 
-  // Construir los valores para la query
-  const values = [
-    ...camposAActualizar.map(campo => formDataEdicion[campo]),
-    productoSeleccionado.id
-  ];
+    // Construir los valores para la query
+    const values = [
+      ...camposAActualizar.map((campo) => formDataEdicion[campo]),
+      productoSeleccionado.id
+    ]
 
     try {
-      await console.log(query, values)
-      // window.electronAPI.actualizarSQLite(query, values)
+      await window.electronAPI.actualizarSQLite(query, values)
+
       // Mostrar alerta de éxito
       toast.success('Los datos se han guardado correctamente', {
         position: 'top-right',
@@ -88,7 +89,7 @@ const EditarProducto = ({ setOpcionSeleccionada, setOpcion }) => {
         progress: undefined,
         theme: 'dark'
       })
-      window.location.reload()
+      // window.location.reload()
     } catch (error) {
       console.error('Error al actualizar:', error)
       // Mostrar alerta con SweetAlert para errores
@@ -159,6 +160,11 @@ const EditarProducto = ({ setOpcionSeleccionada, setOpcion }) => {
       type: 'number'
     },
     {
+      name: 'cada_cuanto_paga',
+      label: 'Cada Cuanto Paga',
+      type: 'number'
+    },
+    {
       name: 'fecha_ultimo_pago',
       label: 'Fecha Ultimo Pago',
       type: 'date'
@@ -195,6 +201,7 @@ const EditarProducto = ({ setOpcionSeleccionada, setOpcion }) => {
                 <div key={index}>
                   <label htmlFor="">{campo[0]}</label>
                   <input
+                  className="campo__editor"
                     placeholder={campo[0]}
                     type={campo[1]}
                     value={formDataEdicion[campo[0]]}
