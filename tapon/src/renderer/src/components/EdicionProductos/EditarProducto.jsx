@@ -6,7 +6,14 @@ import PropTypes from 'prop-types'
 import { ProductosContext } from '../../context/GeneralContext'
 
 const EditarProducto = ({ setOpcionSeleccionada, setOpcion }) => {
+  const [btnMenuEditar, setBtnMenuEditar] = useState(false)
+  const [menuEditar, setMenuEditar] = useState(false)
   const productoSeleccionado = useContext(ProductosContext)
+
+  const handleSiguienteMenuEditar = () => {
+    setMenuEditar(true)
+    setBtnMenuEditar(true)
+  }
 
   const [formDataEdicion, setFormDataEdicion] = useState({
     nombre_producto: '',
@@ -19,20 +26,18 @@ const EditarProducto = ({ setOpcionSeleccionada, setOpcion }) => {
   const [camposSeleccionados, setCamposSeleccionados] = useState([])
 
   const handleCampoSeleccionado = ([campo, tipo, label]) => {
-    const existeCampo = camposSeleccionados.some(([c, t]) => c === campo && t === tipo)
+    const existeCampo = camposSeleccionados.some(([c, t]) => c === campo && t === tipo && t === label)
 
     if (existeCampo) {
       // Si el campo ya está en la lista, quitarlo
-      setCamposSeleccionados(camposSeleccionados.filter(([c, t]) => !(c === campo && t === tipo)))
+      setCamposSeleccionados(camposSeleccionados.filter(([c, t]) => !(c === campo && t === tipo && t === label)))
     } else {
       // Si el campo no está en la lista, añadirlo
-      setCamposSeleccionados([...camposSeleccionados, [campo, tipo]])
-      console.log(camposSeleccionados)
+      setCamposSeleccionados([...camposSeleccionados, [campo, tipo, label]])
     }
   }
 
   const handleInputEdicionChange = (event, campo) => {
-    console.log(formDataEdicion)
     setFormDataEdicion({
       ...formDataEdicion,
       [campo]: event.target.value
@@ -89,7 +94,7 @@ const EditarProducto = ({ setOpcionSeleccionada, setOpcion }) => {
         progress: undefined,
         theme: 'dark'
       })
-      // window.location.reload()
+      window.location.reload()
     } catch (error) {
       console.error('Error al actualizar:', error)
       // Mostrar alerta con SweetAlert para errores
@@ -105,38 +110,6 @@ const EditarProducto = ({ setOpcionSeleccionada, setOpcion }) => {
       })
     }
   }
-
-  const camposProductosSeleccionados = [
-    {
-      name: 'nombre_producto',
-      label: 'Nombre Producto',
-      type: 'text'
-    },
-    {
-      name: 'precio_producto',
-      label: 'Precio Producto',
-      placeholder: 'productoSeleccionado.precio_producto',
-      type: 'number'
-    },
-    {
-      name: 'cuotas_producto',
-      label: 'Cuotas',
-      placeholder: 'productoSeleccionado.cuotas_producto',
-      type: 'number'
-    },
-    {
-      name: 'cuotas_pagadas',
-      label: 'Cuotas Pagadas',
-      placeholder: 'productoSeleccionado.cuotas_pagadas',
-      type: 'number'
-    },
-    {
-      name: 'fecha_ultimo_pago',
-      label: 'Fecha Ultimo Pago',
-      placeholder: 'productoSeleccionado.fecha_ultimo_pago',
-      type: 'date'
-    }
-  ]
 
   const checkboxSeleccionados = [
     {
@@ -175,41 +148,62 @@ const EditarProducto = ({ setOpcionSeleccionada, setOpcion }) => {
     <>
       <div className="editor">
         <h2 className="title_editor">Editar Producto</h2>
-        <BtnAtras set1={setOpcion} set2={setOpcionSeleccionada} />
         <div className="contenedor__campo__editor">
           <div className="campos__editor">
-            <>
-              {checkboxSeleccionados.map((check, indexCheck) => {
-                const isChecked = camposSeleccionados.some(
-                  ([campo, tipo]) => campo === check.name && tipo === check.type
-                )
+            {menuEditar ? (
+              <>
+                <BtnAtras set1={setBtnMenuEditar} set2={setMenuEditar} />
 
-                return (
-                  <div key={indexCheck}>
-                    <label htmlFor={check.label}>{check.label}</label>
+                {camposSeleccionados.map((campo, index) => (
+                  <div className='contenedor_campos' key={index}>
+                    <label htmlFor={campo[2]}>{campo[2]}</label>
                     <input
-                      type="checkbox"
-                      onChange={() => handleCampoSeleccionado([check.name, check.type])}
-                      checked={isChecked}
+                      className="campo__editor"
+                      placeholder={campo[2]}
+                      type={campo[1]}
+                      value={formDataEdicion[campo[0]]}
+                      onChange={(event) => handleInputEdicionChange(event, campo[0])}
                     />
                   </div>
-                )
-              })}
-            </>
-            <div>
-              {camposSeleccionados.map((campo, index) => (
-                <div key={index}>
-                  <label htmlFor="">{campo[0]}</label>
-                  <input
-                  className="campo__editor"
-                    placeholder={campo[0]}
-                    type={campo[1]}
-                    value={formDataEdicion[campo[0]]}
-                    onChange={(event) => handleInputEdicionChange(event, campo[0])}
-                  />
-                </div>
-              ))}
-            </div>
+                ))}
+              </>
+            ) : (
+              <>
+                <BtnAtras set1={setOpcion} set2={setOpcionSeleccionada} />
+
+                {checkboxSeleccionados.map((check, indexCheck) => {
+                  const isChecked = camposSeleccionados.some(
+                    ([campo, tipo]) => campo === check.name && tipo === check.type
+                  )
+                  return (
+                    <div className="check__editor" key={indexCheck}>
+                      <label htmlFor={check.label}>{check.label}</label>
+                      <input
+                        type="checkbox"
+                        className='mycheck'
+                        onChange={() => handleCampoSeleccionado([check.name, check.type, check.label])}
+                        checked={isChecked}
+                      />
+                    </div>
+                  )
+                })}
+              </>
+            )}
+            {btnMenuEditar ? (
+              <div onClick={handleEditar} className="btn__editar">
+                <p>Editar</p>
+              </div>
+            ) : (
+              <>
+                {camposSeleccionados.length > 0 ? (
+                  <div onClick={handleSiguienteMenuEditar} className="btn__editar">
+                    <p>Siguiente</p>
+                  </div>
+                ) : (
+                  <></>
+                )}
+              </>
+            )}
 
             {/* {camposProductosSeleccionados.map((campoSeleccionado, indexCampoSeleccionado) => (
               <React.Fragment key={indexCampoSeleccionado}>
@@ -225,22 +219,7 @@ const EditarProducto = ({ setOpcionSeleccionada, setOpcion }) => {
             ))} */}
           </div>
         </div>
-        <div onClick={handleEditar} className="btn__editar">
-          <p>Editar</p>
-        </div>
       </div>
-      <ToastContainer
-        position="top-right"
-        autoClose={5000}
-        hideProgressBar={false}
-        newestOnTop={false}
-        closeOnClick
-        rtl={false}
-        pauseOnFocusLoss
-        draggable
-        pauseOnHover
-        theme="dark"
-      />
     </>
   )
 }

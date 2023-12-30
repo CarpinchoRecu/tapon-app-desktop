@@ -1,7 +1,7 @@
 import React, { useContext } from 'react'
 import { ProductosContext, IdContext } from '../../context/GeneralContext.jsx'
 import { useDatosContext } from '../../context/DatosContextFile.jsx'
-import { ToastContainer, toast } from 'react-toastify'
+import { toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import { ClienteSeleccionado } from '../../utils/utilsClienteSeleccionado.jsx'
 

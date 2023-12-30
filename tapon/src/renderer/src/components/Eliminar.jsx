@@ -4,7 +4,7 @@ import { useDatosContext } from '../context/DatosContextFile.jsx'
 import BtnAtras from './Items/botones/BtnAtras.jsx'
 import PropTypes from 'prop-types'
 import { ClienteSeleccionado } from '../utils/utilsClienteSeleccionado.jsx'
-import { ToastContainer, toast } from 'react-toastify'
+import { toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 
 const Eliminar = ({ setEliminar, setTocarCliente }) => {
@@ -79,18 +79,6 @@ const Eliminar = ({ setEliminar, setTocarCliente }) => {
           <p>Eliminar</p>
         </div>
       </div>
-      <ToastContainer
-        position="top-right"
-        autoClose={5000}
-        hideProgressBar={false}
-        newestOnTop={false}
-        closeOnClick
-        rtl={false}
-        pauseOnFocusLoss
-        draggable
-        pauseOnHover
-        theme="dark"
-      />
     </>
   )
 }
