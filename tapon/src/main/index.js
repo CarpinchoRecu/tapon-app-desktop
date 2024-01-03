@@ -19,7 +19,7 @@ function backupDatabase() {
   const dbPath = join(app.getPath('userData'), 'db_sqlite.db')
 
   // Ruta de la carpeta de copias de seguridad
-  const backupFolderPath = join(app.getPath('userData'), 'backup_folder');
+  const backupFolderPath = join(app.getPath('userData'), 'backup_folder')
 
   // Verificar si la carpeta de copias de seguridad existe, si no, crearla
   if (!fs.existsSync(backupFolderPath)) {
@@ -195,7 +195,7 @@ function createWindow() {
 
       const query =
         'UPDATE clientes SET eliminado = 1 WHERE id = ? AND nombre = ? AND localidad = ? AND direccion = ?'
-      const values = [ idNumber, nombre, localidad, direccion]
+      const values = [idNumber, nombre, localidad, direccion]
 
       db.run(query, values, function (err) {
         if (err) {
@@ -207,7 +207,6 @@ function createWindow() {
       })
     })
   })
-  
 
   mainWindow.on('ready-to-show', () => {
     mainWindow.show()

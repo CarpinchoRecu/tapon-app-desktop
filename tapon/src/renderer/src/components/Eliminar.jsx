@@ -19,10 +19,10 @@ const Eliminar = ({ setEliminar, setTocarCliente }) => {
   const handleEliminarCliente = async () => {
     try {
       const { nombre, localidad, direccion } = clienteSeleccionado
-  
+
       // Llamar a la función para eliminar cliente en la base de datos
       const resultado = await window.electronAPI.EliminarClienteSQLite(nombre, localidad, direccion)
-  
+
       // Mostrar mensaje de éxito
       toast.success('Cliente eliminado correctamente', {
         position: 'top-right',
@@ -50,36 +50,33 @@ const Eliminar = ({ setEliminar, setTocarCliente }) => {
       })
     }
   }
-  
 
   return (
-    <>
-      <div className="eliminar">
-        <h2>Eliminar Cliente</h2>
-        <BtnAtras set1={setEliminar} set2={setTocarCliente} cancelType={true} />
-        <p className="aviso__eliminar">
-          Con esta acción vas a borrar todos los datos del cliente {clienteSeleccionado.nombre}. Si
-          estás seguro de proceder con la acción, toca &quot;Eliminar&quot;. Ten en cuenta que se
-          van a borrar TODOS los datos de la base y NO SON RECUPERABLES.
-        </p>
-        <div className="datos__eliminar">
-          <p>Datos del Cliente</p>
-          <div>
-            <h5>Nombre</h5>
-            <h5>Direccion</h5>
-            <h5>Localidad</h5>
-          </div>
-          <div>
-            <h5>{clienteSeleccionado.nombre}</h5>
-            <h5>{clienteSeleccionado.localidad}</h5>
-            <h5>{clienteSeleccionado.direccion}</h5>
-          </div>
+    <div className="eliminar">
+      <h2>Eliminar Cliente</h2>
+      <BtnAtras set1={setEliminar} set2={setTocarCliente} cancelType={true} />
+      <p className="aviso__eliminar">
+        Con esta acción vas a borrar todos los datos del cliente {clienteSeleccionado.nombre}. Si
+        estás seguro de proceder con la acción, toca &quot;Eliminar&quot;. Ten en cuenta que se van
+        a borrar TODOS los datos de la base y NO SON RECUPERABLES.
+      </p>
+      <div className="datos__eliminar">
+        <p>Datos del Cliente</p>
+        <div>
+          <h5>Nombre</h5>
+          <h5>Direccion</h5>
+          <h5>Localidad</h5>
         </div>
-        <div className="btn__eliminar" onClick={handleEliminarCliente}>
-          <p>Eliminar</p>
+        <div>
+          <h5>{clienteSeleccionado.nombre}</h5>
+          <h5>{clienteSeleccionado.localidad}</h5>
+          <h5>{clienteSeleccionado.direccion}</h5>
         </div>
       </div>
-    </>
+      <div className="btn__eliminar" onClick={handleEliminarCliente}>
+        <p>Eliminar</p>
+      </div>
+    </div>
   )
 }
 

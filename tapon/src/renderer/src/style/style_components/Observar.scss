@@ -1,189 +1,189 @@
 .editar {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 20px;
-    width: 100vw;
-    height: 100vh;
-    position: absolute;
-    padding: $pGeneral;
-    z-index: 10;
-    top: 0;
-    background-color: $contColor;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  width: 100vw;
+  height: 100vh;
+  position: absolute;
+  padding: $pGeneral;
+  z-index: 10;
+  top: 0;
+  background-color: $contColor;
 
-    .tabla__datos__cliente {
-        border-collapse: collapse;
-        width: 50%;
-        position: relative;
+  .tabla__datos__cliente {
+    border-collapse: collapse;
+    width: 50%;
+    position: relative;
 
-        tbody {
-            background-color: $bkColor;
-        }
-
-        th,
-        td {
-            border: 4px solid $itemsColor;
-            padding: $pChico;
-            text-align: center;
-            font-size: $textSizeGeneral;
-        }
-
-        td {
-            width: 33%;
-            text-align: center;
-            font-size: $textSizeGeneral;
-        }
-
-        th {
-            background-color: $bkColor;
-        }
-
-        tr {
-            transition: 0.2s ease;
-        }
+    tbody {
+      background-color: $bkColor;
     }
 
-    ::-webkit-scrollbar {
-        width: 10px;
+    th,
+    td {
+      border: 4px solid $itemsColor;
+      padding: $pChico;
+      text-align: center;
+      font-size: $textSizeGeneral;
     }
 
-    ::-webkit-scrollbar-track {
-        background: $bkColor;
+    td {
+      width: 33%;
+      text-align: center;
+      font-size: $textSizeGeneral;
     }
 
-    ::-webkit-scrollbar-thumb {
-        border-radius: $rdsGeneral;
-        background: $itemsColor;
+    th {
+      background-color: $bkColor;
     }
 
-    .contenedor__datos__productos {
-        overflow: auto;
-        width: 90%;
-        height: 80%;
-
-        .tabla__datos__productos {
-            border-collapse: collapse;
-            position: relative;
-
-            tbody {
-                background-color: $bkColor;
-            }
-
-            th,
-            td {
-                border: 4px solid $itemsColor;
-                padding: $pChico;
-                text-align: center;
-                font-size: $textSizeGeneral;
-            }
-
-            td {
-                width: 9.1%;
-                text-align: center;
-                font-size: $textSizeChico;
-            }
-
-            th {
-                background-color: $bkColor;
-            }
-
-            tr {
-                transition: 0.2s ease;
-                cursor: pointer;
-            }
-
-            tr:hover {
-                background-color: $itemsColor;
-            }
-        }
+    tr {
+      transition: 0.2s ease;
     }
+  }
 
-    .opciones__productos {
-        padding: $pGeneral;
-        position: absolute;
-        top: 25%;
-        height: 60%;
-        z-index: 1;
+  ::-webkit-scrollbar {
+    width: 10px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: $bkColor;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    border-radius: $rdsGeneral;
+    background: $itemsColor;
+  }
+
+  .contenedor__datos__productos {
+    overflow: auto;
+    width: 90%;
+    height: 80%;
+
+    .tabla__datos__productos {
+      border-collapse: collapse;
+      position: relative;
+
+      tbody {
         background-color: $bkColor;
-        display: flex;
-        align-items: end;
-        gap: 10px;
-        justify-content: space-around;
-        box-shadow: $sombraGeneral;
-        border-radius: $rdsChico;
-        border: 3px solid;
+      }
+
+      th,
+      td {
+        border: 4px solid $itemsColor;
+        padding: $pChico;
         text-align: center;
+        font-size: $textSizeGeneral;
+      }
 
-        .titulo__opciones {
-            position: absolute;
-            top: -15px;
-            width: auto;
-            color: #fff;
-            padding: $pChico;
-            border-radius: $rdsChico;
-            background-color: $itemsColor;
-            font-size: $textSizeGrande;
-            border: #000 3px solid;
-            box-shadow: $sombraGeneral;
-        }
-        
-        .contenedor__opcion {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            position: relative;
-            padding: $pGeneral;
-            box-shadow: $sombraGeneral;
-            border-radius: $rdsChico;
-            width: 300px;
-            height: 85%;
-            background-color: $contColor;
-            border: 3px solid;
-            transition: 0.2s ease;
-            cursor: pointer;
+      td {
+        width: 9.1%;
+        text-align: center;
+        font-size: $textSizeChico;
+      }
 
-            &:hover {
-                scale: 1.04;
-            }
+      th {
+        background-color: $bkColor;
+      }
 
-            .titulo__opcion {
-                position: absolute;
-                top: -15px;
-                width: 90%;
-                color: #fff;
-                padding: $pChico;
-                border-radius: $rdsChico;
-                background-color: $itemsColor;
-                font-size: $textSizeGrande;
-                border: #000 3px solid;
-                box-shadow: $sombraGeneral;
-            }
+      tr {
+        transition: 0.2s ease;
+        cursor: pointer;
+      }
 
-            .descripcion__opcion {
-                display: grid;
-                place-items: center;
-                width: 100%;
-                height: 50%;
-                padding: $pChico;
-                border-radius: $rdsChico;
-                background-color: $bkColor;
-                font-size: $textSizeGeneral;
-                border: 3px solid;
-                box-shadow: $sombraGeneral;
-            }
-        }
-
-        .contenedor__opcion[name="pagar"]{
-            .titulo__opcion {
-                background: $correctoColor;
-            }            
-        }
-
-        .contenedor__opcion[name="eliminar"]{
-            .titulo__opcion {
-                background: $errorColor;
-            }            
-        }
+      tr:hover {
+        background-color: $itemsColor;
+      }
     }
+  }
+
+  .opciones__productos {
+    padding: $pGeneral;
+    position: absolute;
+    top: 25%;
+    height: 60%;
+    z-index: 1;
+    background-color: $bkColor;
+    display: flex;
+    align-items: end;
+    gap: 10px;
+    justify-content: space-around;
+    box-shadow: $sombraGeneral;
+    border-radius: $rdsChico;
+    border: 3px solid;
+    text-align: center;
+
+    .titulo__opciones {
+      position: absolute;
+      top: -15px;
+      width: auto;
+      color: #fff;
+      padding: $pChico;
+      border-radius: $rdsChico;
+      background-color: $itemsColor;
+      font-size: $textSizeGrande;
+      border: #000 3px solid;
+      box-shadow: $sombraGeneral;
+    }
+
+    .contenedor__opcion {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      padding: $pGeneral;
+      box-shadow: $sombraGeneral;
+      border-radius: $rdsChico;
+      width: 300px;
+      height: 85%;
+      background-color: $contColor;
+      border: 3px solid;
+      transition: 0.2s ease;
+      cursor: pointer;
+
+      &:hover {
+        scale: 1.04;
+      }
+
+      .titulo__opcion {
+        position: absolute;
+        top: -15px;
+        width: 90%;
+        color: #fff;
+        padding: $pChico;
+        border-radius: $rdsChico;
+        background-color: $itemsColor;
+        font-size: $textSizeGrande;
+        border: #000 3px solid;
+        box-shadow: $sombraGeneral;
+      }
+
+      .descripcion__opcion {
+        display: grid;
+        place-items: center;
+        width: 100%;
+        height: 50%;
+        padding: $pChico;
+        border-radius: $rdsChico;
+        background-color: $bkColor;
+        font-size: $textSizeGeneral;
+        border: 3px solid;
+        box-shadow: $sombraGeneral;
+      }
+    }
+
+    .contenedor__opcion[name='pagar'] {
+      .titulo__opcion {
+        background: $correctoColor;
+      }
+    }
+
+    .contenedor__opcion[name='eliminar'] {
+      .titulo__opcion {
+        background: $errorColor;
+      }
+    }
+  }
 }

@@ -1,5 +1,5 @@
 export function ClienteSeleccionado(datos, idCliente) {
-      // Encontrar el cliente correspondiente al idSeleccionado
+  // Encontrar el cliente correspondiente al idSeleccionado
   const cliente = datos.find((cliente) => cliente.id === idCliente)
 
   if (!cliente) {

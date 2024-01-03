@@ -1,166 +1,163 @@
 .creador {
-    padding: $pGeneral;
+  padding: $pGeneral;
+  position: absolute;
+  height: 130%;
+  width: auto;
+  z-index: 1;
+  background-color: $bkColor;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  box-shadow: $sombraGeneral;
+  border-radius: $rdsChico;
+  border: $bordes;
+
+  h2 {
+    color: #fff;
     position: absolute;
-    height: 130%;
+    top: -15px;
+    padding: $pChico;
+    border-radius: $rdsChico;
+    background-color: $itemsColor;
+    font-size: $textSizeGrande;
+    border: $bordes;
+    box-shadow: $sombraGeneral;
+  }
+
+  .btn__siguiente__productos {
+    position: absolute;
+    bottom: -15px;
+    border-radius: $rdsChico;
+    background-color: $correctoColor;
+    border: 3px solid;
+    transition: 0.2s ease;
+    width: 70%;
+    box-shadow: $sombraGeneral;
+    cursor: pointer;
+
+    p {
+      padding: $pMedio;
+      color: #fff;
+      text-align: center;
+      font-size: $textSizeGeneral;
+    }
+
+    &:hover {
+      scale: 1.1;
+    }
+  }
+
+  .campos__cliente {
     width: auto;
-    z-index: 1;
-    background-color: $bkColor;
-    display: flex;
+    height: auto;
+    padding: $pGeneral;
     flex-direction: column;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
     align-items: center;
     justify-content: center;
+    background-color: $contColor;
     box-shadow: $sombraGeneral;
-    border-radius: $rdsChico;
+    border-radius: $rdsGeneral;
     border: $bordes;
 
-    h2 {
+    .campo__cliente {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+
+      label {
         color: #fff;
-        position: absolute;
-        top: -15px;
+        font-size: $textSizeGeneral;
+      }
+
+      input {
         padding: $pChico;
+        font-size: $textSizeGeneral;
         border-radius: $rdsChico;
-        background-color: $itemsColor;
-        font-size: $textSizeGrande;
-        border: $bordes;
-        box-shadow: $sombraGeneral;
-    }
-
-    .btn__siguiente__productos {
-        position: absolute;
-        bottom: -15px;
-        border-radius: $rdsChico;
-        background-color: $correctoColor;
-        border: 3px solid;
+        border: 0;
         transition: 0.2s ease;
-        width: 70%;
-        box-shadow: $sombraGeneral;
-        cursor: pointer;
-
-        p {
-            padding: $pMedio;
-            color: #fff;
-            text-align: center;
-            font-size: $textSizeGeneral;
-        }
 
         &:hover {
-            scale: 1.1;
-        }
-    }
-
-    .campos__cliente {
-        width: auto;
-        height: auto;
-        padding: $pGeneral;
-        flex-direction: column;
-        display: flex;
-        flex-wrap: wrap;
-        gap: 15px;
-        align-items: center;
-        justify-content: center;
-        background-color: $contColor;
-        box-shadow: $sombraGeneral;
-        border-radius: $rdsGeneral;
-        border: $bordes;
-
-        .campo__cliente {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-
-            label {
-                color: #fff;
-                font-size: $textSizeGeneral;
-            }
-
-            input {
-                padding: $pChico;
-                font-size: $textSizeGeneral;
-                border-radius: $rdsChico;
-                border: 0;
-                transition: 0.2s ease;
-
-                &:hover {
-                    background-color: $itemsColor;
-                }
-
-                &:focus {
-                    outline: none;
-                }
-            }
-        }
-    }
-
-    .contenedor__campos__productos {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        padding: $pGeneral;
-        flex-wrap: wrap;
-        gap: 10px;
-        width: 100%;
-        height: 100%;
-        overflow: auto;
-
-        .campos__productos {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            height: 100%;
-            padding: $pMedio;
-            background-color: $contColor;
-            box-shadow: $sombraGeneral;
-            border-radius: $rdsGeneral;
-            border: $bordes;
-
-            h3 {
-                color: #fff;
-                padding: $pMedio;
-                font-size: $textSizeGeneral;
-            }
-
-            .campo__producto {
-                display: flex;
-                flex-direction: column;
-                padding: $pChico;
-                margin: 10px;
-                font-size: $textSizeGeneral;
-                border-radius: $rdsChico;
-                border: 0;
-                transition: 0.2s ease;
-
-                &:hover {
-                    background-color: $itemsColor;
-                }
-
-                &:focus {
-                    outline: none;
-                }
-            }
+          background-color: $itemsColor;
         }
 
-
+        &:focus {
+          outline: none;
+        }
+      }
     }
+  }
 
-    .btn__crear {
-        position: absolute;
-        bottom: -15px;
-        padding: $pChico;
-        border-radius: $rdsChico;
-        background-color: $correctoColor;
+  .contenedor__campos__productos {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: $pGeneral;
+    flex-wrap: wrap;
+    gap: 10px;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+
+    .campos__productos {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100%;
+      padding: $pMedio;
+      background-color: $contColor;
+      box-shadow: $sombraGeneral;
+      border-radius: $rdsGeneral;
+      border: $bordes;
+
+      h3 {
         color: #fff;
-        font-size: $textSizeMuyGrande;
-        border: $bordes;
-        box-shadow: $sombraGeneral;
+        padding: $pMedio;
+        font-size: $textSizeGeneral;
+      }
+
+      .campo__producto {
+        display: flex;
+        flex-direction: column;
+        padding: $pChico;
+        margin: 10px;
+        font-size: $textSizeGeneral;
+        border-radius: $rdsChico;
+        border: 0;
         transition: 0.2s ease;
-        cursor: pointer;
 
-        &:hover{
-            scale: 1.1;
+        &:hover {
+          background-color: $itemsColor;
         }
-    }
 
+        &:focus {
+          outline: none;
+        }
+      }
+    }
+  }
+
+  .btn__crear {
+    position: absolute;
+    bottom: -15px;
+    padding: $pChico;
+    border-radius: $rdsChico;
+    background-color: $correctoColor;
+    color: #fff;
+    font-size: $textSizeMuyGrande;
+    border: $bordes;
+    box-shadow: $sombraGeneral;
+    transition: 0.2s ease;
+    cursor: pointer;
+
+    &:hover {
+      scale: 1.1;
+    }
+  }
 }

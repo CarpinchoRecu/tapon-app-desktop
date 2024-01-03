@@ -26,11 +26,15 @@ const EditarProducto = ({ setOpcionSeleccionada, setOpcion }) => {
   const [camposSeleccionados, setCamposSeleccionados] = useState([])
 
   const handleCampoSeleccionado = ([campo, tipo, label]) => {
-    const existeCampo = camposSeleccionados.some(([c, t]) => c === campo && t === tipo && t === label)
+    const existeCampo = camposSeleccionados.some(
+      ([c, t]) => c === campo && t === tipo && t === label
+    )
 
     if (existeCampo) {
       // Si el campo ya está en la lista, quitarlo
-      setCamposSeleccionados(camposSeleccionados.filter(([c, t]) => !(c === campo && t === tipo && t === label)))
+      setCamposSeleccionados(
+        camposSeleccionados.filter(([c, t]) => !(c === campo && t === tipo && t === label))
+      )
     } else {
       // Si el campo no está en la lista, añadirlo
       setCamposSeleccionados([...camposSeleccionados, [campo, tipo, label]])
@@ -155,7 +159,7 @@ const EditarProducto = ({ setOpcionSeleccionada, setOpcion }) => {
                 <BtnAtras set1={setBtnMenuEditar} set2={setMenuEditar} />
 
                 {camposSeleccionados.map((campo, index) => (
-                  <div className='contenedor_campos' key={index}>
+                  <div className="contenedor_campos" key={index}>
                     <label htmlFor={campo[2]}>{campo[2]}</label>
                     <input
                       className="campo__editor"
@@ -180,8 +184,10 @@ const EditarProducto = ({ setOpcionSeleccionada, setOpcion }) => {
                       <label htmlFor={check.label}>{check.label}</label>
                       <input
                         type="checkbox"
-                        className='mycheck'
-                        onChange={() => handleCampoSeleccionado([check.name, check.type, check.label])}
+                        className="mycheck"
+                        onChange={() =>
+                          handleCampoSeleccionado([check.name, check.type, check.label])
+                        }
                         checked={isChecked}
                       />
                     </div>

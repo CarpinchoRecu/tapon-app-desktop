@@ -1,205 +1,205 @@
 header {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  padding: $pGeneral;
+  height: 20%;
+
+  .contenedor__buscador {
+    border-radius: $rdsGeneral;
+    height: 100%;
+    width: 45%;
+    background-color: $contColor;
     display: flex;
     align-items: center;
-    justify-content: space-evenly;
-    padding: $pGeneral;
-    height: 20%;
+    justify-content: center;
+    box-shadow: $sombraGeneral;
 
-    .contenedor__buscador {
-        border-radius: $rdsGeneral;
-        height: 100%;
-        width: 45%;
-        background-color: $contColor;
+    .buscador {
+      display: flex;
+      align-items: center;
+      flex-direction: column;
+      justify-content: center;
+      width: 100%;
+      height: 100%;
+      position: relative;
+
+      h2 {
+        position: absolute;
+        top: 0;
+        padding: $pChico;
+        text-align: center;
+        width: auto;
+        background-color: $bkColor;
+        font-size: $textSizeGeneral;
+        border-radius: 0 0 20px 20px;
+      }
+
+      .img__buscador {
+        position: absolute;
+        right: 7%;
+        background-color: $itemsColor;
+        padding: $pChico;
+        width: 24px;
+        height: 24px;
+        border-radius: 50%;
         display: flex;
         align-items: center;
         justify-content: center;
-        box-shadow: $sombraGeneral;
+        transition: 0.5s ease;
 
-        .buscador {
-            display: flex;
-            align-items: center;
-            flex-direction: column;
-            justify-content: center;
-            width: 100%;
-            height: 100%;
-            position: relative;
-
-            h2 {
-                position: absolute;
-                top: 0;
-                padding: $pChico;
-                text-align: center;
-                width: auto;
-                background-color: $bkColor;
-                font-size: $textSizeGeneral;
-                border-radius: 0 0 20px 20px;
-            }
-
-            .img__buscador {
-                position: absolute;
-                right: 7%;
-                background-color: $itemsColor;
-                padding: $pChico;
-                width: 24px;
-                height: 24px;
-                border-radius: 50%;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                transition: 0.5s ease;
-
-                svg {
-                    scale: 1.1;
-                    pointer-events: none;
-                    height: 30px;
-                    width: 30px;
-                }
-            }
-
-            .img__sacar__buscador {
-                position: absolute;
-                right: 7%;
-                background-color: $errorColor;
-                padding: $pChico;
-                width: 24px;
-                height: 24px;
-                border-radius: 50%;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                cursor: pointer;
-                transition: 0.5s ease;
-
-                svg {
-                    scale: 2;
-                    pointer-events: none;
-                    height: 30px;
-                    width: 30px;
-                }
-            }
-
-            input {
-                border: 0;
-                border-radius: $rdsGeneral;
-                width: 90%;
-                font-size: $textSizeGeneral;
-                padding: $pChico;
-                transition: 0.2s ease;
-
-                &:hover {
-                    background-color: $itemsColor;
-                }
-
-                &:focus {
-                    outline: none;
-                }
-            }
+        svg {
+          scale: 1.1;
+          pointer-events: none;
+          height: 30px;
+          width: 30px;
         }
-    }
+      }
 
-    .contenedor__filtros {
-        border-radius: $rdsGeneral;
-        height: 100%;
-        width: 45%;
-        box-shadow: $sombraGeneral;
-        background-color: $contColor;
+      .img__sacar__buscador {
+        position: absolute;
+        right: 7%;
+        background-color: $errorColor;
+        padding: $pChico;
+        width: 24px;
+        height: 24px;
+        border-radius: 50%;
         display: flex;
         align-items: center;
-        justify-content: space-around;
-        gap: 15px;
+        justify-content: center;
+        cursor: pointer;
+        transition: 0.5s ease;
 
-        h2 {
-            position: absolute;
-            top: 1%;
-            color: #fff;
-            background: $itemsColor;
-            padding: $pChico;
-            border-radius: $rdsGeneral;
-            text-align: center;
-            width: 100px;
-            box-shadow: $sombraGeneral;
+        svg {
+          scale: 2;
+          pointer-events: none;
+          height: 30px;
+          width: 30px;
+        }
+      }
+
+      input {
+        border: 0;
+        border-radius: $rdsGeneral;
+        width: 90%;
+        font-size: $textSizeGeneral;
+        padding: $pChico;
+        transition: 0.2s ease;
+
+        &:hover {
+          background-color: $itemsColor;
         }
 
-        .checkboxContainer {
-            display: flex;
-            flex-direction: column;
-            gap: 5px;
-
-            .checkBox {
-                display: flex;
-                justify-content: space-between;
-                gap: 5px;
-                color: #fff;
-                background: $itemsColor;
-                padding: $pChico;
-                border-radius: $rdsGeneral;
-                text-align: center;
-                width: auto;
-                box-shadow: $sombraGeneral;
-
-                label {
-                    font-size: $textSizeGeneral;
-                }
-            }
+        &:focus {
+          outline: none;
         }
-
-        .numberContainer {
-            .number {
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                gap: 5px;
-                color: #fff;
-                text-align: center;
-
-                input {
-                    box-shadow: $sombraGeneral;
-                    padding: $pChico;
-                    border: 1px solid #fff;
-                    border-radius: $rdsGeneral;
-                    padding: $pChico;
-                    font-size: $textSizeGeneral;
-                    width: 50px;
-                    transition: 0.2s ease;
-                    text-align: center;
-
-                    &:hover {
-                        border: 1px solid $contColor;
-                        background-color: $itemsColor;
-                    }
-
-                    &:focus {
-                        outline: none;
-                    }
-                }
-
-                label {
-                border-radius: $rdsGeneral;
-                    box-shadow: $sombraGeneral;
-                    padding: $pChico;
-                    background: $itemsColor;
-                    font-size: $textSizeGeneral;
-                }
-
-                /* Eliminar los controles de incremento/decremento en input tipo number */
-                input[type='number'] {
-                    -webkit-appearance: textfield;
-                    /* Safari/Webkit */
-                    appearance: textfield;
-                    /* Otros navegadores */
-                }
-
-                /* Estilos adicionales para el input number si es necesario */
-                input[type='number']::-webkit-inner-spin-button,
-                input[type='number']::-webkit-outer-spin-button {
-                    -webkit-appearance: none;
-                    /* Safari/Webkit */
-                    appearance: none;
-                    /* Otros navegadores */
-                    margin: 0;
-                    /* Asegurar que no haya margen alrededor de los botones */
-                }
-            }
-        }
+      }
     }
+  }
+
+  .contenedor__filtros {
+    border-radius: $rdsGeneral;
+    height: 100%;
+    width: 45%;
+    box-shadow: $sombraGeneral;
+    background-color: $contColor;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    gap: 15px;
+
+    h2 {
+      position: absolute;
+      top: 1%;
+      color: #fff;
+      background: $itemsColor;
+      padding: $pChico;
+      border-radius: $rdsGeneral;
+      text-align: center;
+      width: 100px;
+      box-shadow: $sombraGeneral;
+    }
+
+    .checkboxContainer {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+
+      .checkBox {
+        display: flex;
+        justify-content: space-between;
+        gap: 5px;
+        color: #fff;
+        background: $itemsColor;
+        padding: $pChico;
+        border-radius: $rdsGeneral;
+        text-align: center;
+        width: auto;
+        box-shadow: $sombraGeneral;
+
+        label {
+          font-size: $textSizeGeneral;
+        }
+      }
+    }
+
+    .numberContainer {
+      .number {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 5px;
+        color: #fff;
+        text-align: center;
+
+        input {
+          box-shadow: $sombraGeneral;
+          padding: $pChico;
+          border: 1px solid #fff;
+          border-radius: $rdsGeneral;
+          padding: $pChico;
+          font-size: $textSizeGeneral;
+          width: 50px;
+          transition: 0.2s ease;
+          text-align: center;
+
+          &:hover {
+            border: 1px solid $contColor;
+            background-color: $itemsColor;
+          }
+
+          &:focus {
+            outline: none;
+          }
+        }
+
+        label {
+          border-radius: $rdsGeneral;
+          box-shadow: $sombraGeneral;
+          padding: $pChico;
+          background: $itemsColor;
+          font-size: $textSizeGeneral;
+        }
+
+        /* Eliminar los controles de incremento/decremento en input tipo number */
+        input[type='number'] {
+          -webkit-appearance: textfield;
+          /* Safari/Webkit */
+          appearance: textfield;
+          /* Otros navegadores */
+        }
+
+        /* Estilos adicionales para el input number si es necesario */
+        input[type='number']::-webkit-inner-spin-button,
+        input[type='number']::-webkit-outer-spin-button {
+          -webkit-appearance: none;
+          /* Safari/Webkit */
+          appearance: none;
+          /* Otros navegadores */
+          margin: 0;
+          /* Asegurar que no haya margen alrededor de los botones */
+        }
+      }
+    }
+  }
 }

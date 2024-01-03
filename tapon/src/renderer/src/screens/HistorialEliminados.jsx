@@ -1,5 +1,5 @@
 const HistorialEliminados = ({ datosEliminados }) => {
-  console.log(datosEliminados); // Asegúrate de que datosEliminados sea un array o contiene los datos que esperas
+  console.log(datosEliminados) // Asegúrate de que datosEliminados sea un array o contiene los datos que esperas
 
   return (
     <div className="historial">
@@ -10,7 +10,7 @@ const HistorialEliminados = ({ datosEliminados }) => {
         </div>
       ))}
     </div>
-  );
-};
+  )
+}
 
-export default HistorialEliminados;
+export default HistorialEliminados

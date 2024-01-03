@@ -1,81 +1,81 @@
 .footer {
-    position: absolute;
+  position: absolute;
+  display: flex;
+  bottom: 0;
+  width: 100%;
+  height: 20%;
+  border-top: $itemsColor solid 8px;
+  transition: all 0.4s ease;
+
+  section {
+    height: 100%;
     display: flex;
-    bottom: 0;
+    align-items: center;
+    justify-content: center;
+    background-color: $contColor;
     width: 100%;
-    height: 20%;
-    border-top: $itemsColor solid 8px;
-    transition: all 0.4s ease;
 
-    section {
-        height: 100%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        background-color: $contColor;
-        width: 100%;
-
-        p {
-            transition: all 0.4s ease;
-            color: #fff;
-            font-size: $textSizeMuyGrande;
-        }
+    p {
+      transition: all 0.4s ease;
+      color: #fff;
+      font-size: $textSizeMuyGrande;
     }
+  }
 }
 
 .clienteToco {
-    position: absolute;
+  position: absolute;
+  display: flex;
+  bottom: 0;
+  width: 100%;
+  height: 25%;
+  border-top: $itemsColor solid 8px;
+  transition: all 0.4s ease;
+
+  section {
+    height: 100%;
     display: flex;
-    bottom: 0;
+    align-items: center;
+    justify-content: center;
+    background-color: $contColor;
     width: 100%;
-    height: 25%;
-    border-top: $itemsColor solid 8px;
-    transition: all 0.4s ease;
 
-    section {
-        height: 100%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        background-color: $contColor;
-        width: 100%;
+    p {
+      color: #fff;
+      font-size: 55px;
+      padding: $pChico;
+      border-bottom: 5px solid $itemsColor;
+      transition: all 0.4s ease;
+      cursor: pointer;
 
-        p {
-            color: #fff;
-            font-size: 55px;
-            padding: $pChico;
-            border-bottom: 5px solid $itemsColor;
-            transition: all 0.4s ease;
-            cursor: pointer;
-
-            &:hover {
-                padding: $pGeneral;
-                transition: all 0.1s ease;
-                background-color: $itemsColor;
-                border-radius: $rdsGeneral;
-            }
-        }
+      &:hover {
+        padding: $pGeneral;
+        transition: all 0.1s ease;
+        background-color: $itemsColor;
+        border-radius: $rdsGeneral;
+      }
     }
+  }
 
-    section:nth-child(2) {
-        p {
-            border-bottom: 5px solid $correctoColor;
+  section:nth-child(2) {
+    p {
+      border-bottom: 5px solid $correctoColor;
 
-            &:hover {
-                background-color: $correctoColor;
-                border-radius: $rdsGeneral;
-            }
-        }
+      &:hover {
+        background-color: $correctoColor;
+        border-radius: $rdsGeneral;
+      }
     }
+  }
 
-    section:nth-child(3) {
-        p {
-            border-bottom: 5px solid $errorColor;
+  section:nth-child(3) {
+    p {
+      border-bottom: 5px solid $errorColor;
 
-            &:hover {
-                background-color: $errorColor;
-                border-radius: $rdsGeneral;
-            }
-        }
+      &:hover {
+        background-color: $errorColor;
+        border-radius: $rdsGeneral;
+      }
     }
+  }
 }

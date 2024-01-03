@@ -1,144 +1,144 @@
 .home {
-    position: relative;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 60%;
+
+  main {
+    width: 80%;
+    background-color: $contColor;
     display: flex;
     align-items: center;
     justify-content: center;
-    height: 60%;
+    flex-direction: column;
+    border-radius: $rdsChico;
+    box-shadow: $sombraGeneral;
+    position: relative;
 
-    main {
-        width: 80%;
-        background-color: $contColor;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        flex-direction: column;
-        border-radius: $rdsChico;
-        box-shadow: $sombraGeneral;
+    .btn__creador__abrir {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: $itemsColor;
+      gap: 5px;
+      padding: $pChico;
+      border-radius: $rdsChico;
+      box-shadow: $sombraGeneral;
+      position: absolute;
+      z-index: 1;
+      right: 5%;
+      top: 5%;
+      transition: 0.2s ease;
+      cursor: pointer;
+
+      &:hover {
+        scale: 1.1;
+      }
+
+      p {
+        color: #fff;
+        font-size: $textSizeGeneral;
+      }
+
+      svg {
+        border-radius: 50%;
+        height: 40px;
+        width: 40px;
+      }
+    }
+
+    .contenedor__titulo {
+      position: relative;
+      bottom: 20px;
+      background-color: $itemsColor;
+      padding: $pGeneral;
+      border-radius: $rdsGeneral;
+      box-shadow: $sombraGeneral;
+
+      h2 {
+        color: #fff;
+        font-size: $textSizeMuyGrande;
+      }
+    }
+
+    ::-webkit-scrollbar {
+      width: 10px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: $bkColor;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      border-radius: $rdsGeneral;
+      background: $itemsColor;
+    }
+
+    .contenedor__datos {
+      box-shadow: $sombraGeneral;
+      height: 300px;
+      overflow: auto;
+      background-color: $bkColor;
+
+      table {
+        border-collapse: collapse;
+        width: 100%;
+        max-width: 800px;
         position: relative;
 
-        .btn__creador__abrir {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background-color: $itemsColor;
-            gap: 5px;
-            padding: $pChico;
-            border-radius: $rdsChico;
-            box-shadow: $sombraGeneral;
-            position: absolute;
-            z-index: 1;
-            right: 5%;
-            top: 5%;
-            transition: 0.2s ease;
-            cursor: pointer;
-
-            &:hover {
-                scale: 1.1;
-            }
-
-            p {
-                color: #fff;
-                font-size: $textSizeGeneral;
-            }
-
-            svg {
-                border-radius: 50%;
-                height: 40px;
-                width: 40px;
-            }
+        tbody {
+          background-color: $bkColor;
         }
 
-        .contenedor__titulo {
-            position: relative;
-            bottom: 20px;
-            background-color: $itemsColor;
-            padding: $pGeneral;
-            border-radius: $rdsGeneral;
-            box-shadow: $sombraGeneral;
-
-            h2 {
-                color: #fff;
-                font-size: $textSizeMuyGrande;
-            }
+        th,
+        td {
+          border: 4px solid $itemsColor;
+          padding: $pChico;
+          text-align: center;
+          font-size: $textSizeGeneral;
         }
 
-        ::-webkit-scrollbar {
-            width: 10px;
+        td {
+          width: 25%;
+          text-align: center;
+          font-size: $textSizeGeneral;
         }
 
-        ::-webkit-scrollbar-track {
-            background: $bkColor;
+        th {
+          background-color: $bkColor;
         }
 
-        ::-webkit-scrollbar-thumb {
-            border-radius: $rdsGeneral;
-            background: $itemsColor;
+        tr {
+          transition: 0.2s ease;
+          cursor: pointer;
         }
 
-        .contenedor__datos {
-            box-shadow: $sombraGeneral;
-            height: 300px;
-            overflow: auto;
-            background-color: $bkColor;
-
-            table {
-                border-collapse: collapse;
-                width: 100%;
-                max-width: 800px;
-                position: relative;
-
-                tbody {
-                    background-color: $bkColor;
-                }
-
-                th,
-                td {
-                    border: 4px solid $itemsColor;
-                    padding: $pChico;
-                    text-align: center;
-                    font-size: $textSizeGeneral;
-                }
-
-                td {
-                    width: 25%;
-                    text-align: center;
-                    font-size: $textSizeGeneral;
-                }
-
-                th {
-                    background-color: $bkColor;
-                }
-
-                tr {
-                    transition: 0.2s ease;
-                    cursor: pointer;
-                }
-
-                tr:hover {
-                    background-color: $itemsColor;
-                }
-            }
+        tr:hover {
+          background-color: $itemsColor;
         }
+      }
     }
+  }
 
-    .circle {
-        position: absolute;
-        background-color: $decoColor;
-        width: 100%;
-        height: 500px;
-        z-index: -1;
-        box-shadow: $sombraDeco;
-    }
+  .circle {
+    position: absolute;
+    background-color: $decoColor;
+    width: 100%;
+    height: 500px;
+    z-index: -1;
+    box-shadow: $sombraDeco;
+  }
 
-    .circle:first-child {
-        bottom: 115%;
-        border-radius: 30%;
-        right: 0;
-    }
+  .circle:first-child {
+    bottom: 115%;
+    border-radius: 30%;
+    right: 0;
+  }
 
-    .circle:last-child {
-        top: 75%;
-        border-radius: 30%;
-        right: 0;
-    }
+  .circle:last-child {
+    top: 75%;
+    border-radius: 30%;
+    right: 0;
+  }
 }

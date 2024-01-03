@@ -7,6 +7,7 @@ import { IdContext } from '../context/GeneralContext.jsx'
 import CrearProducto from '../components/CrearProducto.jsx'
 import { ClienteAgrupado } from '../utils/utilsClienteAgrupado.jsx'
 import HistorialEliminados from './HistorialEliminados.jsx'
+import Overlay from '../components/Items/Overlay.jsx'
 
 const Home = () => {
   // --------------------------------------------------------- //
@@ -55,7 +56,6 @@ const Home = () => {
   }, [setTocarCliente])
 
   return (
-    
     <IdContext.Provider value={idSeleccionado}>
       <section className="app">
         <Header datosHome={datosHome} setDatosFiltrados={setDatosFiltrados} />
@@ -99,6 +99,7 @@ const Home = () => {
         </section>
       </section>
       <CrearProducto />
+      <Overlay show={true}/>
       {/* <HistorialEliminados datosEliminados={datosEliminados}/> */}
       <Footer tocarCliente={tocarCliente} setTocarCliente={setTocarCliente} />
     </IdContext.Provider>

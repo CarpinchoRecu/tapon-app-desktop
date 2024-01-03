@@ -37,12 +37,18 @@ contextBridge.exposeInMainWorld('electronAPI', {
     }
   },
 
-  EliminarProductoSQLite: async (idNumber,nombre, localidad, direccion) => {
+  EliminarProductoSQLite: async (idNumber, nombre, localidad, direccion) => {
     try {
-      const resultado = await ipcRenderer.invoke('eliminarProducto-db', idNumber, nombre, localidad, direccion)
+      const resultado = await ipcRenderer.invoke(
+        'eliminarProducto-db',
+        idNumber,
+        nombre,
+        localidad,
+        direccion
+      )
       return resultado
     } catch (error) {
       throw new Error(error)
     }
-  },
+  }
 })

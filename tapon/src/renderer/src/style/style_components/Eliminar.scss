@@ -1,142 +1,108 @@
-.eliminar {
-    position: absolute;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    height: 50%;
-    width: 50%;
-    padding: $pGeneral;
-    background-color: $bkColor;
-    box-shadow: $sombraGeneral;
-    border-radius: $rdsChico;
-    border: 3px solid;
-    text-align: center;
-
-    h2 {
-        color: #fff;
-        position: absolute;
-        top: -15px;
-        padding: $pMedio;
-        border-radius: $rdsChico;
-        background-color: $errorColor;
-        font-size: $textSizeGrande;
-        border: #000 3px solid;
-        box-shadow: $sombraGeneral;
-    }
-
-    .aviso__eliminar{
-        font-size: $textSizeGeneral;
-        padding: $pGeneral;
-        width: 80%;
-        position: relative;
-        top: 10%;
-    }
-
-    .datos__eliminar{
-        display: flex;
-        flex-direction: column;
-        position: relative;
-        align-items: center;
-        justify-content: center;
-        top: 8%;
-        gap: 1rem;
-        background-color: $contColor;
-        padding: $pChico;
-        border-radius: $rdsChico;
-
-        p{
-            color: #fff;
-            padding: $pChico;
-            border-radius: $rdsChico;
-            font-size: $textSizeGeneral;
-            border: #000 3px solid;
-            box-shadow: $sombraGeneral;
-            background-color: $itemsColor;
-
-        }
-        div{
-            display: flex;
-            gap: 1rem;
-            align-items: center;
-            justify-content: center;
-            h5{
-                width: 10rem;
-                color: #fff;
-                padding: $pChico;
-                border-radius: $rdsChico;
-                background-color: $itemsColor;
-                font-size: $textSizeGeneral;
-                border: #000 3px solid;
-                box-shadow: $sombraGeneral;
-            }
-        }
-    }
-
-    .btn__eliminar {
-        color: #fff;
-        position: absolute;
-        bottom: -15px;
-        padding: $pMedio;
-        border-radius: $rdsChico;
-        background-color: $errorColor;
-        font-size: $textSizeGrande;
-        border: #000 3px solid;
-        box-shadow: $sombraGeneral;
-        cursor: pointer;
-        transition: 0.2s ease;
-
-        &:hover {
-            scale: 1.1;
-        }
-
-        p {
-            color: #fff;
-            font-size: $textSizeGrande;
-        }
-    }
+.atras{
+  width: 100px;
+  height: 100px;
+  position: absolute;
+  background-color: #000;
+  z-index: 1000;
 }
 
-.btn__eliminar__abrir {
+.eliminar {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  height: 50%;
+  width: 50%;
+  padding: $pGeneral;
+  background-color: $bkColor;
+  box-shadow: $sombraGeneral;
+  border-radius: $rdsChico;
+  border: 3px solid;
+  text-align: center;
+  z-index: 1;
+
+  h2 {
+    color: #fff;
     position: absolute;
+    top: -15px;
+    padding: $pMedio;
+    border-radius: $rdsChico;
+    background-color: $errorColor;
+    font-size: $textSizeGrande;
+    border: #000 3px solid;
+    box-shadow: $sombraGeneral;
+  }
+
+  .aviso__eliminar {
+    font-size: $textSizeGeneral;
+    padding: $pGeneral;
+    width: 80%;
+    position: relative;
+    top: 10%;
+  }
+
+  .datos__eliminar {
     display: flex;
+    flex-direction: column;
+    position: relative;
     align-items: center;
     justify-content: center;
-    background-color: $errorColor;
-    gap: 5px;
+    top: 8%;
+    gap: 1rem;
+    background-color: $contColor;
     padding: $pChico;
     border-radius: $rdsChico;
+
+    p {
+      color: #fff;
+      padding: $pChico;
+      border-radius: $rdsChico;
+      font-size: $textSizeGeneral;
+      border: #000 3px solid;
+      box-shadow: $sombraGeneral;
+      background-color: $itemsColor;
+    }
+    div {
+      display: flex;
+      gap: 1rem;
+      align-items: center;
+      justify-content: center;
+      h5 {
+        width: 10rem;
+        color: #fff;
+        padding: $pChico;
+        border-radius: $rdsChico;
+        background-color: $itemsColor;
+        font-size: $textSizeGeneral;
+        border: #000 3px solid;
+        box-shadow: $sombraGeneral;
+      }
+    }
+  }
+
+  .btn__eliminar {
+    color: #fff;
+    position: absolute;
+    bottom: -15px;
+    padding: $pMedio;
+    border-radius: $rdsChico;
+    background-color: $errorColor;
+    font-size: $textSizeGrande;
+    border: #000 3px solid;
     box-shadow: $sombraGeneral;
-    right: 5%;
-    top: 50%;
-    transition: 0.2s ease;
     cursor: pointer;
+    transition: 0.2s ease;
 
     &:hover {
-        scale: 1.1;
+      scale: 1.1;
     }
 
     p {
-        color: #fff;
-        font-size: $textSizeGeneral;
+      color: #fff;
+      font-size: $textSizeGrande;
     }
-
-    svg {
-        border-radius: 50%;
-        height: 40px;
-        width: 40px;
-    }
-}
-
-.disabled{
-    opacity: 0.5!important;
-    cursor: inherit;
-    scale: 0.9;
-    
-    &:hover{
-        scale: 0.9;
-
-    }
+  }
 }
