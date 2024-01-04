@@ -5,8 +5,9 @@ import { toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import { ClienteSeleccionado } from '../../utils/utilsClienteSeleccionado.jsx'
 import BtnAtras from '../Items/botones/BtnAtras.jsx'
+import BtnFuncion from '../Items/botones/BtnFuncion.jsx'
 
-const EliminarProducto = () => {
+const EliminarProducto = ({ setOpcionSeleccionada, setOpcion }) => {
   // --------------------------------------------------------- //
   const productoSeleccionado = useContext(ProductosContext)
   const datosOriginal = useDatosContext()
@@ -57,26 +58,31 @@ const EliminarProducto = () => {
 
   return (
     <div className="eliminar__producto">
-      <BtnAtras cancelType={true} />
+                <BtnAtras cancelType={true} set1={setOpcion} set2={setOpcionSeleccionada} />
+
       <h2>Eliminar Producto</h2>
-      <table className="tabla__datos__cliente">
-        <thead>
-          <tr>
-            <th>Nombre Producto</th>
-            <th>Precio Producto</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>{productoSeleccionado.nombre_producto}</td>
-            <td>{productoSeleccionado.precio_producto}</td>
-          </tr>
-        </tbody>
-      </table>
-      <br />
-      <div className="btn__eliminar" onClick={handleEliminar}>
-        <p>Eliminar</p>
+      <div className="datos__eliminar">
+        <p>Datos del Producto</p>
+        <table className="tabla__datos__cliente">
+          <thead>
+            <tr>
+              <th>Nombre Producto</th>
+              <th>Precio Producto</th>
+              <th>Cuotas Producto</th>
+              <th>Fecha Ultimo Pago</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>{productoSeleccionado.nombre_producto}</td>
+              <td>{productoSeleccionado.precio_producto}</td>
+              <td>{productoSeleccionado.cuotas_producto}</td>
+              <td>{productoSeleccionado.fecha_ultimo_pago}</td>
+            </tr>
+          </tbody>
+        </table>
       </div>
+      <BtnFuncion texto="Eliminar" tipoDeColor="rojo" funcion={handleEliminar} />
     </div>
   )
 }

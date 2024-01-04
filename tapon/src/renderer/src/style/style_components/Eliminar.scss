@@ -1,11 +1,3 @@
-.atras{
-  width: 100px;
-  height: 100px;
-  position: absolute;
-  background-color: #000;
-  z-index: 1000;
-}
-
 .eliminar {
   position: absolute;
   display: flex;
@@ -65,44 +57,38 @@
       box-shadow: $sombraGeneral;
       background-color: $itemsColor;
     }
-    div {
-      display: flex;
-      gap: 1rem;
-      align-items: center;
-      justify-content: center;
-      h5 {
-        width: 10rem;
-        color: #fff;
-        padding: $pChico;
-        border-radius: $rdsChico;
-        background-color: $itemsColor;
-        font-size: $textSizeGeneral;
-        border: #000 3px solid;
-        box-shadow: $sombraGeneral;
+
+    .tabla__datos__cliente {
+      border-collapse: collapse;
+      width: 100%;
+      max-width: 800px;
+      position: relative;
+
+      tbody {
+        background-color: $bkColor;
       }
-    }
-  }
 
-  .btn__eliminar {
-    color: #fff;
-    position: absolute;
-    bottom: -15px;
-    padding: $pMedio;
-    border-radius: $rdsChico;
-    background-color: $errorColor;
-    font-size: $textSizeGrande;
-    border: #000 3px solid;
-    box-shadow: $sombraGeneral;
-    cursor: pointer;
-    transition: 0.2s ease;
+      th,
+      td {
+        border: 4px solid $itemsColor;
+        padding: $pChico;
+        text-align: center;
+        font-size: $textSizeGeneral;
+      }
 
-    &:hover {
-      scale: 1.1;
-    }
+      td {
+        width: 34%;
+        text-align: center;
+        font-size: $textSizeGeneral;
+      }
 
-    p {
-      color: #fff;
-      font-size: $textSizeGrande;
+      th {
+        background-color: $bkColor;
+      }
+
+      tr {
+        transition: 0.2s ease;
+      }
     }
   }
 }

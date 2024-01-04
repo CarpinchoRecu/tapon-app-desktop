@@ -25,29 +25,6 @@
     box-shadow: $sombraGeneral;
   }
 
-  .btn__siguiente__productos {
-    position: absolute;
-    bottom: -15px;
-    border-radius: $rdsChico;
-    background-color: $correctoColor;
-    border: 3px solid;
-    transition: 0.2s ease;
-    width: 70%;
-    box-shadow: $sombraGeneral;
-    cursor: pointer;
-
-    p {
-      padding: $pMedio;
-      color: #fff;
-      text-align: center;
-      font-size: $textSizeGeneral;
-    }
-
-    &:hover {
-      scale: 1.1;
-    }
-  }
-
   .campos__cliente {
     width: auto;
     height: auto;
@@ -140,24 +117,6 @@
           outline: none;
         }
       }
-    }
-  }
-
-  .btn__crear {
-    position: absolute;
-    bottom: -15px;
-    padding: $pChico;
-    border-radius: $rdsChico;
-    background-color: $correctoColor;
-    color: #fff;
-    font-size: $textSizeMuyGrande;
-    border: $bordes;
-    box-shadow: $sombraGeneral;
-    transition: 0.2s ease;
-    cursor: pointer;
-
-    &:hover {
-      scale: 1.1;
     }
   }
 }

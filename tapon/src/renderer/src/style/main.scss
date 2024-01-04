@@ -1,35 +1,6 @@
-@font-face {
-  font-family: 'League Spartan';
-  src: url('../font/LeagueSpartan-Regular.ttf') format('truetype');
-}
-
-* {
-  font-family: 'League Spartan', sans-serif;
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
-
-body {
-  width: 100vw;
-  height: 100vh;
-  display: flex;
-  overflow: hidden;
-  box-shadow: inset 0px 0px 100px 10px rgba(0, 0, 0, 0.25);
-}
-
-#root {
-  width: 100%;
-  height: 100%;
-}
-
-.app {
-  width: 100%;
-  height: 100%;
-}
-
 $bkColor: #ecdada;
-$contColor: #5b4141;
+$bkFondoColor: #aec6e2;
+$contColor: #110f79;
 $itemsColor: #2473bb;
 $decoColor: #000;
 $errorColor: rgb(187, 36, 36);
@@ -63,3 +34,35 @@ $pChico: 5px;
 @import './style_components/HistorialEliminados.scss';
 @import './style_components/stylesObservar/EliminarProducto.scss';
 @import './style_components/botones/BtnFuncion.scss';
+
+
+@font-face {
+  font-family: 'League Spartan';
+  src: url('../font/LeagueSpartan-Regular.ttf') format('truetype');
+}
+
+* {
+  font-family: 'League Spartan', sans-serif;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background: $bkFondoColor;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  overflow: hidden;
+  box-shadow: inset 0px 0px 100px 10px rgba(0, 0, 0, 0.25);
+}
+
+#root {
+  width: 100%;
+  height: 100%;
+}
+
+.app {
+  width: 100%;
+  height: 100%;
+}

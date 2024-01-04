@@ -1,4 +1,4 @@
-const PagoProducto = () => {
+const PagoProducto = ({ setOpcionSeleccionada, setOpcion }) => {
   return <div>PagoProducto</div>
 }
 

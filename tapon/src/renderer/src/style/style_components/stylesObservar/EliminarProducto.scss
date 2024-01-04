@@ -1,7 +1,8 @@
 .eliminar__producto {
   padding: $pGeneral;
   position: absolute;
-  height: 110%;
+  height: 100%;
+  width: 50%;
   z-index: 2;
   background-color: $bkColor;
   display: flex;
@@ -10,4 +11,68 @@
   box-shadow: $sombraGeneral;
   border-radius: $rdsChico;
   border: 3px solid;
+
+  h2 {
+    color: #fff;
+    position: absolute;
+    top: -15px;
+    padding: $pMedio;
+    border-radius: $rdsChico;
+    background-color: $errorColor;
+    font-size: $textSizeGrande;
+    border: #000 3px solid;
+    box-shadow: $sombraGeneral;
+  }
+
+  .datos__eliminar {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    background-color: $contColor;
+    padding: $pChico;
+    border-radius: $rdsChico;
+
+    p {
+      color: #fff;
+      padding: $pChico;
+      border-radius: $rdsChico;
+      font-size: $textSizeGeneral;
+      border: #000 3px solid;
+      box-shadow: $sombraGeneral;
+      background-color: $itemsColor;
+    }
+
+    .tabla__datos__cliente {
+      border-collapse: collapse;
+      width: 100%;
+      max-width: 800px;
+
+      tbody {
+        background-color: $bkColor;
+      }
+
+      th,
+      td {
+        border: 4px solid $itemsColor;
+        padding: $pChico;
+        text-align: center;
+        font-size: $textSizeGeneral;
+      }
+
+      td {
+        width: 25%;
+        text-align: center;
+        font-size: $textSizeGeneral;
+      }
+
+      th {
+        background-color: $bkColor;
+      }
+
+      tr {
+        transition: 0.2s ease;
+      }
+    }
+  }
 }

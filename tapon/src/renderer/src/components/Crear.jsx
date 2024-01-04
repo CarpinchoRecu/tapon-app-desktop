@@ -4,6 +4,7 @@ import BtnAtras from './Items/botones/BtnAtras'
 import { ToastContainer, toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import Overlay from '../components/Items/Overlay/Overlay.jsx'
+import BtnFuncion from './Items/botones/BtnFuncion.jsx'
 
 const Crear = () => {
   const [abrirCreador, setAbrirCreador] = useState(false)
@@ -277,9 +278,7 @@ const Crear = () => {
                 {mostrarProductos === true ? (
                   <BtnAtras set1={setMostrarProductos} set2={setMostrarCamposClientes} />
                 ) : (
-                  <div onClick={handleSiguiente} className="btn__siguiente__productos">
-                    <p>Crear productos del cliente</p>
-                  </div>
+                  <BtnFuncion texto="Siguiente" tipoDeColor="verde" funcion={handleSiguiente}/>
                 )}
                 {mostrarProductos === true ? (
                   <>
@@ -303,9 +302,7 @@ const Crear = () => {
                         </article>
                       ))}
                     </article>
-                    <div onClick={handleCrear} className="btn__siguiente__productos">
-                      <p>Crear</p>
-                    </div>
+                    <BtnFuncion texto="Crear" tipoDeColor="verde" funcion={handleCrear}/>
                   </>
                 ) : (
                   <></>

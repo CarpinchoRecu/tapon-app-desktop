@@ -58,8 +58,18 @@ const MenuProductos = ({ setProductoSeleccionado }) => {
                         setOpcionSeleccionada={setOpcionSeleccionada}
                       />
                     )}
-                    {opcionesProd[opcion].name === 'eliminar' && <EliminarProducto />}
-                    {opcionesProd[opcion].name === 'pagar' && <PagoProducto />}
+                    {opcionesProd[opcion].name === 'eliminar' && (
+                      <EliminarProducto
+                        setOpcion={setOpcion}
+                        setOpcionSeleccionada={setOpcionSeleccionada}
+                      />
+                    )}
+                    {opcionesProd[opcion].name === 'pagar' && (
+                      <PagoProducto
+                        setOpcion={setOpcion}
+                        setOpcionSeleccionada={setOpcionSeleccionada}
+                      />
+                    )}
                     <Overlay />
                   </>
                 )}

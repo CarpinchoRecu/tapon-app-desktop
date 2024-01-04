@@ -7,6 +7,7 @@ import { ClienteSeleccionado } from '../utils/utilsClienteSeleccionado.jsx'
 import { toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import Overlay from './Items/Overlay/Overlay.jsx'
+import BtnFuncion from './Items/botones/BtnFuncion.jsx'
 
 const Eliminar = ({ setEliminar, setTocarCliente }) => {
   // --------------------------------------------------------- //
@@ -54,32 +55,36 @@ const Eliminar = ({ setEliminar, setTocarCliente }) => {
 
   return (
     <>
-    <div className="eliminar">
-      <h2>Eliminar Cliente</h2>
-      <BtnAtras set1={setEliminar} set2={setTocarCliente} cancelType={true} />
-      <p className="aviso__eliminar">
-        Con esta acción vas a borrar todos los datos del cliente {clienteSeleccionado.nombre}. Si
-        estás seguro de proceder con la acción, toca &quot;Eliminar&quot;. Ten en cuenta que se van
-        a borrar TODOS los datos de la base y NO SON RECUPERABLES.
-      </p>
-      <div className="datos__eliminar">
-        <p>Datos del Cliente</p>
-        <div>
-          <h5>Nombre</h5>
-          <h5>Direccion</h5>
-          <h5>Localidad</h5>
+      <div className="eliminar">
+        <h2>Eliminar Cliente</h2>
+        <BtnAtras set1={setEliminar} set2={setTocarCliente} cancelType={true} />
+        <p className="aviso__eliminar">
+          Con esta acción vas a borrar todos los datos del cliente {clienteSeleccionado.nombre}. Si
+          estás seguro de proceder con la acción, toca &quot;Eliminar&quot;. Ten en cuenta que se van
+          a borrar TODOS los datos de la base y NO SON RECUPERABLES.
+        </p>
+        <div className="datos__eliminar">
+          <p>Datos del Cliente</p>
+          <table className="tabla__datos__cliente">
+            <thead>
+              <tr>
+                <th>Nombre</th>
+                <th>Direccion</th>
+                <th>Localidad</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>{clienteSeleccionado.nombre}</td>
+                <td>{clienteSeleccionado.localidad}</td>
+                <td>{clienteSeleccionado.direccion}</td>
+              </tr>
+            </tbody>
+          </table>
         </div>
-        <div>
-          <h5>{clienteSeleccionado.nombre}</h5>
-          <h5>{clienteSeleccionado.localidad}</h5>
-          <h5>{clienteSeleccionado.direccion}</h5>
-        </div>
+        <BtnFuncion texto="Eliminar" tipoDeColor="rojo" funcion={handleEliminarCliente}/>
       </div>
-      <div className="btn__eliminar" onClick={handleEliminarCliente}>
-        <p>Eliminar</p>
-      </div>
-    </div>
-    <Overlay/>
+      <Overlay />
     </>
   )
 }

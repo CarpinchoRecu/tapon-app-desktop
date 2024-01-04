@@ -175,7 +175,7 @@ const EditarProducto = ({ setOpcionSeleccionada, setOpcion }) => {
               </>
             ) : (
               <>
-                <BtnAtras set1={setOpcion} set2={setOpcionSeleccionada} />
+                <BtnAtras cancelType={true} set1={setOpcion} set2={setOpcionSeleccionada} />
                 {checkboxSeleccionados.map((check, indexCheck) => {
                   const isChecked = camposSeleccionados.some(
                     ([campo, tipo]) => campo === check.name && tipo === check.type
