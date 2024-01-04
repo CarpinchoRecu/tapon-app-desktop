@@ -7,7 +7,6 @@ import { IdContext } from '../context/GeneralContext.jsx'
 import CrearProducto from '../components/CrearProducto.jsx'
 import { ClienteAgrupado } from '../utils/utilsClienteAgrupado.jsx'
 import HistorialEliminados from './HistorialEliminados.jsx'
-import Overlay from '../components/Items/Overlay.jsx'
 
 const Home = () => {
   // --------------------------------------------------------- //
@@ -100,7 +99,6 @@ const Home = () => {
           <div className="circle"></div>
         </section>
       </section>
-      <Overlay show={false}/>
       <Footer tocarCliente={tocarCliente} setTocarCliente={setTocarCliente} />
       {/* <HistorialEliminados datosEliminados={datosEliminados}/> */}
     </IdContext.Provider>

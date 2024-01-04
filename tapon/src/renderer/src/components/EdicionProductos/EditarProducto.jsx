@@ -4,6 +4,7 @@ import 'react-toastify/dist/ReactToastify.css'
 import BtnAtras from '../Items/botones/BtnAtras'
 import PropTypes from 'prop-types'
 import { ProductosContext } from '../../context/GeneralContext'
+import BtnFuncion from '../Items/botones/BtnFuncion'
 
 const EditarProducto = ({ setOpcionSeleccionada, setOpcion }) => {
   const [btnMenuEditar, setBtnMenuEditar] = useState(false)
@@ -27,19 +28,20 @@ const EditarProducto = ({ setOpcionSeleccionada, setOpcion }) => {
 
   const handleCampoSeleccionado = ([campo, tipo, label]) => {
     const existeCampo = camposSeleccionados.some(
-      ([c, t]) => c === campo && t === tipo && t === label
-    )
-
+      ([c, t, l]) => c === campo && t === tipo && l === label
+    );
+  
     if (existeCampo) {
       // Si el campo ya está en la lista, quitarlo
       setCamposSeleccionados(
-        camposSeleccionados.filter(([c, t]) => !(c === campo && t === tipo && t === label))
-      )
+        camposSeleccionados.filter(([c, t, l]) => !(c === campo && t === tipo && l === label))
+      );
     } else {
       // Si el campo no está en la lista, añadirlo
-      setCamposSeleccionados([...camposSeleccionados, [campo, tipo, label]])
+      setCamposSeleccionados([...camposSeleccionados, [campo, tipo, label]]);
     }
-  }
+  };
+  
 
   const handleInputEdicionChange = (event, campo) => {
     setFormDataEdicion({
@@ -174,7 +176,6 @@ const EditarProducto = ({ setOpcionSeleccionada, setOpcion }) => {
             ) : (
               <>
                 <BtnAtras set1={setOpcion} set2={setOpcionSeleccionada} />
-
                 {checkboxSeleccionados.map((check, indexCheck) => {
                   const isChecked = camposSeleccionados.some(
                     ([campo, tipo]) => campo === check.name && tipo === check.type
@@ -196,33 +197,20 @@ const EditarProducto = ({ setOpcionSeleccionada, setOpcion }) => {
               </>
             )}
             {btnMenuEditar ? (
-              <div onClick={handleEditar} className="btn__editar">
-                <p>Editar</p>
-              </div>
+              <BtnFuncion texto="Editar" tipoDeColor="azul" funcion={handleEditar} />
             ) : (
               <>
                 {camposSeleccionados.length > 0 ? (
-                  <div onClick={handleSiguienteMenuEditar} className="btn__editar">
-                    <p>Siguiente</p>
-                  </div>
+                  <BtnFuncion
+                    texto="Siguiente"
+                    tipoDeColor="azul"
+                    funcion={handleSiguienteMenuEditar}
+                  />
                 ) : (
                   <></>
                 )}
               </>
             )}
-
-            {/* {camposProductosSeleccionados.map((campoSeleccionado, indexCampoSeleccionado) => (
-              <React.Fragment key={indexCampoSeleccionado}>
-                <label htmlFor={campoSeleccionado.label}>{campoSeleccionado.label}</label>
-                <input
-                  className="campo__editor"
-                  placeholder={productoSeleccionado[campoSeleccionado.name]}
-                  type={campoSeleccionado.type}
-                  value={formDataEdicion[campoSeleccionado.name]}
-                  onChange={(event) => handleInputEdicionChange(event, campoSeleccionado.name)}
-                />
-              </React.Fragment>
-            ))} */}
           </div>
         </div>
       </div>

@@ -1,10 +1,6 @@
 import './Overlay.css'
 
-const Overlay = ({ show }) => {
-  if (!show) {
-    return null
-  }
-
+const Overlay = () => {
   return <div className="overlay"></div>
 }
 

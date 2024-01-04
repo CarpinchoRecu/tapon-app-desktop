@@ -3,6 +3,7 @@ import { LuPlusCircle } from 'react-icons/lu'
 import BtnAtras from './Items/botones/BtnAtras'
 import { ToastContainer, toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
+import Overlay from '../components/Items/Overlay/Overlay.jsx'
 
 const Crear = () => {
   const [abrirCreador, setAbrirCreador] = useState(false)
@@ -230,89 +231,92 @@ const Crear = () => {
         <LuPlusCircle />
       </div>
       {abrirCreador === true ? (
-        <section className="creador">
-          <h2>Crear Cliente</h2>
-          <BtnAtras
-            set1={setAbrirCreador}
-            set2={setCantidadDeProductos}
-            set3={setMostrarCamposClientes}
-            set4={setMostrarProductos}
-            cancelType={true}
-          />
-          {mostrarCamposClientes === true ? (
-            <></>
-          ) : (
-            <article className="campos__cliente">
-              {camposCreador.map((campo) => (
-                <div key={campo.label} className="campo__cliente">
-                  {campo.name === 'cantidadDeProductos' ? (
-                    <>
-                      <label htmlFor="Cantidad de Productos">Cantidad de Productos</label>
-                      <input
-                        name="cantidadDeProductos"
-                        type="number"
-                        value={cantidadDeProductos}
-                        onChange={campo.onChange}
-                      />
-                    </>
-                  ) : (
-                    <>
-                      <label htmlFor={campo.label}>{campo.label}</label>
-                      <input
-                        name={campo.name}
-                        type={campo.type}
-                        value={formDataClientes[campo.name]}
-                        onChange={handleInputClientesChange}
-                      />
-                    </>
-                  )}
-                </div>
-              ))}
-            </article>
-          )}
-          {mostrarBtnProductos === true ? (
-            <>
-              {mostrarProductos === true ? (
-                <BtnAtras set1={setMostrarProductos} set2={setMostrarCamposClientes} />
-              ) : (
-                <div onClick={handleSiguiente} className="btn__siguiente__productos">
-                  <p>Crear productos del cliente</p>
-                </div>
-              )}
-              {mostrarProductos === true ? (
-                <>
-                  <article className="contenedor__campos__productos">
-                    {camposProducto.map((producto, productIndex) => (
-                      <article className="campos__productos" key={productIndex}>
-                        <h3>{producto.label}</h3>
-                        {producto.campos.map((campo, campoIndex) => (
-                          <input
-                            key={campoIndex}
-                            name={campo.name}
-                            className="campo__producto"
-                            placeholder={campo.label}
-                            value={formDataProductos[campo.name]}
-                            onChange={(event) =>
-                              handleInputProductosChange(event, productIndex, campo.name)
-                            }
-                            type={campo.type}
-                          />
-                        ))}
-                      </article>
-                    ))}
-                  </article>
-                  <div onClick={handleCrear} className="btn__siguiente__productos">
-                    <p>Crear</p>
+        <>
+          <section className="creador">
+            <h2>Crear Cliente</h2>
+            <BtnAtras
+              set1={setAbrirCreador}
+              set2={setCantidadDeProductos}
+              set3={setMostrarCamposClientes}
+              set4={setMostrarProductos}
+              cancelType={true}
+            />
+            {mostrarCamposClientes === true ? (
+              <></>
+            ) : (
+              <article className="campos__cliente">
+                {camposCreador.map((campo) => (
+                  <div key={campo.label} className="campo__cliente">
+                    {campo.name === 'cantidadDeProductos' ? (
+                      <>
+                        <label htmlFor="Cantidad de Productos">Cantidad de Productos</label>
+                        <input
+                          name="cantidadDeProductos"
+                          type="number"
+                          value={cantidadDeProductos}
+                          onChange={campo.onChange}
+                        />
+                      </>
+                    ) : (
+                      <>
+                        <label htmlFor={campo.label}>{campo.label}</label>
+                        <input
+                          name={campo.name}
+                          type={campo.type}
+                          value={formDataClientes[campo.name]}
+                          onChange={handleInputClientesChange}
+                        />
+                      </>
+                    )}
                   </div>
-                </>
-              ) : (
-                <></>
-              )}
-            </>
-          ) : (
-            <></>
-          )}
-        </section>
+                ))}
+              </article>
+            )}
+            {mostrarBtnProductos === true ? (
+              <>
+                {mostrarProductos === true ? (
+                  <BtnAtras set1={setMostrarProductos} set2={setMostrarCamposClientes} />
+                ) : (
+                  <div onClick={handleSiguiente} className="btn__siguiente__productos">
+                    <p>Crear productos del cliente</p>
+                  </div>
+                )}
+                {mostrarProductos === true ? (
+                  <>
+                    <article className="contenedor__campos__productos">
+                      {camposProducto.map((producto, productIndex) => (
+                        <article className="campos__productos" key={productIndex}>
+                          <h3>{producto.label}</h3>
+                          {producto.campos.map((campo, campoIndex) => (
+                            <input
+                              key={campoIndex}
+                              name={campo.name}
+                              className="campo__producto"
+                              placeholder={campo.label}
+                              value={formDataProductos[campo.name]}
+                              onChange={(event) =>
+                                handleInputProductosChange(event, productIndex, campo.name)
+                              }
+                              type={campo.type}
+                            />
+                          ))}
+                        </article>
+                      ))}
+                    </article>
+                    <div onClick={handleCrear} className="btn__siguiente__productos">
+                      <p>Crear</p>
+                    </div>
+                  </>
+                ) : (
+                  <></>
+                )}
+              </>
+            ) : (
+              <></>
+            )}
+          </section>
+          <Overlay />
+        </>
       ) : (
         <></>
       )}

@@ -6,6 +6,7 @@ import PropTypes from 'prop-types'
 import { ClienteSeleccionado } from '../utils/utilsClienteSeleccionado.jsx'
 import { toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
+import Overlay from './Items/Overlay/Overlay.jsx'
 
 const Eliminar = ({ setEliminar, setTocarCliente }) => {
   // --------------------------------------------------------- //
@@ -52,6 +53,7 @@ const Eliminar = ({ setEliminar, setTocarCliente }) => {
   }
 
   return (
+    <>
     <div className="eliminar">
       <h2>Eliminar Cliente</h2>
       <BtnAtras set1={setEliminar} set2={setTocarCliente} cancelType={true} />
@@ -77,6 +79,8 @@ const Eliminar = ({ setEliminar, setTocarCliente }) => {
         <p>Eliminar</p>
       </div>
     </div>
+    <Overlay/>
+    </>
   )
 }
 

@@ -1,0 +1,36 @@
+.btn__funcion {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    padding: $pChico;
+    border-radius: $rdsChico;
+    box-shadow: $sombraGeneral;
+    position: absolute;
+    z-index: 1;
+    bottom: 3%;
+    transition: 0.2s ease;
+    cursor: pointer;
+    border: 2px solid;
+
+    &:hover {
+        scale: 1.1;
+    }
+
+    p {
+        color: #fff;
+        font-size: $textSizeGrande;
+    }
+
+
+}
+
+.btn__funcion[tipoDeColor='rojo'] {
+    background-color: $errorColor;
+}
+.btn__funcion[tipoDeColor='azul'] {
+    background-color: $itemsColor;
+}
+.btn__funcion[tipoDeColor='verde'] {
+    background-color: $correctoColor;
+}

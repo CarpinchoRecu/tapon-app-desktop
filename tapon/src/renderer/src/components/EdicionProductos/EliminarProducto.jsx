@@ -4,6 +4,7 @@ import { useDatosContext } from '../../context/DatosContextFile.jsx'
 import { toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import { ClienteSeleccionado } from '../../utils/utilsClienteSeleccionado.jsx'
+import BtnAtras from '../Items/botones/BtnAtras.jsx'
 
 const EliminarProducto = () => {
   // --------------------------------------------------------- //
@@ -56,9 +57,22 @@ const EliminarProducto = () => {
 
   return (
     <div className="eliminar__producto">
+      <BtnAtras cancelType={true} />
       <h2>Eliminar Producto</h2>
-      <p>{productoSeleccionado.nombre_producto}</p>
-      <p>{productoSeleccionado.precio_producto}</p>
+      <table className="tabla__datos__cliente">
+        <thead>
+          <tr>
+            <th>Nombre Producto</th>
+            <th>Precio Producto</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>{productoSeleccionado.nombre_producto}</td>
+            <td>{productoSeleccionado.precio_producto}</td>
+          </tr>
+        </tbody>
+      </table>
       <br />
       <div className="btn__eliminar" onClick={handleEliminar}>
         <p>Eliminar</p>
