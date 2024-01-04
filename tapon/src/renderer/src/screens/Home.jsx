@@ -57,6 +57,8 @@ const Home = () => {
 
   return (
     <IdContext.Provider value={idSeleccionado}>
+
+      <CrearProducto />
       <section className="app">
         <Header datosHome={datosHome} setDatosFiltrados={setDatosFiltrados} />
         <section className="home">
@@ -98,10 +100,9 @@ const Home = () => {
           <div className="circle"></div>
         </section>
       </section>
-      <CrearProducto />
-      <Overlay show={true}/>
-      {/* <HistorialEliminados datosEliminados={datosEliminados}/> */}
+      <Overlay show={false}/>
       <Footer tocarCliente={tocarCliente} setTocarCliente={setTocarCliente} />
+      {/* <HistorialEliminados datosEliminados={datosEliminados}/> */}
     </IdContext.Provider>
   )
 }
