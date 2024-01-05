@@ -4,7 +4,6 @@ import Footer from '../components/Footer.jsx'
 import Crear from '../components/Crear.jsx'
 import { useDatosContext } from '../context/DatosContextFile.jsx'
 import { IdContext } from '../context/GeneralContext.jsx'
-import CrearProducto from '../components/CrearProducto.jsx'
 import { ClienteAgrupado } from '../utils/utilsClienteAgrupado.jsx'
 import HistorialEliminados from './HistorialEliminados.jsx'
 
@@ -56,8 +55,6 @@ const Home = () => {
 
   return (
     <IdContext.Provider value={idSeleccionado}>
-
-      <CrearProducto />
       <section className="app">
         <Header datosHome={datosHome} setDatosFiltrados={setDatosFiltrados} />
         <section className="home">
@@ -100,7 +97,7 @@ const Home = () => {
         </section>
       </section>
       <Footer tocarCliente={tocarCliente} setTocarCliente={setTocarCliente} />
-      <HistorialEliminados datosEliminados={datosEliminados}/>
+      <HistorialEliminados datosEliminados={datosEliminados} />
     </IdContext.Provider>
   )
 }

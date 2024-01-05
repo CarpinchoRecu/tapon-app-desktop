@@ -8,13 +8,22 @@ const Footer = ({ tocarCliente, setTocarCliente }) => {
   // --------------------------------------------------------- //
   const [editar, setEditar] = useState(false)
   const [eliminar, setEliminar] = useState(false)
+  const [crearP, setCrearP] = useState(false)
   // --------------------------------------------------------- //
   const handleAbrirEditor = () => {
     setEditar(true)
     setEliminar(false)
+    setCrearP(false)
   }
   const handleAbrirEliminar = () => {
     setEliminar(true)
+    setEditar(false)
+    setCrearP(false)
+  }
+
+  const handleAbrirCrearP = () => {
+    setCrearP(true)
+    setEliminar(false)
     setEditar(false)
   }
   return (
@@ -26,7 +35,7 @@ const Footer = ({ tocarCliente, setTocarCliente }) => {
               <p onClick={handleAbrirEditor}>Observar</p>
             </section>
             <section>
-              <p onClick={handleAbrirEditor}>Crear Producto</p>
+              <p onClick={handleAbrirCrearP}>Crear Producto</p>
             </section>
             <section>
               <p onClick={handleAbrirEliminar}>Eliminar</p>
@@ -46,10 +55,9 @@ const Footer = ({ tocarCliente, setTocarCliente }) => {
           </>
         )}
       </footer>
-      {editar === true && <Observar setTocarCliente={setTocarCliente} setEditar={setEditar} />}
-      {eliminar === true && (
-        <Eliminar setTocarCliente={setTocarCliente} setEliminar={setEliminar} />
-      )}
+      {editar && <Observar setTocarCliente={setTocarCliente} setEditar={setEditar} />}
+      {eliminar && <Eliminar setTocarCliente={setTocarCliente} setEliminar={setEliminar} />}
+      {crearP && <CrearProducto setTocarCliente={setTocarCliente} setCrearP={setCrearP} />}
     </>
   )
 }

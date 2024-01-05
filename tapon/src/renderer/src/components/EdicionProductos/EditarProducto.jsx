@@ -1,5 +1,5 @@
 import React, { useContext, useState } from 'react'
-import { ToastContainer, toast } from 'react-toastify'
+import { toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import BtnAtras from '../Items/botones/BtnAtras'
 import PropTypes from 'prop-types'
@@ -30,19 +30,18 @@ const EditarProducto = ({ setOpcionSeleccionada, setOpcion }) => {
   const handleCampoSeleccionado = ([campo, tipo, label]) => {
     const existeCampo = camposSeleccionados.some(
       ([c, t, l]) => c === campo && t === tipo && l === label
-    );
-  
+    )
+
     if (existeCampo) {
       // Si el campo ya está en la lista, quitarlo
       setCamposSeleccionados(
         camposSeleccionados.filter(([c, t, l]) => !(c === campo && t === tipo && l === label))
-      );
+      )
     } else {
       // Si el campo no está en la lista, añadirlo
-      setCamposSeleccionados([...camposSeleccionados, [campo, tipo, label]]);
+      setCamposSeleccionados([...camposSeleccionados, [campo, tipo, label]])
     }
-  };
-  
+  }
 
   const handleInputEdicionChange = (event, campo) => {
     setFormDataEdicion({
@@ -152,70 +151,68 @@ const EditarProducto = ({ setOpcionSeleccionada, setOpcion }) => {
   ]
 
   return (
-    <>
-      <div className="editor">
-        <Titulos texto="Editar Producto" tipoDeColor="azul"/>
-        <div className="contenedor__campo__editor">
-          <div className="campos__editor">
-            {menuEditar ? (
-              <>
-                <BtnAtras set1={setBtnMenuEditar} set2={setMenuEditar} />
+    <div className="editor">
+      <Titulos texto="Editar Producto" tipoDeColor="azul" />
+      <div className="contenedor__campo__editor">
+        <div className="campos__editor">
+          {menuEditar ? (
+            <>
+              <BtnAtras set1={setBtnMenuEditar} set2={setMenuEditar} />
 
-                {camposSeleccionados.map((campo, index) => (
-                  <div className="contenedor_campos" key={index}>
-                    <label htmlFor={campo[2]}>{campo[2]}</label>
+              {camposSeleccionados.map((campo, index) => (
+                <div className="contenedor_campos" key={index}>
+                  <label htmlFor={campo[2]}>{campo[2]}</label>
+                  <input
+                    className="campo__editor"
+                    placeholder={campo[2]}
+                    type={campo[1]}
+                    value={formDataEdicion[campo[0]]}
+                    onChange={(event) => handleInputEdicionChange(event, campo[0])}
+                  />
+                </div>
+              ))}
+            </>
+          ) : (
+            <>
+              <BtnAtras cancelType={true} set1={setOpcion} set2={setOpcionSeleccionada} />
+              {checkboxSeleccionados.map((check, indexCheck) => {
+                const isChecked = camposSeleccionados.some(
+                  ([campo, tipo]) => campo === check.name && tipo === check.type
+                )
+                return (
+                  <div className="check__editor" key={indexCheck}>
+                    <label htmlFor={check.label}>{check.label}</label>
                     <input
-                      className="campo__editor"
-                      placeholder={campo[2]}
-                      type={campo[1]}
-                      value={formDataEdicion[campo[0]]}
-                      onChange={(event) => handleInputEdicionChange(event, campo[0])}
+                      type="checkbox"
+                      className="mycheck"
+                      onChange={() =>
+                        handleCampoSeleccionado([check.name, check.type, check.label])
+                      }
+                      checked={isChecked}
                     />
                   </div>
-                ))}
-              </>
-            ) : (
-              <>
-                <BtnAtras cancelType={true} set1={setOpcion} set2={setOpcionSeleccionada} />
-                {checkboxSeleccionados.map((check, indexCheck) => {
-                  const isChecked = camposSeleccionados.some(
-                    ([campo, tipo]) => campo === check.name && tipo === check.type
-                  )
-                  return (
-                    <div className="check__editor" key={indexCheck}>
-                      <label htmlFor={check.label}>{check.label}</label>
-                      <input
-                        type="checkbox"
-                        className="mycheck"
-                        onChange={() =>
-                          handleCampoSeleccionado([check.name, check.type, check.label])
-                        }
-                        checked={isChecked}
-                      />
-                    </div>
-                  )
-                })}
-              </>
-            )}
-            {btnMenuEditar ? (
-              <BtnFuncion texto="Editar" tipoDeColor="azul" funcion={handleEditar} />
-            ) : (
-              <>
-                {camposSeleccionados.length > 0 ? (
-                  <BtnFuncion
-                    texto="Siguiente"
-                    tipoDeColor="azul"
-                    funcion={handleSiguienteMenuEditar}
-                  />
-                ) : (
-                  <></>
-                )}
-              </>
-            )}
-          </div>
+                )
+              })}
+            </>
+          )}
+          {btnMenuEditar ? (
+            <BtnFuncion texto="Editar" tipoDeColor="azul" funcion={handleEditar} />
+          ) : (
+            <>
+              {camposSeleccionados.length > 0 ? (
+                <BtnFuncion
+                  texto="Siguiente"
+                  tipoDeColor="azul"
+                  funcion={handleSiguienteMenuEditar}
+                />
+              ) : (
+                <></>
+              )}
+            </>
+          )}
         </div>
       </div>
-    </>
+    </div>
   )
 }
 

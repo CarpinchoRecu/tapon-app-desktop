@@ -1,23 +1,23 @@
 .title {
-    color: #fff;
-    position: absolute;
-    top: -15px;
-    padding: $pMedio;
-    border-radius: $rdsChico;
-    font-weight: 100;
-    font-size: $textSizeGrande;
-    border: #000 3px solid;
-    box-shadow: $sombraGeneral;
+  color: #fff;
+  position: absolute;
+  top: -15px;
+  padding: $pMedio;
+  border-radius: $rdsChico;
+  font-weight: 100;
+  font-size: $textSizeGrande;
+  border: #000 3px solid;
+  box-shadow: $sombraGeneral;
 }
 
 .title[tipoDeColor='rojo'] {
-    background-color: $errorColor;
+  background-color: $errorColor;
 }
 
 .title[tipoDeColor='azul'] {
-    background-color: $itemsColor;
+  background-color: $itemsColor;
 }
 
 .title[tipoDeColor='verde'] {
-    background-color: $correctoColor;
+  background-color: $correctoColor;
 }

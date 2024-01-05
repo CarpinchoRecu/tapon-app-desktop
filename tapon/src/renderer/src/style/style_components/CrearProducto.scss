@@ -1,8 +1,39 @@
-.btn__crear__producto {
-  position: absolute;
-  background-color: $itemsColor;
+.campos_producto {
   padding: $pGeneral;
-  z-index: 1;
-  top: 0;
-  left: 0;
+  background-color: $contColor;
+  box-shadow: $sombraGeneral;
+  border-radius: $rdsGeneral;
+  border: 3px solid;
+  width: auto;
+  height: auto;
+  .campo_producto {
+    padding: $pChico;
+    flex-direction: column;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    align-items: center;
+    justify-content: center;
+
+    label {
+      color: #fff;
+      font-size: $textSizeGeneral;
+    }
+
+    input {
+      padding: $pChico;
+      font-size: $textSizeGeneral;
+      border-radius: $rdsChico;
+      border: 0;
+      transition: 0.2s ease;
+
+      &:hover {
+        background-color: $itemsColor;
+      }
+
+      &:focus {
+        outline: none;
+      }
+    }
+  }
 }

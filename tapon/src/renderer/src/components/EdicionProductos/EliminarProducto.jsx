@@ -60,7 +60,13 @@ const EliminarProducto = ({ setOpcionSeleccionada, setOpcion }) => {
   return (
     <div className="eliminar__producto">
       <BtnAtras cancelType={true} set1={setOpcion} set2={setOpcionSeleccionada} />
-      <Titulos texto="Eliminar Producto" tipoDeColor="rojo"/>
+      <Titulos texto="Eliminar Producto" tipoDeColor="rojo" />
+      <p className="aviso__eliminar">
+        Al realizar esta acción, eliminarás todos los datos asociados con el producto del cliente{' '}
+        <strong>{clienteSeleccionado.nombre}</strong> . Si estás seguro de querer proceder, haz clic
+        en &quot;Eliminar&quot;.
+      </p>
+
       <div className="datos__eliminar">
         <p>Datos del Producto</p>
         <table className="tabla__datos__cliente">

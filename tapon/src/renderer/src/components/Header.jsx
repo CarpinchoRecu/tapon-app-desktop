@@ -123,7 +123,6 @@ const Header = ({ datosHome, setDatosFiltrados }) => {
 
   return (
     <header>
-
       <section className="contenedor__buscador">
         <div className="buscador">
           {buscando === true ? (

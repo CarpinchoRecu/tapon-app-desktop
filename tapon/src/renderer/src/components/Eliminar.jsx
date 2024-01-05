@@ -60,8 +60,7 @@ const Eliminar = ({ setEliminar, setTocarCliente }) => {
         <BtnAtras set1={setEliminar} set2={setTocarCliente} cancelType={true} />
         <p className="aviso__eliminar">
           Con esta acción vas a borrar todos los datos del cliente {clienteSeleccionado.nombre}. Si
-          estás seguro de proceder con la acción, toca &quot;Eliminar&quot;. Ten en cuenta que se van
-          a borrar TODOS los datos de la base y NO SON RECUPERABLES.
+          estás seguro de proceder con la acción, toca &quot;Eliminar&quot;.
         </p>
         <div className="datos__eliminar">
           <p>Datos del Cliente</p>
@@ -82,7 +81,7 @@ const Eliminar = ({ setEliminar, setTocarCliente }) => {
             </tbody>
           </table>
         </div>
-        <BtnFuncion texto="Eliminar" tipoDeColor="rojo" funcion={handleEliminarCliente}/>
+        <BtnFuncion texto="Eliminar" tipoDeColor="rojo" funcion={handleEliminarCliente} />
       </div>
       <Overlay />
     </>

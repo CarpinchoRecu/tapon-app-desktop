@@ -278,7 +278,7 @@ const Crear = () => {
                 {mostrarProductos === true ? (
                   <BtnAtras set1={setMostrarProductos} set2={setMostrarCamposClientes} />
                 ) : (
-                  <BtnFuncion texto="Siguiente" tipoDeColor="verde" funcion={handleSiguiente}/>
+                  <BtnFuncion texto="Siguiente" tipoDeColor="verde" funcion={handleSiguiente} />
                 )}
                 {mostrarProductos === true ? (
                   <>
@@ -302,7 +302,7 @@ const Crear = () => {
                         </article>
                       ))}
                     </article>
-                    <BtnFuncion texto="Crear" tipoDeColor="verde" funcion={handleCrear}/>
+                    <BtnFuncion texto="Crear" tipoDeColor="verde" funcion={handleCrear} />
                   </>
                 ) : (
                   <></>

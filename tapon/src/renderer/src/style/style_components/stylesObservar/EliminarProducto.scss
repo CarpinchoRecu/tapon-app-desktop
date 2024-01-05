@@ -6,11 +6,17 @@
   z-index: 2;
   background-color: $bkColor;
   display: flex;
+  flex-direction: column;
+  gap: 2rem;
   align-items: center;
   justify-content: center;
   box-shadow: $sombraGeneral;
   border-radius: $rdsChico;
   border: 3px solid;
+
+  .aviso__eliminar {
+    font-size: $textSizeGeneral;
+  }
 
   .datos__eliminar {
     display: flex;
