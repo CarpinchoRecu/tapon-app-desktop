@@ -5,6 +5,7 @@ import BtnAtras from '../Items/botones/BtnAtras'
 import PropTypes from 'prop-types'
 import { ProductosContext } from '../../context/GeneralContext'
 import BtnFuncion from '../Items/botones/BtnFuncion'
+import Titulos from '../Items/Titulos'
 
 const EditarProducto = ({ setOpcionSeleccionada, setOpcion }) => {
   const [btnMenuEditar, setBtnMenuEditar] = useState(false)
@@ -153,7 +154,7 @@ const EditarProducto = ({ setOpcionSeleccionada, setOpcion }) => {
   return (
     <>
       <div className="editor">
-        <h2 className="title_editor">Editar Producto</h2>
+        <Titulos texto="Editar Producto" tipoDeColor="azul"/>
         <div className="contenedor__campo__editor">
           <div className="campos__editor">
             {menuEditar ? (

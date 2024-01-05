@@ -12,18 +12,6 @@
   border-radius: $rdsChico;
   border: 3px solid;
 
-  h2 {
-    color: #fff;
-    position: absolute;
-    top: -15px;
-    padding: $pMedio;
-    border-radius: $rdsChico;
-    background-color: $errorColor;
-    font-size: $textSizeGrande;
-    border: #000 3px solid;
-    box-shadow: $sombraGeneral;
-  }
-
   .datos__eliminar {
     display: flex;
     flex-direction: column;

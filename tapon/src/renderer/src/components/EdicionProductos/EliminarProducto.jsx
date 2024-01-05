@@ -6,6 +6,7 @@ import 'react-toastify/dist/ReactToastify.css'
 import { ClienteSeleccionado } from '../../utils/utilsClienteSeleccionado.jsx'
 import BtnAtras from '../Items/botones/BtnAtras.jsx'
 import BtnFuncion from '../Items/botones/BtnFuncion.jsx'
+import Titulos from '../Items/Titulos'
 
 const EliminarProducto = ({ setOpcionSeleccionada, setOpcion }) => {
   // --------------------------------------------------------- //
@@ -58,9 +59,8 @@ const EliminarProducto = ({ setOpcionSeleccionada, setOpcion }) => {
 
   return (
     <div className="eliminar__producto">
-                <BtnAtras cancelType={true} set1={setOpcion} set2={setOpcionSeleccionada} />
-
-      <h2>Eliminar Producto</h2>
+      <BtnAtras cancelType={true} set1={setOpcion} set2={setOpcionSeleccionada} />
+      <Titulos texto="Eliminar Producto" tipoDeColor="rojo"/>
       <div className="datos__eliminar">
         <p>Datos del Producto</p>
         <table className="tabla__datos__cliente">

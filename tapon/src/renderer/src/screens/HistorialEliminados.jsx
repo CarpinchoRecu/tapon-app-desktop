@@ -1,11 +1,10 @@
 const HistorialEliminados = ({ datosEliminados }) => {
-  console.log(datosEliminados) // Asegúrate de que datosEliminados sea un array o contiene los datos que esperas
-
+  console.log(datosEliminados)
   return (
     <div className="historial">
       {datosEliminados.map((eliminado, index) => (
         <div key={index}>
-          <p>{eliminado.nombre}</p> {/* Accede a la propiedad que deseas mostrar */}
+          <p>{eliminado.nombre}</p>
           <p>{eliminado.direccion}</p> {/* Accede a la propiedad que deseas mostrar */}
         </div>
       ))}

@@ -100,7 +100,7 @@ const Home = () => {
         </section>
       </section>
       <Footer tocarCliente={tocarCliente} setTocarCliente={setTocarCliente} />
-      {/* <HistorialEliminados datosEliminados={datosEliminados}/> */}
+      <HistorialEliminados datosEliminados={datosEliminados}/>
     </IdContext.Provider>
   )
 }
