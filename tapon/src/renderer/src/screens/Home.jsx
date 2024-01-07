@@ -23,9 +23,10 @@ const Home = () => {
     const datosEnHome = () => {
       const datosAgrupados = ClienteAgrupado(datosOriginal)
       const datosSinEliminar = datosAgrupados.filter((dato) => dato.eliminado === 0)
-      const datosEliminados = datosAgrupados.filter((dato) => dato.eliminado === 1)
+      const datoEliminado = datosAgrupados.filter((dato) => dato.eliminado === 1)
+      console.log(datoEliminado)
       setDatosHome(datosSinEliminar)
-      setDatosEliminados(datosEliminados)
+      setDatosEliminados(datoEliminado)
     }
 
     datosEnHome()

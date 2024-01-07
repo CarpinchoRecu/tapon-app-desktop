@@ -53,37 +53,78 @@ const CrearProducto = ({ setCrearP, setTocarCliente }) => {
 
   const [formDataProductos, setFormDataProductos] = useState({
     nombre_producto: '',
-    precio_producto: '',
-    cuotas_producto: '',
-    cuotas_pagadas: '',
-    cada_cuanto_paga: '',
+    precio_producto: "",
+    cuotas_producto: "",
+    cuotas_pagadas: "",
+    cada_cuanto_paga: "",
     fecha_ultimo_pago: ''
   })
 
-  const handleInputProductosChange = (event, productIndex, fieldName) => {
-    const { value } = event.target
-    setFormDataProductos((prevFormData) => {
-      const updatedFormData = [...prevFormData]
-      updatedFormData[productIndex] = {
-        ...updatedFormData[productIndex],
-        [fieldName]: value
-      }
-      return updatedFormData
+  const handleInputProductosChange = (event, campo) => {
+    setFormDataProductos({
+      ...formDataProductos,
+      [campo]: event.target.value
     })
   }
 
-  const handleCrearProducto = () => {
+  const handleCrearProducto = async () => {
+    const camposProductos = [
+      'nombre_producto',
+      'precio_producto',
+      'cuotas_producto',
+      'cuotas_pagadas',
+      'cada_cuanto_paga',
+      'fecha_ultimo_pago'
+    ]
+
+    const camposProductosIncompletos = camposProductos.filter((campo) => !formDataProductos[campo])
     console.log(formDataProductos)
-    toast.success('Los datos se han guardado correctamente', {
-      position: 'top-right',
-      autoClose: 5000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-      theme: 'dark'
-    })
+
+    if (camposProductosIncompletos.length > 0) {
+      // Mostrar alerta de campos incompletos
+      toast.error('Por favor completa todos los campos', {
+        position: 'top-right',
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: 'dark'
+      })
+      return // Detener la ejecución si hay campos incompletos
+    }
+
+    try {
+      const consulta = `INSERT INTO clientes (nombre, localidad, direccion, nombre_producto, precio_producto, cuotas_producto, cuotas_pagadas, cada_cuanto_paga, fecha_ultimo_pago) VALUES ('${clienteSeleccionado.nombre}', '${clienteSeleccionado.localidad}', '${clienteSeleccionado.direccion}', '${formDataProductos.nombre_producto}', ${formDataProductos.precio_producto}, ${formDataProductos.cuotas_producto}, ${formDataProductos.cuotas_pagadas}, ${formDataProductos.cada_cuanto_paga}, '${formDataProductos.fecha_ultimo_pago}')`
+
+      await window.electronAPI.insertarSQLite(consulta)
+      // Mostrar alerta de éxito
+      toast.success('Los datos se han guardado correctamente', {
+        position: 'top-right',
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: 'dark'
+      })
+      window.location.reload()
+    } catch (error) {
+      console.error('Error al ejecutar los INSERT:', error)
+      // Mostrar alerta de error
+      toast.error('Hubo un error al guardar los datos', {
+        position: 'top-right',
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: 'dark'
+      })
+    }
   }
 
   return (
@@ -92,14 +133,14 @@ const CrearProducto = ({ setCrearP, setTocarCliente }) => {
         <Titulos texto="Crear Producto" tipoDeColor="verde" />
         <BtnAtras cancelType={true} set1={setCrearP} set2={setTocarCliente} />
         <section className="campos_producto">
-          {camposCrearP.map((campo, productIndex) => (
-            <div className="campo_producto">
+          {camposCrearP.map((campo, index) => (
+            <div key={index} className="campo_producto">
               <label htmlFor={campo.label}>{campo.label}</label>
               <input
-                key={productIndex}
+                name={campo.name}
                 type={campo.type}
                 value={formDataProductos[campo.name]}
-                onChange={(event) => handleInputProductosChange(event, productIndex, campo.name)}
+                onChange={(event) => handleInputProductosChange(event, campo.name)}
               />
             </div>
           ))}
