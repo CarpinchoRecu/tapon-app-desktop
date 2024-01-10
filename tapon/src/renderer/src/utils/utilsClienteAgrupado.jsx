@@ -1,4 +1,4 @@
-export function ClienteAgrupado(datosOriginal) {
+export function ClienteAgrupado(datosOriginal, eliminados ) {
   const clienteAgrupado = datosOriginal.reduce((acumulador, dato) => {
     const sinCompletar = 'Sin Completar'
     const nombreMinusculas = dato.nombre.toLowerCase()
@@ -7,9 +7,9 @@ export function ClienteAgrupado(datosOriginal) {
     const clave = `${nombreMinusculas}-${localidad}-${direccion}`
     const indiceExistente = acumulador.findIndex((elem) => elem.clave === clave)
 
-    if (indiceExistente !== -1 && dato.eliminado === 0) {
+    if (indiceExistente !== -1 && dato.eliminado === eliminados) {
       acumulador[indiceExistente].cantidadProductos++
-    } else if (indiceExistente === -1 && dato.eliminado === 0) {
+    } else if (indiceExistente === -1 && dato.eliminado === eliminados) {
       acumulador.push({
         id: dato.id,
         eliminado: dato.eliminado,

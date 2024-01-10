@@ -5,7 +5,8 @@ import Crear from '../components/Crear.jsx'
 import { useDatosContext } from '../context/DatosContextFile.jsx'
 import { IdContext } from '../context/GeneralContext.jsx'
 import { ClienteAgrupado } from '../utils/utilsClienteAgrupado.jsx'
-import HistorialEliminados from './HistorialEliminados.jsx'
+import HistorialEliminados from './Papelera.jsx'
+import { FaHistory } from 'react-icons/fa'
 
 const Home = () => {
   // --------------------------------------------------------- //
@@ -18,18 +19,22 @@ const Home = () => {
   const [datosFiltrados, setDatosFiltrados] = useState(datosHome)
   // --------------------------------------------------------- //
 
+  const [papelera, setPapelera] = useState(false)
+
+  const HandleAbrirPapelera = () => {
+    setPapelera(true)
+  }
+
   //tranformando datos
   useEffect(() => {
-    const datosEnHome = () => {
-      const datosAgrupados = ClienteAgrupado(datosOriginal)
-      const datosSinEliminar = datosAgrupados.filter((dato) => dato.eliminado === 0)
-      const datoEliminado = datosAgrupados.filter((dato) => dato.eliminado === 1)
-      console.log(datoEliminado)
+    const datosApp = () => {
+      const datosSinEliminar = ClienteAgrupado(datosOriginal, 0)
+      const datoEliminado = ClienteAgrupado(datosOriginal, 1)
       setDatosHome(datosSinEliminar)
       setDatosEliminados(datoEliminado)
     }
 
-    datosEnHome()
+    datosApp()
   }, [datosOriginal])
 
   const [tocarCliente, setTocarCliente] = useState(false)
@@ -98,7 +103,13 @@ const Home = () => {
         </section>
       </section>
       <Footer tocarCliente={tocarCliente} setTocarCliente={setTocarCliente} />
-      <HistorialEliminados datosEliminados={datosEliminados} />
+      {datosEliminados.length > 0 && (
+        <div onClick={HandleAbrirPapelera} className="btnPapelera">
+          <p>Papelera</p>
+          <FaHistory />
+        </div>
+      )}
+      {papelera && <HistorialEliminados setPapelera={setPapelera} datosEliminados={datosEliminados} />}
     </IdContext.Provider>
   )
 }

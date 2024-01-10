@@ -1,0 +1,82 @@
+.pepelera {
+  height: 300px;
+
+  .datos__eliminar {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    align-items: center;
+    justify-content: center;
+    top: 8%;
+    gap: 1rem;
+    background-color: $contColor;
+    padding: $pChico;
+    border-radius: $rdsChico;
+
+    p {
+      color: #fff;
+      padding: $pChico;
+      border-radius: $rdsChico;
+      font-size: $textSizeGeneral;
+      border: #000 3px solid;
+      box-shadow: $sombraGeneral;
+      background-color: $itemsColor;
+    }
+
+    .tabla__datos__cliente {
+      border-collapse: collapse;
+      width: 100%;
+      max-width: 800px;
+      position: relative;
+
+      tbody {
+        background-color: $bkColor;
+      }
+
+      th,
+      td {
+        border: 4px solid $itemsColor;
+        padding: $pChico;
+        text-align: center;
+        font-size: $textSizeGeneral;
+      }
+
+      td {
+        width: 34%;
+        text-align: center;
+        font-size: $textSizeGeneral;
+      }
+
+      th {
+        background-color: $bkColor;
+      }
+
+      tr {
+        transition: 0.2s ease;
+      }
+    }
+  }
+}
+
+.btnPapelera{
+  position: absolute;
+  top: 70%;
+  left: 2%;
+  text-align: center;
+  background-color: $contColor;
+  color: #fff;
+  padding: $pChico;
+  border-radius: $rdsChico;
+  box-shadow: $sombraGeneral;
+  transition: 0.2s ease;
+  cursor: pointer;
+
+  &:hover{
+    scale: 1.1;
+  }
+
+  p{
+    margin-bottom: 5px;
+    font-size: $textSizeGeneral;
+  }
+}
