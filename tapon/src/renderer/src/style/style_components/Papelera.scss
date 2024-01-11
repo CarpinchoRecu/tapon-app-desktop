@@ -65,11 +65,12 @@
   text-align: center;
   background-color: $contColor;
   color: #fff;
-  padding: $pChico;
+  padding: $pMedio;
   border-radius: $rdsChico;
   box-shadow: $sombraGeneral;
   transition: 0.2s ease;
   cursor: pointer;
+  border: #fff solid 2px;
 
   &:hover{
     scale: 1.1;

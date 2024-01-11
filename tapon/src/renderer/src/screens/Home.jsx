@@ -32,6 +32,7 @@ const Home = () => {
       const datoEliminado = ClienteAgrupado(datosOriginal, 1)
       setDatosHome(datosSinEliminar)
       setDatosEliminados(datoEliminado)
+      console.log(datoEliminado)
     }
 
     datosApp()

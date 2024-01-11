@@ -4,8 +4,8 @@ import Menus from '../components/Items/Menus'
 import BtnAtras from '../components/Items/botones/BtnAtras'
 
 const HistorialEliminados = ({ datosEliminados, setPapelera }) => {
-  console.log(datosEliminados)
   return (
+    <>
     <Menus>
       <Titulos tipoDeColor="rojo" texto="Historial Eliminados" />
       <BtnAtras set1={setPapelera} cancelType={true} />
@@ -28,6 +28,8 @@ const HistorialEliminados = ({ datosEliminados, setPapelera }) => {
                   <td>{eliminado.direccion}</td>
                   <td>{eliminado.localidad}</td>
                   <td>{eliminado.cantidadProductos}</td>
+                  <td>{eliminado.nombreProducto}</td>
+                  <td>{eliminado.precioProducto}</td>
                 </tr>
               ))}
             </tbody>
@@ -35,6 +37,8 @@ const HistorialEliminados = ({ datosEliminados, setPapelera }) => {
         </div>
       </section>
     </Menus>
+    <Overlay/>
+    </>
   )
 }
 
