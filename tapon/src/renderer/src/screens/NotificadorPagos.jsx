@@ -10,21 +10,16 @@ const NotificadorPagos = () => {
   const [paganHoy, setPaganHoy] = useState([]);
   const [checkboxState, setCheckboxState] = useState({});
 
-  // Obtener la fecha actual
-
-  const fecha = () => {
-
-    const hoy = new Date();
-    const fechaActual = hoy.toISOString().split('T')[0];
-    // Sumar cada_cuanto_paga días a la fecha actual
-    const nuevaFechaPago = new Date(fechaActual);
-    nuevaFechaPago.setDate(nuevaFechaPago.getDate() + 10);
-    console.log(nuevaFechaPago)
-
+  const handleCheckboxChange = (checkboxId) => {
+    setCheckboxState((prevStates) => ({
+      ...prevStates,
+      [checkboxId]: !prevStates[checkboxId],
+    }))
   }
 
-  fecha()
-
+  console.log(checkboxState)
+  // Obtener la fecha actual
+  
   useEffect(() => {
     const hoy = new Date();
     const fechaHoy = hoy.toISOString().split('T')[0];
@@ -63,10 +58,10 @@ const NotificadorPagos = () => {
                   <td>
                     <input
                       type="checkbox"
-                      name={`pago-${morosos.id}`} // Usar un identificador único como el ID del moroso
-                      id={`pago-${morosos.id}`}
-                      checked={checkboxState[`pago-${morosos.id}`]}
-                      onChange={() => handleCheckboxChange(`pago-${morosos.id}`)}
+                      name="pago"// Usar un identificador único como el ID del moroso
+                      id="pago"
+                      checked={checkboxState[morosos.id] || false}
+                      onChange={() => handleCheckboxChange(morosos.id)}
                     />
                   </td>
                   <td>
