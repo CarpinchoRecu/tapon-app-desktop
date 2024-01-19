@@ -22,26 +22,6 @@ $pGeneral: 20px;
 $pMedio: 9px;
 $pChico: 5px;
 
-@import './style_components/Home.scss';
-@import './style_components/Observar.scss';
-@import './style_components/Papelera.scss';
-
-@import './style_components/Footer.scss';
-@import './style_components/Header.scss';
-
-@import './style_components/Eliminar.scss';
-@import './style_components/Crear.scss';
-@import './style_components/CrearProducto.scss';
-
-@import './style_components/stylesObservar/EditarProducto.scss';
-@import './style_components/stylesObservar/EliminarProducto.scss';
-@import './style_components/stylesObservar/PagoProducto.scss';
-
-@import './style_components/items/botones/BtnAtras.scss';
-@import './style_components/items/botones/BtnFuncion.scss';
-@import './style_components/items/Titulos.scss';
-@import './style_components/items/Menus.scss';
-
 @font-face {
   font-family: 'League Spartan';
   src: url('../font/LeagueSpartan-Regular.ttf') format('truetype');
@@ -72,3 +52,32 @@ body {
   width: 100%;
   height: 100%;
 }
+
+h1,h2,h3,h4,h5,h6{
+  text-wrap: balance;
+}
+
+p{
+  text-wrap: pretty;
+}
+
+@import './style_components/Home.scss';
+@import './style_components/Observar.scss';
+@import './style_components/Papelera.scss';
+@import './style_components/../style_components/NotificadorPagos.scss';
+
+@import './style_components/Footer.scss';
+@import './style_components/Header.scss';
+
+@import './style_components/Eliminar.scss';
+@import './style_components/Crear.scss';
+@import './style_components/CrearProducto.scss';
+
+@import './style_components/stylesObservar/EditarProducto.scss';
+@import './style_components/stylesObservar/EliminarProducto.scss';
+@import './style_components/stylesObservar/PagoProducto.scss';
+
+@import './style_components/items/botones/BtnAtras.scss';
+@import './style_components/items/botones/BtnFuncion.scss';
+@import './style_components/items/Titulos.scss';
+@import './style_components/items/Menus.scss';

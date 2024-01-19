@@ -7,6 +7,7 @@ import { IdContext } from '../context/GeneralContext.jsx'
 import { ClienteAgrupado } from '../utils/utilsClienteAgrupado.jsx'
 import HistorialEliminados from './Papelera.jsx'
 import { FaHistory } from 'react-icons/fa'
+import NotificadorPagos from './NotificadorPagos.jsx'
 
 const Home = () => {
   // --------------------------------------------------------- //
@@ -32,7 +33,6 @@ const Home = () => {
       const datoEliminado = ClienteAgrupado(datosOriginal, 1)
       setDatosHome(datosSinEliminar)
       setDatosEliminados(datoEliminado)
-      console.log(datoEliminado)
     }
 
     datosApp()
@@ -110,6 +110,7 @@ const Home = () => {
           <FaHistory />
         </div>
       )}
+      <NotificadorPagos/>
       {papelera && <HistorialEliminados setPapelera={setPapelera} datosEliminados={datosEliminados} />}
     </IdContext.Provider>
   )

@@ -140,6 +140,22 @@ header {
         label {
           font-size: $textSizeGeneral;
         }
+
+        input {
+          border-radius: 50%;
+          cursor: pointer;
+          background-color: $bkColor;
+          width: 20px;
+          height: 20px;
+          appearance: none;
+          border: 2px solid;
+          border-color: $itemsColor;
+          transition: background-color 0.3s ease;
+        }
+
+        input:checked {
+          background-color: $contColor;
+        }
       }
     }
 

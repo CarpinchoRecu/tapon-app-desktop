@@ -50,5 +50,14 @@ contextBridge.exposeInMainWorld('electronAPI', {
     } catch (error) {
       throw new Error(error)
     }
-  }
+  },
+
+  NotificadorSQLite: async (query, values) => {
+    try {
+      const resultado = await ipcRenderer.invoke('notificador-db', query, values)
+      return resultado
+    } catch (error) {
+      throw new Error(error)
+    }
+  },
 })
