@@ -10,17 +10,24 @@ export const useDatosContext = () => {
 export const DatosProvider = ({ children }) => {
   const [datos, setDatos] = useState([])
 
-  useEffect(() => {
-    const obtenerDatos = async () => {
-      try {
-        const selectDB = await window.electronAPI.consultarSQLite('SELECT * FROM clientes')
-        setDatos(selectDB) // Almacena los datos en el estado 'datos'
-      } catch (error) {
-        console.error('Error al obtener los datos:', error)
-      }
+  const obtenerDatos = async () => {
+    try {
+      const selectDB = await window.electronAPI.consultarSQLite('SELECT * FROM clientes')
+      setDatos(selectDB) // Almacena los datos en el estado 'datos'
+    } catch (error) {
+      console.error('Error al obtener los datos:', error)
     }
-    obtenerDatos()
-  }, [])
+  }
+
+  useEffect(() => {
+    // Obtener los datos inicialmente
+    obtenerDatos();
+
+    const intervalId = setInterval(obtenerDatos, 100000);
+
+    // Limpiar el intervalo cuando el componente se desmonta
+    return () => clearInterval(intervalId);
+  }, []);
 
   return <DatosContext.Provider value={datos}>{children}</DatosContext.Provider>
 }

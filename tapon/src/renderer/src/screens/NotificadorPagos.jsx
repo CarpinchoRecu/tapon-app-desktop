@@ -3,21 +3,24 @@ import Menus from '../components/Items/Menus'
 import { useDatosContext } from '../context/DatosContextFile'
 import Titulos from '../components/Items/Titulos'
 import Overlay from '../components/Items/Overlay/Overlay'
-import { calcularUltimoPago } from '../utils/utilsDate'
+import BtnFuncion from '../components/Items/botones/BtnFuncion.jsx'
 
 const NotificadorPagos = () => {
   const datosOriginal = useDatosContext();
   const [paganHoy, setPaganHoy] = useState([]);
-  const [checkboxState, setCheckboxState] = useState({});
+  const [checkboxStatePagaron, setCheckboxStatePagaron] = useState({});
+  const [verBtnPago, setVerBtnPago] = useState(false);
 
   const handleCheckboxChange = (checkboxId) => {
-    setCheckboxState((prevStates) => ({
+    setCheckboxStatePagaron((prevStates) => ({
       ...prevStates,
       [checkboxId]: !prevStates[checkboxId],
     }))
   }
 
-  console.log(checkboxState)
+
+
+  console.log(checkboxStatePagaron)
   // Obtener la fecha actual
   
   useEffect(() => {
@@ -60,7 +63,7 @@ const NotificadorPagos = () => {
                       type="checkbox"
                       name="pago"// Usar un identificador único como el ID del moroso
                       id="pago"
-                      checked={checkboxState[morosos.id] || false}
+                      checked={checkboxStatePagaron[morosos.id] || false}
                       onChange={() => handleCheckboxChange(morosos.id)}
                     />
                   </td>
@@ -72,6 +75,10 @@ const NotificadorPagos = () => {
             </>
           ))}
         </table>
+
+        {checkboxStatePagaron.lenght > 0 && (
+          <BtnFuncion texto="Notificar Pago"/>
+        )}
       </Menus>
       <Overlay />
     </>
