@@ -23,8 +23,6 @@ const NotificadorPagos = () => {
   useEffect(() => {
     const hoy = new Date();
     const fechaHoy = hoy.toISOString().split('T')[0];
-    console.log(hoy)
-    
 
     const personasConPagoHoy = datosOriginal.filter((moroso) => {
 
@@ -34,8 +32,12 @@ const NotificadorPagos = () => {
     setPaganHoy(personasConPagoHoy);
   }, [datosOriginal]);
 
+  console.log(paganHoy.length)
+
   return (
     <>
+    {paganHoy.length >= 1 && (
+      <>
       <Menus>
         <Titulos texto="Hoy Pagan:" tipoDeColor="verde" />
         <table className="tabla__datos__cliente__notificado">
@@ -82,6 +84,8 @@ const NotificadorPagos = () => {
         )}
       </Menus>
       <Overlay />
+      </>
+    )}
     </>
   )
 }
