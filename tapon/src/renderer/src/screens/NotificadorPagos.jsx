@@ -4,6 +4,7 @@ import { useDatosContext } from '../context/DatosContextFile'
 import Titulos from '../components/Items/Titulos'
 import Overlay from '../components/Items/Overlay/Overlay'
 import BtnFuncion from '../components/Items/botones/BtnFuncion.jsx'
+import { calcularUltimoPago } from '../utils/utilsDate.js'
 
 const NotificadorPagos = () => {
   const datosOriginal = useDatosContext();
@@ -17,18 +18,18 @@ const NotificadorPagos = () => {
       [checkboxId]: !prevStates[checkboxId],
     }))
   }
-
-
-
-  console.log(checkboxStatePagaron)
   // Obtener la fecha actual
   
   useEffect(() => {
     const hoy = new Date();
     const fechaHoy = hoy.toISOString().split('T')[0];
+    console.log(hoy)
+    
 
     const personasConPagoHoy = datosOriginal.filter((moroso) => {
-      return moroso.fecha_ultimo_pago === fechaHoy;
+
+      const fechaProximo = calcularUltimoPago(moroso.fecha_ultimo_pago, moroso.cada_cuanto_paga)
+      return fechaProximo === fechaHoy;
     });
     setPaganHoy(personasConPagoHoy);
   }, [datosOriginal]);
