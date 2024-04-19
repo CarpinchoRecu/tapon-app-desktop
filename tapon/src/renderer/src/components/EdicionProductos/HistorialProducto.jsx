@@ -1,6 +1,6 @@
 import Titulos from '../Items/Titulos'
 import BtnAtras from '../Items/botones/BtnAtras'
-const PagoProducto = ({ setOpcionSeleccionada, setOpcion }) => {
+const HistorialProducto = ({ setOpcionSeleccionada, setOpcion }) => {
   return (
     <div className="pago__producto">
       <Titulos texto="Pago de producto" tipoDeColor="verde" />
@@ -10,4 +10,4 @@ const PagoProducto = ({ setOpcionSeleccionada, setOpcion }) => {
   )
 }
 
-export default PagoProducto
+export default HistorialProducto

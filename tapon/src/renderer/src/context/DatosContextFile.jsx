@@ -14,6 +14,8 @@ export const DatosProvider = ({ children }) => {
     try {
       const selectDB = await window.electronAPI.consultarSQLite('SELECT * FROM clientes')
       setDatos(selectDB) // Almacena los datos en el estado 'datos'
+      console.log("aca esta")
+
     } catch (error) {
       console.error('Error al obtener los datos:', error)
     }

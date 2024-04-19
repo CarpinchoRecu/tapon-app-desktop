@@ -2,7 +2,7 @@ import React, { useContext, useState } from 'react'
 import BtnAtras from '../../components/Items/botones/BtnAtras'
 import EditarProducto from '../../components/EdicionProductos/EditarProducto'
 import EliminarProducto from '../../components/EdicionProductos/EliminarProducto'
-import PagoProducto from '../../components/EdicionProductos/PagoProducto'
+import HistorialProducto from '../../components/EdicionProductos/HistorialProducto'
 import { ProductosContext } from '../../context/GeneralContext'
 import Overlay from '../../components/Items/Overlay/Overlay'
 
@@ -24,8 +24,8 @@ const MenuProductos = ({ setProductoSeleccionado }) => {
     },
     {
       name: 'pagar',
-      h2: 'Notificar Pago de Producto',
-      p: 'Esta opción es para cuando el producto de este cliente ya fue cobrado y quieres notificarlo.'
+      h2: 'Historial Producto',
+      p: 'Esta opción es para corroborar el historial del pago de este producto en especifico.'
     },
     {
       name: 'eliminar',
@@ -65,7 +65,7 @@ const MenuProductos = ({ setProductoSeleccionado }) => {
                       />
                     )}
                     {opcionesProd[opcion].name === 'pagar' && (
-                      <PagoProducto
+                      <HistorialProducto
                         setOpcion={setOpcion}
                         setOpcionSeleccionada={setOpcionSeleccionada}
                       />

@@ -110,7 +110,7 @@ const Home = () => {
           <FaHistory />
         </div>
       )}
-      <NotificadorPagos/>
+      {/* <NotificadorPagos/> */}
       {papelera && <HistorialEliminados setPapelera={setPapelera} datosEliminados={datosEliminados} />}
     </IdContext.Provider>
   )
