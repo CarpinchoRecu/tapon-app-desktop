@@ -5,59 +5,58 @@ import Titulos from '../components/Items/Titulos'
 import Overlay from '../components/Items/Overlay/Overlay'
 import BtnFuncion from '../components/Items/botones/BtnFuncion.jsx'
 import { calcularUltimoPago } from '../utils/utilsDate.js'
+import { toast } from 'react-toastify'
 
 const NotificadorPagos = () => {
   const datosOriginal = useDatosContext()
   const [paganHoy, setPaganHoy] = useState([])
   const [checkboxStatePagaron, setCheckboxStatePagaron] = useState({})
   const [checkboxStateNoPagaron, setCheckboxStateNoPagaron] = useState({})
-  console.log(checkboxStatePagaron)
-
-  const handleCheckboxChange = (checkboxId, isChecked, tipoPago) => {
+  const handleCheckboxChange = (MorosoId, isChecked, tipoPago) => {
     if (isChecked) {
       if (tipoPago === 'pagaron') {
         setCheckboxStatePagaron((prevStates) => ({
           ...prevStates,
-          [checkboxId]: true
+          [MorosoId]: true
         }))
       }
       if (tipoPago === 'nopagaron') {
         setCheckboxStateNoPagaron((prevStates) => ({
           ...prevStates,
-          [checkboxId]: true
+          [MorosoId]: true
         }))
       }
       if (
         tipoPago === 'pagaron' &&
-        checkboxStateNoPagaron.hasOwnProperty(checkboxId) &&
-        checkboxStateNoPagaron[checkboxId]
+        checkboxStateNoPagaron.hasOwnProperty(MorosoId) &&
+        checkboxStateNoPagaron[MorosoId]
       ) {
-        const { [checkboxId]: removedId, ...remainingNoPagaron } = checkboxStateNoPagaron
+        const { [MorosoId]: removedId, ...remainingNoPagaron } = checkboxStateNoPagaron
         setCheckboxStateNoPagaron(remainingNoPagaron)
       }
       if (
         tipoPago === 'nopagaron' &&
-        checkboxStatePagaron.hasOwnProperty(checkboxId) &&
-        checkboxStatePagaron[checkboxId]
+        checkboxStatePagaron.hasOwnProperty(MorosoId) &&
+        checkboxStatePagaron[MorosoId]
       ) {
-        const { [checkboxId]: removedId, ...remainingPagaron } = checkboxStatePagaron
+        const { [MorosoId]: removedId, ...remainingPagaron } = checkboxStatePagaron
         setCheckboxStatePagaron(remainingPagaron)
       }
     } else {
       if (
         tipoPago === 'pagaron' &&
-        checkboxStatePagaron.hasOwnProperty(checkboxId) &&
-        checkboxStatePagaron[checkboxId]
+        checkboxStatePagaron.hasOwnProperty(MorosoId) &&
+        checkboxStatePagaron[MorosoId]
       ) {
-        const { [checkboxId]: removedId, ...remainingPagaron } = checkboxStatePagaron
+        const { [MorosoId]: removedId, ...remainingPagaron } = checkboxStatePagaron
         setCheckboxStatePagaron(remainingPagaron)
       }
       if (
         tipoPago === 'nopagaron' &&
-        checkboxStateNoPagaron.hasOwnProperty(checkboxId) &&
-        checkboxStateNoPagaron[checkboxId]
+        checkboxStateNoPagaron.hasOwnProperty(MorosoId) &&
+        checkboxStateNoPagaron[MorosoId]
       ) {
-        const { [checkboxId]: removedId, ...remainingNoPagaron } = checkboxStateNoPagaron
+        const { [MorosoId]: removedId, ...remainingNoPagaron } = checkboxStateNoPagaron
         setCheckboxStateNoPagaron(remainingNoPagaron)
       }
     }
@@ -81,6 +80,42 @@ const NotificadorPagos = () => {
       checkboxStateNoPagaron.hasOwnProperty(idMoroso)
     )
   })
+
+  const handleNotificarPago = async () => {
+    try {
+      const morososPagaron = Object.keys(checkboxStatePagaron).filter((id) => checkboxStatePagaron[id]);
+      
+      for (const idMoroso of morososPagaron) {
+        console.log(idMoroso)
+        const resultado = await window.electronAPI.NotificadorPagadoSQLite(idMoroso);
+      }
+      
+      toast.success('Cliente Pago correctamente', {
+        position: 'top-right',
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: 'dark'
+      });
+      // window.location.reload()
+    } catch (error) {
+      console.log(error);
+      toast.error('Hubo un problema al eliminar al cliente', {
+        position: 'top-right',
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: 'dark'
+      });
+    }
+  };
+  
 
   return (
     <>
@@ -134,7 +169,7 @@ const NotificadorPagos = () => {
                 </tbody>
               ))}
             </table>
-            {todosNotificados && <BtnFuncion tipoDeColor="verde" texto="Notificar Pago" />}
+            {todosNotificados && <BtnFuncion funcion={handleNotificarPago} tipoDeColor="verde" texto="Notificar Pago" />}
           </Menus>
           <Overlay />
         </>

@@ -172,8 +172,6 @@ function createWindow() {
 
   ipcMain.handle('eliminarCliente-db', async (event, nombre, localidad, direccion) => {
     return new Promise((resolve, reject) => {
-      backupDatabase()
-
       const query =
         'UPDATE clientes SET eliminado = 1 WHERE nombre = ? AND localidad = ? AND direccion = ?'
       const values = [nombre, localidad, direccion]
@@ -191,8 +189,6 @@ function createWindow() {
 
   ipcMain.handle('eliminarProducto-db', async (event, idNumber, nombre, localidad, direccion) => {
     return new Promise((resolve, reject) => {
-      backupDatabase()
-
       const query =
         'UPDATE clientes SET eliminado = 1 WHERE id = ? AND nombre = ? AND localidad = ? AND direccion = ?'
       const values = [idNumber, nombre, localidad, direccion]
@@ -208,8 +204,16 @@ function createWindow() {
     })
   })
 
-  ipcMain.handle('notificador-db', async (event, query, values) => {
+  ipcMain.handle('notificadorPagado-db', async (event, idMoroso) => {
     return new Promise((resolve, reject) => {
+      const query = `
+      UPDATE clientes
+      SET fecha_ultimo_pago = strftime('%Y-%m-%d', date(fecha_ultimo_pago, '+' || cada_cuanto_paga || ' day'))
+      WHERE id = ?;
+    `
+
+    const values = idMoroso
+
       db.run(query, values, function (err) {
         if (err) {
           console.error(err)
