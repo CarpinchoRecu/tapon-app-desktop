@@ -52,9 +52,9 @@ contextBridge.exposeInMainWorld('electronAPI', {
     }
   },
 
-  NotificadorPagadoSQLite: async (idMoroso) => {
+  NotificadorPagosSQLite: async (idMoroso, pagoRealizado) => {
     try {
-      const resultado = await ipcRenderer.invoke('notificadorPagado-db', idMoroso)
+      const resultado = await ipcRenderer.invoke('notificadorPagos-db', idMoroso, pagoRealizado)
       return resultado
     } catch (error) {
       throw new Error(error)

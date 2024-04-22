@@ -81,16 +81,26 @@ const NotificadorPagos = () => {
     )
   })
 
+
   const handleNotificarPago = async () => {
     try {
       const morososPagaron = Object.keys(checkboxStatePagaron).filter((id) => checkboxStatePagaron[id]);
-      
-      for (const idMoroso of morososPagaron) {
-        console.log(idMoroso)
-        const resultado = await window.electronAPI.NotificadorPagadoSQLite(idMoroso);
+      const morososNoPagaron = Object.keys(checkboxStateNoPagaron).filter((id) => checkboxStateNoPagaron[id]);
+  
+      const resultadosPagaron = [];
+      const resultadosNoPagaron = [];
+  
+      for (const idMorosoPago of morososPagaron) {
+        const resultado = await window.electronAPI.NotificadorPagosSQLite(idMorosoPago, true);
+        resultadosPagaron.push(resultado);
+      }
+  
+      for (const idMorosoNoPago of morososNoPagaron) {
+        const resultado = await window.electronAPI.NotificadorPagosSQLite(idMorosoNoPago, false);
+        resultadosNoPagaron.push(resultado);
       }
       
-      toast.success('Cliente Pago correctamente', {
+      toast.success('Clientes pagaron correctamente', {
         position: 'top-right',
         autoClose: 5000,
         hideProgressBar: false,
@@ -103,7 +113,7 @@ const NotificadorPagos = () => {
       // window.location.reload()
     } catch (error) {
       console.log(error);
-      toast.error('Hubo un problema al eliminar al cliente', {
+      toast.error('Hubo un problema al notificar el pago de los clientes', {
         position: 'top-right',
         autoClose: 5000,
         hideProgressBar: false,
@@ -116,7 +126,7 @@ const NotificadorPagos = () => {
     }
   };
   
-
+  
   return (
     <>
       {paganHoy.length >= 1 && (
@@ -128,6 +138,7 @@ const NotificadorPagos = () => {
                 <tr>
                   <th>Nombre</th>
                   <th>Producto</th>
+                  <th>Valor de la cuota</th>
                   <th>Fecha Ultimo Pago</th>
                   <th>Cada Cuanto Paga (Dias)</th>
                   <th>Va por la cuota</th>
@@ -140,6 +151,7 @@ const NotificadorPagos = () => {
                   <tr>
                     <td>{morosos.nombre}</td>
                     <td>{morosos.nombre_producto}</td>
+                    <td>${morosos.precio_producto}</td>
                     <td>{morosos.fecha_ultimo_pago}</td>
                     <td>{morosos.cada_cuanto_paga}</td>
                     <td>{morosos.cuotas_pagadas}</td>

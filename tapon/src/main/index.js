@@ -204,26 +204,76 @@ function createWindow() {
     })
   })
 
-  ipcMain.handle('notificadorPagado-db', async (event, idMoroso) => {
+  ipcMain.handle('notificadorPagos-db', async (event, { idMoroso, pagoRealizado }) => {
     return new Promise((resolve, reject) => {
-      const query = `
-      UPDATE clientes
-      SET fecha_ultimo_pago = strftime('%Y-%m-%d', date(fecha_ultimo_pago, '+' || cada_cuanto_paga || ' day'))
-      WHERE id = ?;
-    `
+      let query
+      let values
 
-    const values = idMoroso
+      if (pagoRealizado) {
+        query = `
+          UPDATE clientes
+          SET fecha_ultimo_pago = strftime('%Y-%m-%d', date(fecha_ultimo_pago, '+' || cada_cuanto_paga || ' day'))
+          WHERE id = ?;
+        `
+        values = idMoroso
+      } else {
+        query = `
+      INSERT INTO deudas (productoId, deuda, fecha_deuda)
+      VALUES (?, (SELECT precio_producto FROM clientes WHERE id = ?), DATE('now'));
+    `
+        values = idMoroso
+      }
 
       db.run(query, values, function (err) {
         if (err) {
           console.error(err)
           reject(err)
         } else {
-          resolve({ message: 'Actualización exitosa' })
+          resolve({ message: 'Operación exitosa' })
         }
       })
     })
   })
+
+  // ipcMain.handle('notificadorPagado-db', async (event, idMoroso) => {
+  //   return new Promise((resolve, reject) => {
+  //     const query = `
+  //     UPDATE clientes
+  //     SET fecha_ultimo_pago = strftime('%Y-%m-%d', date(fecha_ultimo_pago, '+' || cada_cuanto_paga || ' day'))
+  //     WHERE id = ?;
+  //   `
+
+  //     const values = idMoroso
+
+  //     db.run(query, values, function (err) {
+  //       if (err) {
+  //         console.error(err)
+  //         reject(err)
+  //       } else {
+  //         resolve({ message: 'Actualización exitosa' })
+  //       }
+  //     })
+  //   })
+  // })
+
+  // ipcMain.handle('notificadorNoPagado-db', async (event, idMoroso) => {
+  //   return new Promise((resolve, reject) => {
+  //     const query = `
+  //     INSERT INTO deudas (productoId, deuda, fecha_deuda)
+  //     VALUES (?, (SELECT precio_producto FROM clientes WHERE id = ?), DATE('now'));
+  //   `
+  //     const values = [idMoroso]
+
+  //     db.run(query, values, function (err) {
+  //       if (err) {
+  //         console.error(err)
+  //         reject(err)
+  //       } else {
+  //         resolve({ message: 'Actualización exitosa' })
+  //       }
+  //     })
+  //   })
+  // })
 
   mainWindow.on('ready-to-show', () => {
     mainWindow.show()
