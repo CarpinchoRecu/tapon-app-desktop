@@ -59,5 +59,5 @@ contextBridge.exposeInMainWorld('electronAPI', {
     } catch (error) {
       throw new Error(error)
     }
-  },
+  }
 })

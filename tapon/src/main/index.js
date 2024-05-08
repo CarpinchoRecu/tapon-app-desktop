@@ -208,8 +208,9 @@ function createWindow() {
     return new Promise((resolve, reject) => {
       let query
       let values
+      console.log(idMoroso,pagoRealizado)
 
-      if (pagoRealizado) {
+      if (pagoRealizado === true) {
         query = `
           UPDATE clientes
           SET fecha_ultimo_pago = strftime('%Y-%m-%d', date(fecha_ultimo_pago, '+' || cada_cuanto_paga || ' day'))

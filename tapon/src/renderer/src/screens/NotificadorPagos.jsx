@@ -86,18 +86,18 @@ const NotificadorPagos = () => {
     try {
       const morososPagaron = Object.keys(checkboxStatePagaron).filter((id) => checkboxStatePagaron[id]);
       const morososNoPagaron = Object.keys(checkboxStateNoPagaron).filter((id) => checkboxStateNoPagaron[id]);
+      console.log(morososPagaron)
+      console.log(morososNoPagaron)
   
       const resultadosPagaron = [];
       const resultadosNoPagaron = [];
   
       for (const idMorosoPago of morososPagaron) {
-        const resultado = await window.electronAPI.NotificadorPagosSQLite(idMorosoPago, true);
-        resultadosPagaron.push(resultado);
+        await window.electronAPI.NotificadorPagosSQLite(idMorosoPago, true);
       }
   
       for (const idMorosoNoPago of morososNoPagaron) {
-        const resultado = await window.electronAPI.NotificadorPagosSQLite(idMorosoNoPago, false);
-        resultadosNoPagaron.push(resultado);
+        await window.electronAPI.NotificadorPagosSQLite(idMorosoNoPago, false);
       }
       
       toast.success('Clientes pagaron correctamente', {
